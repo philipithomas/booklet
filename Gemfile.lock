@@ -140,7 +140,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
-    chartkick (5.1.4)
+    chartkick (5.2.1)
     childprocess (5.1.0)
       logger (~> 1.5)
     chroma-db (0.8.2)
@@ -655,7 +655,7 @@ DEPENDENCIES
   brakeman (~> 6.1)
   bundler-audit (~> 0.9.1)
   capybara
-  chartkick (~> 5.0)
+  chartkick (~> 5.2)
   chroma-db (~> 0.8.2)
   cloudflare-rails (~> 6.0)
   countries (~> 5.7)
