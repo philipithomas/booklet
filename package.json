@@ -16,7 +16,7 @@
     "date-fns-tz": "^2.0.1",
     "lodash.debounce": "^4.0.8",
     "medium-zoom": "^1.1.0",
-    "puppeteer": "^22.10.0",
+    "puppeteer": "^24.42.0",
     "stimulus-notification": "^2.2.0",
     "stimulus-use": "^0.52.2",
     "tailwindcss-stimulus-components": "^4.0.4",
