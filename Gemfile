@@ -14,7 +14,7 @@ gem "turbo-rails"
 gem "stimulus-rails"
 gem "jbuilder"
 gem "bootsnap", require: false
-gem "pg", "~> 1.5"
+gem "pg", "~> 1.6"
 gem "solid_queue", "~> 0.3.2"
 gem "mission_control-jobs", "~> 0.2.1"
 gem "jsbundling-rails", "~> 1.2"
