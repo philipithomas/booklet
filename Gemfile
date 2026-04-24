@@ -92,7 +92,7 @@ gem "tiktoken_ruby", "~> 0.0.9"
 gem "chroma-db", "~> 0.8.2"
 
 # push
-gem "web-push", "~> 3.0"
+gem "web-push", "~> 3.1"
 
 # analytics
 gem "geocoder", "~> 1.8"
