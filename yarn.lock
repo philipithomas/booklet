@@ -2001,7 +2001,7 @@ __metadata:
     puppeteer: ^22.10.0
     stimulus-notification: ^2.2.0
     stimulus-use: ^0.52.2
-    tailwindcss-stimulus-components: ^4.0.4
+    tailwindcss-stimulus-components: ^6.1.3
     tributejs: ^5.1.3
     trix: ^2.1.1
     webpack: ^5.91.0
@@ -3846,12 +3846,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss-stimulus-components@npm:^4.0.4":
-  version: 4.0.4
-  resolution: "tailwindcss-stimulus-components@npm:4.0.4"
+"tailwindcss-stimulus-components@npm:^6.1.3":
+  version: 6.1.3
+  resolution: "tailwindcss-stimulus-components@npm:6.1.3"
   peerDependencies:
     "@hotwired/stimulus": ">= 3.0.0"
-  checksum: cbd1e54e15095506fb9e119d0294ce81cec03c8842f12478bb1b6d769a36766271a5acc92a6a167cbce4d8f409df61481e960d19b48d36711b71c55b8b834680
+  checksum: c51e1694e375241cdce5bac2cbb1545eaab9c89285fc7d540cf67649eb364b58ee525892d407aca2071eefc422dba858578c3d6d8de4bd762d7fce985ddd99e9
   languageName: node
   linkType: hard
 
