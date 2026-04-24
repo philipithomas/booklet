@@ -1889,10 +1889,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ahoy.js@npm:^0.4.4":
-  version: 0.4.4
-  resolution: "ahoy.js@npm:0.4.4"
-  checksum: 8be2dafa200937cc3c5ce053177b8e47e298af50cb2ece963725813ed2ff510afe64d0792da5aa94bf3c605a969bc3c875c676623506c40aa3421fbc67f8a0f5
+"ahoy.js@npm:^0.4.5":
+  version: 0.4.5
+  resolution: "ahoy.js@npm:0.4.5"
+  checksum: a8047e908f7c5b2ac41b4690c2aba31e22e857d476bbb6dd40582580b835be73cab518b447245ae139e14593dbdc52f0693c6df3ce271d9f7deb1a09bb1990b1
   languageName: node
   linkType: hard
 
@@ -1989,7 +1989,7 @@ __metadata:
     "@hotwired/turbo-rails": ^8.0.0
     "@rails/actiontext": ^7.1.3
     "@rails/activestorage": ^7.1.3
-    ahoy.js: ^0.4.4
+    ahoy.js: ^0.4.5
     babel-loader: ^9.1.3
     chart.js: ^4.4.3
     chartkick: ^5.0.1
