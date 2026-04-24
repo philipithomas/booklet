@@ -1,0 +1,15 @@
+---
+en-US:
+  activerecord:
+    attributes:
+      member:
+        name: Full name
+        source: Source
+        status:
+          active: Active
+          admin: Admin
+          invited: Invited
+          locked: Deactivated
+          quarantined: Hidden
+          subscribed: Subscribed
+          unconfirmed: Unconfirmed

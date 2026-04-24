@@ -1,0 +1,27 @@
+<nav class="flex-none">
+  <ul role="list" class="flex gap-x-3 gap-y-1 whitespace-nowrap lg:flex-col">
+    <% menuItems.each do |item| %>
+      <% if item[:show] %>
+        <li>
+          <a
+            href="<%= item[:to] %>"
+            <% if item[:active] %>
+              aria-current="page"
+              class="lg:w-full inline-flex items-center px-3 py-2 text-sm font-medium bg-gray-100 dark:bg-gray-800 rounded-md text-gray-800 dark:text-gray-100"
+            <% else %>
+              class="lg:w-full inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100"
+            <% end %>
+            >
+
+            <div class="pr-2">
+              <%= heroicon item[:icon], options: { class: "w-5 h-5" }, variant: item[:active] ? :solid : :outline %>
+            </div>
+
+            <%= item[:name] %>
+          </a>
+
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</nav>

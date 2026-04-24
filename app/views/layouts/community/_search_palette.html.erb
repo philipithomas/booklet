@@ -1,0 +1,28 @@
+
+<div
+  data-search-palette-target="container"
+  class="relative z-50 hidden"
+  data-action="keyup@window->search-palette#closeWithKeyboard click->search-palette#closeBackground"
+  >
+
+  <div
+    class="fixed inset-0 bg-gray-500 dark:bg-black bg-opacity-25 dark:bg-opacity-25 transition-opacity z-50 backdrop-blur-sm"
+    >
+  </div>
+
+  <!--
+    Command palette, show/hide based on modal state.
+
+    Entering: "ease-out duration-300"
+      From: "opacity-0 scale-95"
+      To: "opacity-100 scale-100"
+    Leaving: "ease-in duration-200"
+      From: "opacity-100 scale-100"
+      To: "opacity-0 scale-95"
+  -->
+  <div class="fixed inset-0 z-60 w-screen overflow-y-auto p-4 sm:p-6 md:p-20"
+    data-search-palette-target="background"
+    >
+    <%= render "layouts/community/search_form", enable_data_action: true, enable_data_target: true %>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<% noindex %>
+
+<% content_for :heading do %><%= title t('.title') %><% end %>
+
+<%= simple_form_for @community, builder: Bklt::FormBuilder, :html => { :honeypot => true }   do |f| %>
+  <div class="form-space">
+    <%= f.error_notification %>
+    <%= f.input :name, autofocus: true, label: t('.community_name'), required: true %>
+    <%= f.input :email, autofocus: true, required: true, label: t('.email') %>
+    <%= f.button :submit_dynamic, label: t('.submit'), full_width: true %>
+  </div>
+<% end %>
+
+<div class="mt-4 prose dark:prose-invert text-center">
+  <%= t('.questions') %>
+  <%= link_to t('.contact_support'), 'mailto:' + t('support_email'), class: :link %>
+</div>
+
+
+<%= render "components/legalese/agree_terms" %>

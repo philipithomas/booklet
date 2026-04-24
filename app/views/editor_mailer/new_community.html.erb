@@ -1,0 +1,11 @@
+<% content_for :summary do %>
+  New Booklet community
+<% end %>
+
+<% content_for :button_label do %><%= @community.host %><% end %>
+
+<% content_for :button_link do %><%= @community.url %><% end %>
+
+<p>
+  New community <%= @community.name %> created by <%= @community.email %>
+</p>

@@ -1,0 +1,10 @@
+<% title "#{t 'search'}: #{@query}" %>
+
+<div class="community-container my-8">
+  <%= render "layouts/community/search_form", query: @query %>
+</div>
+<turbo-frame
+  id="search_results"
+  src="<%= search_path(@query) %>">
+  <%= render "components/shared/loading" %>
+</turbo-frame>

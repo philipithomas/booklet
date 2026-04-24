@@ -1,0 +1,19 @@
+<li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm" id="<%= dom_id(member) %>">
+  <div class="flex items-center flex-1 w-0">
+    <%#= heroicon 'mail', class: "flex-shrink-0 h-5 w-5 text-gray-300 dark:text-gray-300" %>
+    <span class="flex-1 w-0 text-gray-800 truncate dark:text-gray-200">
+      <%= link_to member.name.present? ? "#{member.name} (#{member.email})" : member.email, member_path(member) %>
+    </span>
+  </div>
+  <div class="flex-shrink-0 ml-4">
+    <%= button_to t('.revoke'),
+      member_invitation_path(member),
+      method: :delete,
+      class: "font-medium text-gray-500 hover:text-gray-700 dark:hover:text-gray-300",
+      form: {
+        data: {
+          turbo_confirm: t('.are_you_sure_you_want_to_revoke_this_invitation'),
+        }
+      } %>
+  </div>
+</li>

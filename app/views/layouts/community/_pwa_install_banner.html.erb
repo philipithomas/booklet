@@ -1,0 +1,50 @@
+
+<% if @community&.icon&.present? && member_signed_in?  %>
+  <% if platform.ios? and (platform.safari? || platform.chrome?)  %>
+    <div data-controller="modal" data-action="keydown.esc->modal#close">
+      <div class="hidden pwa:hidden community-container bg-gray-100 flex items-center border border-b border-gray-200" data-controller="pwa-install" data-pwa-install-target="banner">
+
+        <button class="p-2 -ml-2" data-action="pwa-install#hide">
+          <%= heroicon 'x-mark', options: { class: 'h-4 w-4 text-gray-500 hover:cursor', variant: :mini, 'aria-hidden': true } %>
+        </button>
+        <%= render "components/shared/square_image_variants", image: @community.icon, size: 36, classes: "h-8 w-8 rounded-md", alt: @community.name %>
+        <button class="p-2 overflow-hidden h-full grow text-left" data-action="click->modal#open">
+          <h3 class="text-sm font-semibold text-gray-900"><%= @community.name.truncate(40) %></h3>
+          <p class="text-xs text-gray-700 font-light">        <%= t '.progressive_web_app' %></p>
+        <button class="btn btn-primary btn-sm p-2 -mr-2" data-action="click->modal#open">
+          <%= t '.install' %>
+        </button>
+      </div>
+
+      <div class="hidden fixed inset-0 bg-black bg-opacity-80 overflow-y-auto flex items-center justify-center z-50"
+          data-modal-target="background"
+          data-action="click->modal#closeBackground"
+          data-transition-enter="transition-all ease-in-out duration-300"
+          data-transition-enter-from="bg-opacity-0"
+          data-transition-enter-to="bg-opacity-80"
+          data-transition-leave="transition-all ease-in-out duration-300"
+          data-transition-leave-from="bg-opacity-80"
+          data-transition-leave-to="bg-opacity-0">
+
+      <!-- Modal Container -->
+      <div data-modal-target="container" class="max-h-screen w-full max-w-lg relative community-container">
+        <!-- Modal Card -->
+        <div class="bg-white dark:bg-black rounded shadow">
+          <div class="p-8 prose dark:prose-invert">
+            <h2>Instructions</h2>
+            <p>To install <%=@community.name %> as a web app and receive push notifications:
+            <ol>
+              <li>Tap <strong><%= image_tag "icons/apple_share.svg", role: "presentation", size: 20, class: "inline" %></strong> (Share) in <%= platform.browser.capitalize %>.
+              <li>Tap <strong>Add to Home Screen</strong>.</li>
+            </ol>
+
+
+            <div class="flex justify-start items-center flex-wrap mt-6">
+              <button class="btn btn-secondary btn-small" data-action="click->modal#close:prevent">Done</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

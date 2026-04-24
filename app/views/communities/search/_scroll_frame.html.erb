@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "infinite_scroll",
+  src: search_path(query, offset: offset, format: :turbo_stream),
+  loading: "lazy" do %>
+  <%= render "components/shared/loading" %>
+<% end %>

@@ -1,0 +1,62 @@
+# == Schema Information
+#
+# Table name: communities
+#
+#  id                                 :bigint           not null, primary key
+#  brand_color                        :string           default("#4D3DF7"), not null
+#  default_newsletter_days_bitmask    :integer          default(127), not null
+#  directory_enabled                  :boolean          default(TRUE), not null
+#  email                              :string           default(""), not null
+#  email_visibility                   :string           default("open"), not null
+#  name                               :string           not null
+#  newsletter_days_bitmask            :integer          default(127), not null
+#  open_ai_content_moderation_enabled :boolean          default(TRUE), not null
+#  open_ai_member_moderation_enabled  :boolean          default(FALSE), not null
+#  signups                            :integer          default("invite_only"), not null
+#  slug                               :string           not null
+#  vapid_private_key                  :string
+#  vapid_public_key                   :string
+#  visibility                         :integer          default("private"), not null
+#  created_at                         :datetime         not null
+#  updated_at                         :datetime         not null
+#  ahoy_create_visit_id               :bigint
+#  pinned_post_id                     :bigint
+#
+# Indexes
+#
+#  index_communities_on_pinned_post_id  (pinned_post_id)
+#  index_communities_on_slug            (slug) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (pinned_post_id => posts.id) ON DELETE => nullify
+#
+
+# before_lab, lab, and after_lab have the same member emails,
+# to test auth
+before_lab:
+  name: Before Laboratory
+  slug: before_lab
+  visibility: private
+  signups: invite_only
+  email: before-lab@example.com
+  created_at: <%= Time.zone.now - 1.day %>
+lab:
+  name: Laboratory
+  slug: lab
+  visibility: private
+  signups: invite_only
+  email: lab@google.com
+  created_at: <%= Time.zone.now - 1.minute %>
+after_lab:
+  name: After Laboratory
+  slug: after_lab
+  visibility: private
+  signups: invite_only
+  email: after@lab.com
+other:
+  name: Other Community
+  slug: other
+  visibility: private
+  signups: invite_only
+  email: other@my-site.com

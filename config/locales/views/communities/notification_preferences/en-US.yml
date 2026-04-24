@@ -1,0 +1,7 @@
+---
+en-US:
+  communities:
+    notification_preferences:
+      show:
+        or_comma: Or,
+        sign_in: Sign in

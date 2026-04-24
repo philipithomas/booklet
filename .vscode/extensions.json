@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "GitHub.copilot",
+    "bung87.rails",
+    "rebornix.ruby",
+    "castwide.solargraph",
+    "rubocop.vscode-rubocop",
+    "bradlc.vscode-tailwindcss",
+    "github.vscode-github-actions"
+  ]
+}

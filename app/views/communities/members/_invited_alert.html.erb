@@ -1,0 +1,19 @@
+<div class="card mb-8">
+  <div class="flex sm:items-center">
+    <div class="flex-shrink-0">
+      <%= heroicon "eye-slash", options: { class: "h-5 w-5 text-accent" } %>
+    </div>
+    <div class="ml-3 flex-1 sm:flex sm:justify-between sm:items-center">
+      <p class="text-sm font-semibold text-gray-700 dark:text-gray-200">
+        <%= t ".invited" %>
+      </p>
+      <div class="mt-3 text-sm sm:ml-6 sm:mt-0 shrink-0">
+        <%= mail_to member.email, t(".send_reminder"),
+          subject: t(".finish_joining_subject", community: @community.name),
+          body: t(".finish_joining_body", community: @community.name, email: @member.email) + "\n\n" +
+          new_member_session_url(host: @community.host),
+          class: "btn btn-small btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>

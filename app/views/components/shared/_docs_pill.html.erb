@@ -1,0 +1,9 @@
+<%# locals: (url:) -%>
+<a
+  href="<%= url %>"
+  target="_blank"
+  rel="noopener"
+  class="inline-flex items-center space-x-1 rounded-full bg-accent/10 px-2 py-1 text-xs font-light	 text-black dark:text-white ring-accent border border-accent">
+  <span><%= t('.docs') %></span>
+  <%= heroicon "arrow-top-right-on-square", options: { class: "h-3 w-3", variant: :mini  } %>
+</a>

@@ -1,0 +1,15 @@
+<% content_for :heading do %><%= title t(".resend_unlock_instructions") %><% end %>
+
+<%= simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }, builder: Bklt::FormBuilder) do |f| %>
+  <div class="form-space">
+    <%= f.error_notification %>
+    <%= f.full_error :unlock_token %>
+
+    <%= f.input :email,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "email" } %>
+
+    <%= f.button :submit_dynamic, label: t(".resend_unlock_instructions"), full_width: true %>
+  </div>
+<% end %>

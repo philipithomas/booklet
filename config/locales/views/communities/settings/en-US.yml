@@ -1,0 +1,120 @@
+---
+en-US:
+  communities:
+    settings:
+      api_keys:
+        actions:
+          delete: Delete
+        create:
+          description: Here is your API key - copy it now. You won't be able to see it again. Treat it like a password - it grants full access to your community.
+          done: Done
+          key_copied: Key copied to clipboard
+          save_api_key: Save API key
+        description: Admins can issue API keys for developers to programatically access the community. Treat these keys like passwords - they enable full access to your community. After creating a key, you cannot view it again. You can revoke a key at any time.
+        flash:
+          destroyed: API key deleted
+        new:
+          create: Create
+          create_api_key: Create API key
+          description: Give a name to your API key so you can remember its purpose in the future.
+          key_name: Key name
+        table:
+          confirm_delete: Are you sure you want to delete this API key?
+          delete: Delete
+          never_used: Never used
+        title: Community API keys
+        view_api_documentation: View API documentation
+      branding:
+        flash:
+          update: Branding updated
+        show:
+          save: Save
+        title: Community branding
+      confirmation:
+        show:
+          thank_you: Thank you for subscribing
+      features:
+        directory:
+          description: Enabling the member directory allows members to see a list of all active members in the community. They can search for members profiles using search, and profiles on public communities may be indexed by search engines.
+          title: Member directory
+        disabled: Disabled
+        email_visibility:
+          description: Control whether members can see each other's email addresses.
+          title: Member email visibility
+        enabled: Enabled
+        flash:
+          saved: Saved
+        save: Save
+        title: Features
+      hosting:
+        add_custom_domain: Add custom domain
+        custom_domain: Custom domain
+        email: Email
+        flash:
+          update: Updated hosting settings
+        remove: Remove
+        remove_custom_domain_confirm: Are you sure you want to remove the custom domain?
+        show:
+          save: Save
+        signups:
+          invite_only: Invite only
+          open: Open
+        subdomain: Subdomain
+        title: Hosting
+        visibility:
+          private: Private
+          public: Public
+          unlisted: Unlisted
+      integrations:
+        title: Integrations
+      moderation:
+        description: Booklet reviews all posts, replies, and profiles for objectionable content using the OpenAI Moderation API. You can choose to automatically remove posts and replies that are flagged as objectionable. You can also automatically deactivate member accounts that post objectionable content. You'll be notified of any action taken. You can disable these features, but content that fails moderation may be excluded from AI-powered features such as the newsletter.
+        flash:
+          update: Moderation settings updated
+        learn_more: Learn about OpenAI Moderation
+        show:
+          save: Save
+        title: Moderation settings
+      newsletter:
+        description: Configure when members receive an automated email summary of all activity from your community. Everybody receives the same newsletter. If there's no new content, then Booklet skips sending an email.
+        flash:
+          update: Newsletter settings updated
+        show:
+          save: Save
+        title: Community newsletter settings
+      notifications:
+        flash:
+          update: Notifications updated
+        form:
+          email: Email
+          notify_mentions:
+            description: Receive an email when someone mentions you in a post or reply.
+            email_label: Notify about mentions via email
+            label: Mentions (Recommended)
+            push_label: Notify about mentions via push notification
+          notify_new_posts:
+            description: Receive email every time a new post is made. Useful if you want to know about posts before the newsletter.
+            email_label: Notify about new posts via email
+            label: New posts
+            push_label: Notify about new posts via push notification
+          notify_newsletter:
+            description: Get an occasional email summary of posts, replies, and new members in the community.
+            email_label: Notify about new newsletters via email
+            label: Newsletter (Recommended)
+            push_label: Notify about new newsletters via push notification
+          push: Push
+          save: Save
+        newsletter_days: Days of the week newsletter sends
+        push_subscribe:
+          enable: Enable
+          notifications_available: Push notifications are available for this browser.
+        title: Your notifications
+      pinned_post:
+        flash:
+          pinned: Post pinned
+          unpinned: Removed pinned post
+          update_error: Error updating pinned post
+      subscription:
+        flash:
+          network_paywall: Network plan required for this feature.
+        title: Pricing and plans

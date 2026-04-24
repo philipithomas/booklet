@@ -1,0 +1,46 @@
+<%
+tabs = []
+
+tabs <<  {
+  name: t(".active"),
+  to: members_path,
+  active: request.path.eql?(members_path),
+} if @community.directory_enabled?
+
+tabs << {
+  name: t(".all"),
+  to: all_members_path,
+  active: request.path.start_with?(all_members_path),
+} if MemberPolicy.new(current_member, @community).index_all?
+
+%>
+
+<div class="community-container ">
+  <!--
+  <div class="sm:hidden">
+    <label for="tabs" class="sr-only">Select a tab</label>
+
+    <select id="tabs" name="tabs" class="block w-full py-2 pl-3 pr-10 text-base border-gray-300 rounded-md dark:border-gray-700 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm">
+      <% tabs.each do |tab| %>
+        <option <% if tab[:active] %>selected <% end %> >
+          <%= tab[:name] %>
+        </option>
+      <% end %>
+    </select>
+  </div>
+  -->
+  <div>
+    <div class="border-b border-gray-100 dark:border-gray-800">
+      <nav class="flex justify-around -mb-px space-x-8 md:justify-start" aria-label="Tabs">
+        <!-- Current: "border-gray-500 text-gray-600", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" -->
+        <% tabs.each do |tab| %>
+          <a href="<%= tab[:to] %>"
+            class="<% if tab[:active] %>border-gray-900 dark:border-gray-100 border-b <% else %> hover:border-b hover:border-gray-900 hover:dark:border-gray-100 border-gray-200 dark:border-gray-900 border-transparent  hover:border-gray-200 dark:hover:border-gray-800 <% end %> px-1 py-2 text-sm  text-gray-800 dark:text-gray-200 font-medium whitespace-nowrap"
+            >
+            <%= tab[:name] %>
+          </a>
+        <% end %>
+      </nav>
+    </div>
+  </div>
+</div>

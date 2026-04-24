@@ -1,0 +1,15 @@
+
+<% if view_count > 0 %>
+  <div class="flex flex-col items-end">
+    <div class="flex justify-center pb-1.5 text-xs text-gray-600 dark:text-gray-400 text-light">
+      <%= t('.seen_by', count: view_count, member: view_count > 1 ? t('activerecord.models.member.other').downcase : t('activerecord.models.member.one').downcase) %>
+    </div>
+    <div class="isolate flex -space-x-1 overflow-hidden">
+      <% members.each_with_index do |member, i| %>
+        <div class="relative z-<%= (members.length - i)*10 %> inline-block" data-member="<%= member.id %>">
+          <%= render :partial => 'components/member/photo', locals: { member: member, size: 6, class: "ring-2 rounded-full ring-white dark:ring-black" } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

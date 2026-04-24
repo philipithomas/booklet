@@ -1,0 +1,17 @@
+---
+en-US:
+  activerecord:
+    attributes:
+      community:
+        email: Billing Email
+        icon: Icon
+        logo: Logo
+        logo_for_dark_background: Logo for dark background
+        name: Name
+        open_ai_content_moderation_enabled: Auto-remove content flagged by OpenAI Moderation
+        open_ai_member_moderation_enabled: Auto-deactivate members that post content flagged by OpenAI Moderation
+        slug: Slug
+    models:
+      community:
+        one: Community
+        other: Communities

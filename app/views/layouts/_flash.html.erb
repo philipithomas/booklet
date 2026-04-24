@@ -1,0 +1,31 @@
+<div
+  data-controller="notification"
+  data-notification-delay-value="3000"
+  class="hidden transition duration-300 transform flash"
+  data-transition-enter-from="opacity-0 translate-x-6"
+  data-transition-enter-to="opacity-100 translate-x-0"
+  data-transition-leave-from="opacity-100 translate-x-0"
+  data-transition-leave-to="opacity-0 translate-x-6"
+  >
+  <div class="flex items-center">
+    <div class="flex justify-between flex-1 w-0">
+      <p class="flex-1 w-0 flash-body">
+        <%= message %>
+      </p>
+      <%#
+      <button type="button" class="flex-shrink-0 ml-3 text-sm font-medium text-indigo-600 bg-white rounded-md hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        Undo
+      </button>
+      %>
+    </div>
+
+    <div class="flex flex-shrink-0 ml-4">
+      <button
+        data-action="notification#hide"
+        class="inline-flex text-gray-400 dark:text-gray-600 rounded-md hover:text-gray-800 dark:hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 dark:focus:ring-gray-700">
+        <span class="sr-only">Close</span>
+        <%= heroicon 'x-mark', options: { class: "w-5 h-5" }, variant: :solid %>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<% content_for :heading do %><%= title t(".forgot_your_password") %><% end %>
+<% noindex %>
+
+<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }, builder: Bklt::FormBuilder) do |f| %>
+  <div class="form-space">
+    <%= f.error_notification %>
+
+    <%= f.input :email,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "email" } %>
+
+    <%= f.hidden_field :community_id, value: @community.id %>
+
+    <%= f.button :submit_dynamic, label: t(".send_me_reset_password_instructions"), full_width: true %>
+  </div>
+<% end %>

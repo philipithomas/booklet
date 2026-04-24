@@ -1,0 +1,13 @@
+<%= simple_form_for(member, url: member_invitations_path, builder: Bklt::FormBuilder, html: { id: 'new_invitation' }) do |f| %>
+  <div class="space-y-4">
+    <%= f.error_notification %>
+
+    <%= f.input :email,
+                required: true,
+                label: t(".invite_by_email"),
+                required: true,
+                input_html: { autocomplete: "off", autofocus: true, required: true, placeholder: "#{@community.slug}@example.com, booklet@example.com" } %>
+
+    <%= f.button :submit_dynamic, label: t(".send") %>
+  </div>
+<% end %>

@@ -1,0 +1,29 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Redirect",
+      "warning_code": 18,
+      "fingerprint": "8290718af32c73364ec77c27a66614096474db8fb58d459d5e3bd1d13179266b",
+      "check_name": "Redirect",
+      "message": "Possible unprotected redirect",
+      "file": "app/controllers/setup_controller.rb",
+      "line": 15,
+      "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
+      "code": "redirect_to(Community.new(community_params).checkout_url(welcome_community_url(:community_id => Community.new(community_params).id, :host => request.host), cancel_community_url(:community_id => Community.new(community_params).id, :host => request.host)), :allow_other_host => true)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "SetupController",
+        "method": "create"
+      },
+      "user_input": "Community.new(community_params).checkout_url(welcome_community_url(:community_id => Community.new(community_params).id, :host => request.host), cancel_community_url(:community_id => Community.new(community_params).id, :host => request.host))",
+      "confidence": "Weak",
+      "cwe_id": [
+        601
+      ],
+      "note": ""
+    }
+  ],
+  "updated": "2023-05-09 21:36:51 -0500",
+  "brakeman_version": "5.4.1"
+}

@@ -1,0 +1,17 @@
+<% cache [member, size, local_assigns.fetch(:class, '')] do %>
+  <% if member.photo.attached? %>
+    <%= render "components/shared/square_image_variants",
+        classes: "h-#{size} w-#{size} #{local_assigns.fetch :class, ''} rounded-full bg-gray-700 dark:bg-gray-200 text-gray-500 no-zoom",
+        image: member.photo,
+        alt: member.name,
+        size: size * 4,
+        imageClasses: "no-zoom"
+    %>
+  <% else %>
+    <span class="inline-flex items-center justify-center bg-gray-700 dark:bg-gray-200 rounded-full h-<%= size %> w-<%= size %> <%= local_assigns.fetch :class, '' %>">
+      <span class="<% if size>9 %>text-xl<% else %>text-xs<% end %> font-medium leading-none text-gray-050 dark:text-gray-950">
+        <%= member.name.present? ? member.initials : '' %>
+      </span>
+    </span>
+  <% end %>
+<% end %>

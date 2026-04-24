@@ -1,0 +1,61 @@
+<div id="domain-copied-tmpl" class="hidden">
+  <%# Event name must match one below in copy controller %>
+  <%= render "layouts/flash", message: 'Copied!' %>
+</div>
+
+
+<div class="flex flex-col mt-8 overflow-visible">
+  <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+      <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+        <table class="min-w-full divide-y divide-gray-300 dark:divide-gray-700">
+          <thead class="bg-gray-050 dark:bg-gray-950">
+            <tr>
+              <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100 sm:pl-6">Type</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Host name</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Value</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white dark:bg-gray-950 divide-y divide-gray-200 dark:divide-gray-800">
+            <% @community.domains.each do |domain| %>
+              <tr>
+                <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 dark:text-gray-100 whitespace-nowrap sm:pl-6">
+                  <% if domain.apex? %>
+                    <span class="record">A</span>
+                  <% else %>
+                    <span class="record">CNAME</span>
+                  <% end %>
+                </td>
+                <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
+                  <button
+                    class="record"
+                    data-controller="copy"
+                    data-clipboard-text="<%= domain.domain %>"
+                    data-copy-template-id-value="domain-copied-tmpl"
+                  >
+                    <%= domain.domain %>
+                    <%= heroicon "clipboard", options: { class: "inline-block w-4 h-4 ml-1 text-gray-400 hover:text-gray-500 dark:text-gray-600" } %>
+                  </button>
+                </td>
+                <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
+                  <%
+                    value = domain.apex? ? '137.66.55.154' : "#{@community.slug}.#{Rails.configuration.app_apex_host}"
+                  %>
+                  <button
+                    class="record"
+                    data-controller="copy"
+                    data-clipboard-text="<%= value %>"
+                    data-copy-template-id-value="domain-copied-tmpl"
+                  >
+                    <%= value %>
+                    <%= heroicon "clipboard", options: { class: "inline-block w-4 h-4 ml-1 text-gray-400 dark:text-gray-600 hover:text-gray-500" } %>
+                  </button>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

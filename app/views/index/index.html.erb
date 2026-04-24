@@ -1,0 +1,12 @@
+<turbo-frame
+  loading="lazy"
+  id="switch"
+  src="<%= switch_index_path %>">
+  <%= render "components/shared/loading" %>
+</turbo-frame>
+
+<div class="mt-8 text-center prose-sm dark:prose-invert">
+  <p>
+    <%= button_to "Sign out", index_path, method: :delete, class: "link", form: { "data-turbo" => "false" } %>
+  </p>
+</div>

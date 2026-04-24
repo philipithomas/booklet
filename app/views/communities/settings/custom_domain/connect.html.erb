@@ -1,0 +1,32 @@
+<% title 'Connect domain' %>
+
+<% content_for :heading do %>
+  Connect a domain
+<% end %>
+<% content_for :subheading do %>
+  <%= render "components/shared/docs_pill", url: "https://docs.booklet.group/docs/settings/custom-domain/" %>
+<% end %>
+
+<%= simple_form_for(
+  :domain,
+  url: request.path,
+  method: :put,
+  builder: Bklt::FormBuilder,
+  local: true) do |f|
+  %>
+  <div class="form-space">
+    <div>
+      <%= f.label :domain, 'Domain', class: 'form-label' %>
+      <div class="mt-1">
+        <%= f.text_field :domain, class: 'form-input', autofocus: true, autocomplete: "off", placeholder: 'example.com'  %>
+      </div>
+    </div>
+
+    <%= f.button :submit_dynamic, label: "Next", full_width: true %>
+  </div>
+<% end %>
+
+
+<p class="text-gray-700 dark:text-gray-300 text-center text-sm">
+  Or, <%= link_to "do this later", settings_hosting_path, class: 'link' %>
+</p>

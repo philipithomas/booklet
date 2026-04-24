@@ -1,0 +1,36 @@
+<%= turbo_frame_tag dom_id(reply) do %>
+  <li class="transition duration-150 ease-in-out border-b border-gray-100 border-solid dark:border-gray-900 md:border-0 py-4 community-container"
+      data-controller="reply" data-reply-member-id-value="<%= reply.member_id %>">
+
+    <div class="md:card max-w-prose mx-auto">
+      <span class="text-sm font-light leading-5 text-gray-500 md:pt-2">
+        <%= t('communities.replies.show.replied') %> <%= link_to relative_time_tag(reply.created_at), post_reply_path(reply.post, reply), target: "_top" %>.
+
+        <span class="hidden" data-reply-target="edit">
+          <a href="<%= edit_post_reply_path(reply.post, reply) %>" class="link">
+            <%= t('communities.replies.show.edit') %></a>.
+        </span>
+
+        <span class="hidden" data-reply-target="delete">
+          <%= button_to t('communities.replies.show.delete'),
+            post_reply_path(reply.post, reply),
+            class: "link",
+            method: :delete,
+            form: {
+              data: {
+                turbo_confirm: t('communities.replies.show.are_you_sure_you_want_to_delete_this_reply'),
+              }
+            } %>.
+        </span>
+      </span>
+
+      <div class="pt-2" data-controller="linkout medium-zoom">
+        <%= reply.body %>
+      </div>
+
+      <div class="pt-4">
+        <%= render :partial => 'components/member/inline', locals: { member: reply.member } %>
+      </div>
+    </div>
+  </li>
+<% end %>

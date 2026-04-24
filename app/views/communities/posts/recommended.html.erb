@@ -1,0 +1,9 @@
+<%= turbo_frame_tag "recommended_posts" do %>
+  <div class="w-full space-x-2  ml-4 sm:ml-6 lg:ml-8">
+    <% @recommended_posts.each_with_index do |recommendation, index| %>
+      <span class="<%= "pr-4 sm:pr-6 lg:pr-8" if index == @recommended_posts.length - 1 %>">
+        <%= link_to recommendation, new_post_path(s_prompt: Post.generate_signed_prompt(recommendation)), class: "btn btn-secondary", data: { turbo_frame: "_top" } %>
+      </span>
+    <% end %>
+  </div>
+<% end %>

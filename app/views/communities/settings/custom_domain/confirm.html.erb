@@ -1,0 +1,13 @@
+<% title 'Domain deploying' %>
+
+<% content_for :heading do %>
+    Domain deploying
+<% end %>
+
+<div class="prose dark:prose-invert">
+  <p>We'll email you when your domain is live. This typically takes about twenty minutes, but occassionally takes longer.</p>
+  <p>Taking longer than expected? <a href="mailto:<%= Rails.configuration.support_email %>">Email us</a> and we'll review your settings.</p>
+</div>
+
+
+<%= link_to 'Done →', posts_path, class: 'btn btn-primary w-full' %>

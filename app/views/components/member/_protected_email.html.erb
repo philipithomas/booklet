@@ -1,0 +1,34 @@
+<%# locals: (member:, community:) %>
+
+<div data-controller="modal">
+  <button data-action="click->modal#open" class="w-full btn btn-secondary">
+    <%= heroicon "envelope", options: { class: "-ml-1 mr-2 h-5 w-5 text-accent" } %>
+    <%= t(".contact") %>
+  </button>
+
+  <div class="hidden fixed inset-0 bg-black bg-opacity-80 overflow-y-none flex items-center justify-center z-50"
+    data-modal-target="background"
+    data-action="click->modal#closeBackground"
+    data-transition-enter="transition-all ease-in-out duration-300"
+    data-transition-enter-from="bg-opacity-0"
+    data-transition-enter-to="bg-opacity-80"
+    data-transition-leave="transition-all ease-in-out duration-300"
+    data-transition-leave-from="bg-opacity-80"
+    data-transition-leave-to="bg-opacity-0">
+    <div data-modal-target="container" class="max-h-screen w-full max-w-md relative px-6 py-8 overflow-y-auto">
+      <div class="bg-white dark:bg-gray-950 rounded-lg shadow h-auto p-4">
+        <div class="flex justify-end pb-2">
+          <button data-action="click->modal#close">
+            <%= heroicon "x-mark", options: { class: "h-6 w-6 text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 cursor-pointer", action: "click->modal#close" } %>
+          </button>
+        </div>
+        <turbo-frame
+          loading="lazy"
+          id="contact"
+          src="<%= member_contact_path(member) %>">
+          <%= render "components/shared/inline_loading" %>
+        </turbo-frame>
+      </div>
+    </div>
+  </div>
+</div>

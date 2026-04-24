@@ -1,0 +1,16 @@
+<% content_for :summary do %>
+  <%= t("emails.community_admin_mailer.domain_verified.line_1") %>
+<% end %>
+
+<p>
+    <%= t("emails.community_admin_mailer.domain_verified.line_1") %>
+</p>
+<p>
+      <%= t("emails.community_admin_mailer.domain_verified.line_2") %>
+</p>
+
+<% content_for :button_label do %>
+  <%= t("emails.community_admin_mailer.domain_verified.button_label", host: @community.host) %> &rarr;
+<% end %>
+
+<% content_for :button_link do %><%= @community.url %><% end %>

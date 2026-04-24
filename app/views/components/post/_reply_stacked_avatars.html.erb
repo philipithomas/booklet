@@ -1,0 +1,21 @@
+<% cache post, expires_in: 1.hour, race_condition_ttl: 5.minutes do %>
+  <div class="flex items-center justify-end">
+    <%
+    preview_limit = 3
+    count = post.replies.count
+    remainder = count - preview_limit
+    %>
+    <div class="isolate flex -space-x-1 overflow-hidden">
+      <% post.replies.feed_for(nil).first(preview_limit).reverse.map(&:member).each_with_index do |m, i| %>
+        <div class="relative z-<%= (preview_limit- i)*10 %> inline-block">
+          <%= render :partial => 'components/member/photo', locals: { member: m, size: 6, class: "ring-2 rounded-full ring-white dark:ring-black" } %>
+        </div>
+      <% end %>
+    </div>
+    <% if remainder > 0 %>
+      <div class="pl-1 text-xs font-normal leading-5 text-gray-300 dark:text-gray-700">
+        +<%= remainder %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

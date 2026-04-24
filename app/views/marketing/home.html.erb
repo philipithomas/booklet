@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="prose dark:prose-invert">
+    <h1><%= t('booklet') %></h1>
+
+    <p>Some of our communities:</p>
+
+    <ul>
+      <% Community.order(created_at: :asc).each do |c| %>
+        <li>
+          <a href="http://<%= c.host %>:3000">
+            <%= c.name %>
+          </a>
+          (<%= c.host %>)
+        </li>
+      <% end %>
+    </ul>
+
+    <p>
+      Or, check out the <%= link_to "Editor", "http://#{Rails.configuration.editor_host}:3000" %> or <%= link_to "API", "http://#{Rails.configuration.api_host}:3000" %>.
+    </  >
+  </div>
+
+  <div class="flex items-center space-x-4 mt-8">
+    <a class="btn btn-primary" href="http://<%= Rails.configuration.signup_host %>:3000">
+      Sign up
+    </a>
+    <%= link_to "Sign in", index_url(host: Rails.configuration.index_host), class: "link" %>
+  </div>

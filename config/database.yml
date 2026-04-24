@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  reaping_frequency: 5
+  idle_timeout: 10
+
+development:
+  <<: *default
+  database: bklt_development
+
+test:
+  <<: *default
+  database: bklt_test
+
+production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 20 } %>
+  statement_timeout: 5000
+  reconnect: true

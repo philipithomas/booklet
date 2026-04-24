@@ -1,0 +1,5 @@
+<%= turbo_stream.remove dom_id(@api_key) %>
+
+<%= turbo_stream.prepend "flash_messages" do %>
+  <%= render :partial => "layouts/flash", locals: { message: t('communities.settings.api_keys.flash.destroyed') } %>
+<% end %>

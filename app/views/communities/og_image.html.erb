@@ -1,0 +1,12 @@
+
+<div class="w-full bg-white h-full min-h-screen flex items-center justify-center">
+  <% if community.logo.attached? %>
+    <img class="max-w-full max-h-full" style="padding: 15%"
+      src="<%= cdn_proxy_url(community.logo) %>"
+      />
+  <% else %>
+    <div class="font-bold text-gray-900 overflow-wrap" style="font-size: 5rem; line-height: 1.2; padding: 15%">
+      <%= community.name %>
+    </div>
+  <% end %>
+</div>

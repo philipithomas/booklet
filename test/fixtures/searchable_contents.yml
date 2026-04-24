@@ -1,0 +1,27 @@
+# == Schema Information
+#
+# Table name: searchable_contents
+#
+#  id           :bigint           not null, primary key
+#  content_type :string           not null
+#  document     :text
+#  embedding    :vector(3072)
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  community_id :bigint           not null
+#  content_id   :bigint           not null
+#
+# Indexes
+#
+#  index_searchable_contents_on_community_id  (community_id)
+#  index_searchable_contents_on_content       (content_type,content_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (community_id => communities.id)
+#
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the "{}" from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#

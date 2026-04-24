@@ -1,0 +1,9 @@
+---
+en-US:
+  emails:
+    community_admin_mailer:
+      domain_verified:
+        button_label: Visit %{host}
+        line_1: Your community's custom domain is live and active!
+        line_2: Occassionally, it can take up to 24 hours for DNS changes to propagate. If you have any issues, please respond to this email and we'll help you out.
+        subject: 'Your domain is live: %{host}'

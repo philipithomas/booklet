@@ -1,0 +1,21 @@
+<% if object&.errors&.any? %>
+<div class="p-4 mb-4 bg-gray-100 rounded-md">
+  <div class="flex">
+    <div class="flex-shrink-0">
+      <%= heroicon "x-circle", options: { class: "w-5 h-5 text-gray-500" }  %>
+    </div>
+    <div class="ml-3 text-sm text-gray-900">
+      <h3 class="font-semibold ">
+        There <%= object.errors.count > 1 ? 'are' : "is"%> <%= pluralize(object.errors.count, "problem") %>:
+      </h3>
+      <div class="mt-2 text-xs">
+        <ul class="pl-5 space-y-1 list-disc">
+          <% object.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

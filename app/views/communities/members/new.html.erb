@@ -1,0 +1,50 @@
+
+<div class="community-container community-page-vertical-padding">
+  <div class="md:max-w-prose md:mx-auto">
+    <h1 class="page-title block mb-4 flex justify-between items-center">
+      <%= title t('.title') %>
+      <%= render "components/shared/docs_pill", url: "https://docs.booklet.group/docs/management/adding-members/" %>
+    </h1>
+
+    <%= simple_form_for(@member, url: members_path, builder: Bklt::FormBuilder, html: { id: 'member-form', data: { controller: 'new-member' } }) do |f| %>
+      <div class="form-space">
+        <%= f.error_notification %>
+
+        <%= f.input :email, as: :email,
+                    required: true,
+                    autofocus: true,
+                    input_html: { autocomplete: "off" } %>
+
+        <%= f.input :name,
+                    required: false,
+                    input_html: { autocomplete: "off" }, hint: "Optional" %>
+
+        <div class="relative flex items-center py-2">
+          <div class="flex h-6 items-center">
+            <%= f.check_box :subscribed_at, id: "member_confirmed_at", class: "form-input", data: { 'new-member-target': "consent", action: "new-member#toggleSendWelcome" } %>
+          </div>
+          <div class="ml-3 text-sm leading-6">
+            <div class="text-gray-800 dark:text-gray-200 font-medium text-sm">
+              <%= f.label :subscribed_at, t(".consented"), for: "member_confirmed_at" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative flex items-center pb-2 hidden" data-new-member-target="sendWelcome">
+          <div class="flex h-6 items-center">
+            <%= f.check_box :send_welcome, id: "member_send_welcome", class: "form-input", checked: true %>
+          </div>
+          <div class="ml-3 text-sm leading-6">
+            <div class="text-gray-800 dark:text-gray-200 font-medium text-sm">
+              <%= f.label :send_welcome, t(".send_welcome"), for: "member_send_welcome" %>
+            </div>
+          </div>
+        </div>
+
+        <%= render "import_member_limit", community: @community, current_member: current_member %>
+
+        <%= f.button :submit_dynamic, label: t(".invite"), full_width: true, data: { 'invite-label': t(".invite"), 'add-label': t('.add'), 'new-member-target': "button", 'can-direct-add': @community.can_direct_add_member?(current_member) } %>
+      </div>
+    <% end %>
+  </div>
+</div>

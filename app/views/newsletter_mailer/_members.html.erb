@@ -1,0 +1,33 @@
+<div>
+  <table class="mx-0" style="margin: 0 0 12px 0" cellpadding="0" cellspacing="0" role="presentation">
+    <tbody>
+      <% members.each do |member| %>
+        <tr >
+          <td class="pb-16">
+            <div>
+              <a href="<%= member_url(member, host: @community.host, email_token: @email_token) %>" target="_blank">
+                  <div>
+                    <%= image_tag member.photo.attached? ? member.photo.variant(resize_to_fill: [48, 48, { crop: :attention }]).processed : (@community.icon.attached? ? @community.icon.variant(resize_to_fill: [48, 48, { crop: :attention }]).processed : asset_path('logo/icon.png')),
+                      width: 24, height: 24,
+                      class: member.photo.attached? ? "border-0 rounded-full h-24 w-24" : "border-0 h-24 w-24",
+                      alt: member.photo.attached? ? member.name : @community.name %>
+                  </div>
+              </a>
+            </div>
+          </td>
+          <td class="pb-8">
+            <div class="ml-12 leading-tight">
+              <div class="pb-8">
+                <a href="<%= member_url(member, host: @community.host, email_token: @email_token) %>" target="_blank">
+                  <span class="font-semibold">
+                    <%= member.name %>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

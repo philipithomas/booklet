@@ -1,0 +1,34 @@
+<%# locals: (drafts:) %>
+
+<div
+  data-controller="dropdown"
+  data-action="click@window->dropdown#hide touchstart@window->dropdown#hide keydown.up->dropdown#previousItem keydown.down->dropdown#nextItem keydown.esc->dropdown#hide"
+  class="inline-block relative flex items-center justify-center">
+  <button data-action="dropdown#toggle:stop" class="p-2">
+    <%= heroicon "chevron-down", options: { class: "w-6 h-6 text-gray-700 dark:text-gray-300" }, variant: :solid %>
+  </button>
+  <div data-dropdown-target="menu" class="hidden absolute top-4 left-0 z-10 mt-5 flex w-screen max-w-max">
+    <div class="text-sm bg-white shadow-sm rounded border border-gray-100 overflow-y-scroll w-48 dark:bg-black dark:border-gray-800" style="max-height: 80vh;">
+      <% drafts.each do |draft| %>
+        <a
+          data-dropdown-target="menuItem"
+          href="<%= edit_post_path(draft) %>"
+          class="truncate no-underline block pl-4 py-2 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-900 whitespace-nowrap"
+          >
+          <%= draft.title %> <%= draft.body.to_plain_text.split[0..9].join(' ') %> . . .
+        </a>
+      <% end %>
+      <% if drafts.any? %>
+        <hr class="border-t border-gray-100 dark:border-gray-800" />
+      <% end %>
+      <a
+        data-dropdown-target="menuItem"
+        href="<%= new_post_path(force_new: true) %>"
+        class="no-underline block pl-4 py-2 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-900 whitespace-nowrap flex items-center space-x-1"
+        >
+        <%= heroicon "plus", options: { class: "w-4 h-4 text-gray-700 dark:text-gray-300 inline-block" }, variant: :mini %>
+        <span><%= t ".new_draft" %></span>
+      </a>
+    </div>
+  </div>
+</div>

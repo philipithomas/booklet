@@ -1,0 +1,34 @@
+<% title @post.title %>
+
+<div class="">
+  <div class="community-container mt-8">
+    <%= turbo_stream_from @post %>
+    <% if @post.quarantined_at.present? and (current_member&.manager_or_admin? or current_editor) %>
+      <%= render "quarantined_alert", post: @post %>
+    <% end %>
+    <%= render "components/post/post", post: @post %>
+  </div>
+
+  <div class="">
+    <div class="community-container">
+      <div class="mt-12 max-w-prose mx-auto">
+        <hr class="mb-8 border-gray-100 dark:border-gray-900 hidden md:block" />
+
+        <div class="flex justify-between items-center">
+          <h2 class="text-xl md:text-2xl font-semibold">
+            Replies
+          </h2>
+          <% if current_member.present? %>
+            <%= render "components/post/follow_button", post: @post, following: @follow.present? %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <turbo-frame
+      id="post_replies"
+      src="<%= post_replies_path(@post) %>">
+      <%= render "components/shared/loading" %>
+    </turbo-frame>
+  </div>
+</div>

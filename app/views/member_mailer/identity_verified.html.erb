@@ -1,0 +1,13 @@
+<% content_for :summary do %>
+  <%= t("mailers.identity_verified.summary") %>
+<% end %>
+
+<p>
+    <%= t("mailers.identity_verified.identity_verified") %>
+</p>
+
+<% content_for :button_label do %>
+  <%= t("mailers.identity_verified.sign_in_to_community", community_name: @community.name) %> &rarr;
+<% end %>
+
+<% content_for :button_link do %><%= @url %><% end %>

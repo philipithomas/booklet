@@ -1,0 +1,15 @@
+---
+en-US:
+  index:
+    create:
+      code: Code
+      code_sent_to_email: Enter the 6-digit code we sent to %{email}.
+      sign_in: Sign in
+      try_again: Try again
+    failure:
+      cannot_create_pin: There was a problem. Please try again.
+      incorrect_pin: That pin is incorrect. Please try again.
+      invalid_email: That email is invalid. Please try again.
+    new:
+      next: Next
+    sign_in: Sign In

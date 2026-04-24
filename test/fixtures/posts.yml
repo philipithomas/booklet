@@ -1,0 +1,47 @@
+# == Schema Information
+#
+# Table name: posts
+#
+#  id             :bigint           not null, primary key
+#  prompt         :string
+#  published_at   :datetime
+#  quarantined_at :datetime
+#  replies_count  :integer          default(0), not null
+#  slug           :string           not null
+#  title          :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  community_id   :bigint           not null
+#  member_id      :bigint           not null
+#
+# Indexes
+#
+#  index_posts_on_community_id           (community_id)
+#  index_posts_on_community_id_and_slug  (community_id,slug) UNIQUE
+#  index_posts_on_member_id              (member_id)
+#  index_posts_on_quarantined_at         (quarantined_at)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (community_id => communities.id)
+#  fk_rails_...  (member_id => members.id)
+#
+before_post:
+  title: Hello, World - old
+  slug: hello-world-old
+  published_at: <%= Time.zone.now - 1.year %>
+  created_at: <%= Time.zone.now - 1.year %>
+  community: lab
+  member: before_member
+post:
+  title: Hello, World!
+  slug: hello-world
+  published_at: <%= Time.zone.now %>
+  community: lab
+  member: member
+after_post:
+  title: Hello, World - again
+  slug: hello-world-2
+  published_at: <%= Time.zone.now %>
+  community: lab
+  member: after_member

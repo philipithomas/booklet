@@ -1,0 +1,13 @@
+<% noindex %>
+
+<% content_for :heading do %>
+  <%= title t('.community_created_check_email') %>
+<% end %>
+
+<div class="prose dark:prose-invert text-center">
+  <p><%= t('.welcome_to_booklet') %></p>
+  <p>
+    <%= t('.questions') %>
+    <%= link_to t('.contact_support'), 'mailto:' + t('support_email'), class: :link %>
+  </p>
+<div>

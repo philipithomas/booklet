@@ -1,0 +1,46 @@
+<%# locals: (post:) %>
+
+<%= form_with(
+  model: post,
+  method: :put,
+  url: post_path(post),
+  local: true,
+  id: "post-#{post.id}",
+  class: 'h-full w-full px-4 sm:px-6 lg:px-8',
+  data: post.published? ? {} : { controller: 'autosave', autosave_target: 'form' }
+  ) do |f| %>
+  <div class="my-6 md:my-8 max-w-prose mx-auto h-full">
+    <%= render 'communities/posts/error_messages', object: f.object %>
+
+    <div
+      <% unless post.published? %>
+        data-controller="editable" data-editable-autofocus-value="true"
+      <% end %>
+      >
+      <h1 contenteditable class="form-input-inline page-title"
+        data-editable-target="content"
+        data-action="keyup->editable#changed keyup->editable#debouncedSave"
+        data-placeholder="Title"
+        placeholder="Title"
+        ><%= post.title %></h1>
+
+      <%= f.hidden_field :title,
+        class: 'form-input-inline page-title',
+        value: post.title,
+        data: { editable_target: 'input' }
+        %>
+      <% if post.published? %>
+        <%= f.hidden_field :published_at, value: post.published_at %>
+      <% end %>
+    </div>
+
+    <div class="min-h-full h-auto mt-3">
+      <%= f.rich_text_area :body,
+        class: 'form-input prose dark:prose-invert trix-editor h-full form-input-inline',
+        autocomplete: "off",
+        data: { action: 'keyup->autosave#debouncedSave paste->trix-paste#pasteHandler', controller: "mentions trix-paste", mentions_target: "field" },
+        placeholder: t('.write_your_post_here')
+         %>
+    </div>
+  </div>
+<% end %>

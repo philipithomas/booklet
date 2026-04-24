@@ -1,0 +1,8 @@
+production:
+  # Convert your Sidekiq cron jobs to this format:
+  # example_job:
+  #   class: YourJobClass
+  #   args: [42, { status: "active" }]
+  #   schedule: "0 */3 * * *"  # Run every 3 hours
+
+  # Add your actual converted jobs here

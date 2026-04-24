@@ -1,0 +1,21 @@
+<% content_for :heading do %><%= title t(".sign_up") %><% end %>
+<% noindex %>
+<% content_for :subheading do %>
+  <%= t("devise.shared.links.have_an_account") %> <%= link_to t("devise.shared.links.sign_in"), new_member_session_path, class: "link" %>
+<% end %>
+
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), builder: Bklt::FormBuilder, html: { honeypot: true }) do |f| %>
+  <div class="form-space">
+    <%= f.error_notification %>
+
+    <%= f.input :name,
+                required: true,
+                autofocus: true ,
+                input_html: { autocomplete: "name" }%>
+    <%= f.input :email,
+                required: true,
+                input_html: { autocomplete: "email" }%>
+
+    <%= f.button :submit_dynamic, label: t(".sign_up"), full_width: true %>
+  </div>
+<% end %>

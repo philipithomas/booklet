@@ -1,0 +1,16 @@
+<div class="community-container">
+  <a
+    class="block md:card text-center mt-12 md:mt-0"
+    href="<%= new_post_path %>"
+  >
+    <%= heroicon "document-plus", options: { class: "w-8 h-8 mx-auto text-accent" } %>
+
+    <span class="block mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+      <% if current_member&.manager_or_admin? %>
+        <%= t("communities.posts.empty.write_welcome_post") %>
+      <% else %>
+        <%= t("communities.posts.empty.write_first_post") %>
+      <% end %>
+    </span>
+  </a>
+</div>

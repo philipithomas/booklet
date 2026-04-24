@@ -1,0 +1,115 @@
+ <% if @community&.brand_color %>
+<style>
+  .turbo-progress-bar {
+    background-color: <%= @community.brand_color %>;
+  }
+  .ring-accent {
+    --tw-ring-color: <%= @community.brand_color %>;
+  }
+
+  .btn-primary {
+    background-color: <%= @community.brand_color %>;
+    color: <%= @community.light_mode_label_color %>;
+    border-color: <%= @community.brand_color %>;
+  }
+  .spinner {
+    color: <%= @community.light_mode_label_color %>;
+  }
+  .form-input[type='checkbox'], .form-input[type='radio'] {
+    color: <%= @community.brand_color %>;
+  }
+  .bg-accent {
+    background-color: <%= @community.brand_color %>;
+  }
+  .bg-accent\/10 {
+    background-color: rgba(<%= @community.brand_color.scan(/../).map(&:hex).join(', ') %>, 0.1);
+  }
+  .text-accent {
+    color:  <%= @community.brand_color %>;
+  }
+  .text-accent-label {
+    color: <%= @community.light_mode_label_color %>;
+  }
+  .border-accent {
+    border-color: <%= @community.brand_color %>;
+  }
+  .hover:border-accent:hover {
+    border-color: <%= @community.brand_color %>;
+  }
+  .btn-secondary {
+    border-color: <%= @community.brand_color %>;
+    <% if @community.brand_color_has_sufficient_contrast_to_light %>
+      color: <%= @community.brand_color %>;
+    <% else %>
+      color: <%= Community::DARK_LABEL_COLOR %>;
+    <% end %>
+  }
+
+  .text-accent-if-contrast {
+    <% if @community.brand_color_has_sufficient_contrast_to_light %>
+      color: <%= @community.brand_color %>;
+    <% else %>
+      color: <%= Community::DARK_LABEL_COLOR%>;
+    <% end %>
+  }
+
+  .form-input-inline {
+    caret-color: <%= @community.brand_color %>;
+  }
+
+  .link {
+    <% if @community.brand_color_has_sufficient_contrast_to_light %>
+      color: <%= @community.brand_color %>;
+    <% else %>
+      color: <%= Community::DARK_LABEL_COLOR %>;
+      text-decoration-color: <%= @community.brand_color %>;
+    <% end %>
+  }
+
+  .prose blockquote, .trix-content blockquote {
+    border-color: <%= @community.brand_color %> !important;
+  }
+
+  .prose a, .trix-content a {
+    text-decoration-color: <%= @community.brand_color %>;
+  }
+
+  @media (prefers-color-scheme:dark){
+    .btn-primary {
+      color: <%= @community.dark_mode_label_color %>;
+    }
+    .spinner {
+      color: <%= @community.dark_mode_label_color %>;
+    }
+    .text-accent-label {
+      color: <%= @community.dark_mode_label_color %>;
+    }
+    .btn-secondary {
+      <% if @community.brand_color_has_sufficient_contrast_to_dark %>
+        color: <%= @community.brand_color %>;
+      <% else %>
+        color: <%= Community::LIGHT_LABEL_COLOR%>;
+      <% end %>
+    }
+
+    .text-accent-if-contrast {
+      <% if @community.brand_color_has_sufficient_contrast_to_dark %>
+        color: <%= @community.brand_color %>;
+      <% else %>
+        color: <%= Community::LIGHT_LABEL_COLOR%>;
+      <% end %>
+    }
+
+
+    .link {
+      <% if @community.brand_color_has_sufficient_contrast_to_dark %>
+        color: <%= @community.brand_color %>;
+      <% else %>
+        color: <%= Community::LIGHT_LABEL_COLOR %>;
+        text-decoration-color: <%= @community.brand_color %>;
+      <% end %>
+    }
+}
+</style>
+
+<% end %>

@@ -1,0 +1,33 @@
+# == Schema Information
+#
+# Table name: replies
+#
+#  id             :bigint           not null, primary key
+#  quarantined_at :datetime
+#  slug           :string           not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  member_id      :bigint           not null
+#  post_id        :bigint           not null
+#
+# Indexes
+#
+#  index_replies_on_member_id         (member_id)
+#  index_replies_on_post_id           (post_id)
+#  index_replies_on_post_id_and_slug  (post_id,slug) UNIQUE
+#  index_replies_on_quarantined_at    (quarantined_at)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (member_id => members.id)
+#  fk_rails_...  (post_id => posts.id)
+#
+new_reply_to_before_post:
+  post: before_post
+  member: new_member
+  slug: new-reply-to-before-post
+  created_at: <%= Time.zone.now - 1.minute %>
+reply_to_hello_world:
+  post: post
+  member: member
+  slug: reply-to-hello-world

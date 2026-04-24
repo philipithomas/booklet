@@ -1,0 +1,228 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/members":
+    post:
+      summary: Creates a member
+      security:
+      - api_key: []
+      tags:
+      - Members
+      parameters: []
+      responses:
+        '201':
+          description: member created
+        '422':
+          description: invalid request
+        '409':
+          description: email already exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                about:
+                  type: string
+                email:
+                  type: string
+                permission:
+                  type: string
+                subscribed_at:
+                  type: boolean
+                  nullable: true
+                  summary: Opts in to receive emails immediately
+                quarantined_at:
+                  type: string
+                  nullable: true
+                  summary: Opts out of receiving emails
+                send_welcome:
+                  type: boolean
+                  nullable: true
+                  summary: Send a welcome email. Only used when subscribed_at is present.
+                photo:
+                  type: string
+                  nullable: true
+              required:
+              - email
+    get:
+      summary: Lists members
+      security:
+      - api_key: []
+      tags:
+      - Members
+      parameters:
+      - name: page
+        in: query
+        description: Page number
+        schema:
+          type: integer
+      - name: items
+        in: query
+        description: Number of items per page
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: members found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  members:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        email:
+                          type: string
+                        name:
+                          type: string
+                        about:
+                          type: string
+                        permission:
+                          type: string
+                        slug:
+                          type: string
+                        created_at:
+                          type: string
+                        updated_at:
+                          type: string
+                        quarantined_at:
+                          type: string
+                          nullable: true
+                        subscribed_at:
+                          type: boolean
+                          nullable: true
+                        photo_url:
+                          type: string
+                          nullable: true
+                        status:
+                          type: string
+                  metadata:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                      page:
+                        type: integer
+                      last:
+                        type: integer
+                        nullable: true
+                required:
+                - members
+                - metadata
+  "/members/{id}":
+    get:
+      summary: Retrieves a member
+      security:
+      - api_key: []
+      tags:
+      - Members
+      parameters:
+      - name: id
+        in: path
+        description: ID, slug, or url-encoded email of the member to retrieve
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: member found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  email:
+                    type: string
+                  name:
+                    type: string
+                  about:
+                    type: string
+                    nullable: true
+                  permission:
+                    type: string
+                  subscribed_at:
+                    type: boolean
+                    nullable: true
+                    summary: Opts in to receive emails immediately
+                  quarantined_at:
+                    type: string
+                    nullable: true
+                    summary: Opts out of receiving emails
+                  photo_url:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                  status:
+                    type: string
+                  slug:
+                    type: string
+                required:
+                - id
+        '404':
+          description: member not found
+    put:
+      summary: Updates a member
+      security:
+      - api_key: []
+      tags:
+      - Members
+      parameters:
+      - name: id
+        in: path
+        description: Member ID, slug, or url-encoded email
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: member updated
+        '404':
+          description: member not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                photo:
+                  type: string
+                about:
+                  type: string
+                locked_at:
+                  type: string
+                  nullable: true
+                quarantined_at:
+                  type: string
+                  nullable: true
+              required: []
+components:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
+security:
+- api_key: []
+servers:
+- url: "{defaultHost}"
+  variables:
+    defaultHost:
+      default: https://api.booklet.group

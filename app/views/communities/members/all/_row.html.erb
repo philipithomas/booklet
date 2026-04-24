@@ -1,0 +1,21 @@
+<%# locals: (member:) %>
+
+<tr class="odd:bg-gray-050 dark:odd:bg-gray-950" id="<%= dom_id(member) %>">
+  <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 dark:text-gray-100 whitespace-nowrap sm:pl-6">
+    <a class="flex items-center space-x-2" href="<%= member_path(member) %>">
+      <% if member.name? %>
+        <%= render :partial => 'components/member/photo', locals: { member: member, size: 5 }, class: "flex-shrink-0" %>
+      <% end %>
+      <span>
+        <%= member.name %>
+      </span>
+    </a>
+  </td>
+  <td class="px-3 py-4 text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap"><%= member.email %></td>
+  <td class="px-3 py-4 text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">
+    <%= render "communities/members/status", member: member %>
+  </td>
+  <td class="relative py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+    <%= render "communities/members/all/actions", member: member %>
+  </td>
+</tr>

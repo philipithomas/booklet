@@ -1,0 +1,9 @@
+<%= turbo_stream.append "replies", partial: "reply", collection: @replies, as: :reply %>
+
+<% if @pagy.next.present? %>
+  <%= turbo_stream.replace "infinite_scroll",
+    partial: "communities/replies/scroll_frame",
+    locals: { page: @pagy.next } %>
+<% else %>
+  <%= turbo_stream.remove "infinite_scroll" %>
+<% end %>

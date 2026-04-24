@@ -1,0 +1,13 @@
+
+<div class="w-full bg-white h-full min-h-screen flex justify-center items-center">
+  <div class="w-full h-auto" style="padding: 0 15%">
+    <h1 class=" font-bold text-gray-950 leading-tight line-clamp-3" style="font-size: 4.5rem; line-height: 1.15;">
+      <%= post.title %>
+    </h1>
+    <% if community.logo.attached? %>
+      <img class="w-auto h-10 mt-10"
+        src="<%= cdn_proxy_url(community.logo) %>"
+        />
+    <% end %>
+  </div>
+</div>

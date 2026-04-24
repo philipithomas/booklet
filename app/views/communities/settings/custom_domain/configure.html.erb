@@ -1,0 +1,32 @@
+<% title 'Configure domain' %>
+
+<%
+calendly_url = "#"
+%>
+
+<% content_for :heading do %>
+  Configure your domain
+<% end %>
+
+<div class="prose dark:prose-invert">
+  <p>
+    Sign into your domain provider
+    <% if @registrar&.name && @registrar&.url %>
+      <a href="<%= @registrar.url %>" target="_blank" rel="noopener"><%= @registrar.name %></a>
+    <% end %>
+   and set these DNS values for <span class="record"><%= @community.domains.where(redirect_for_name: nil).first.domain %></span>:</p>
+</div>
+
+<%= render "domain_record_table" %>
+
+<div class="prose">
+  <p>Want help? <a href="<%= calendly_url %>" class="link" target="_blank" rel="noopener">Schedule a setup call</a>.</p>
+</div>
+
+<%= link_to 'Finished adding the records →', next_wizard_path, class: 'btn btn-primary w-full' %>
+
+<p class="text-gray-700 text-center text-sm">
+    <%= link_to "Do this later", posts_path, class: 'link' %>
+    or
+    <%= link_to "Cancel and start over", request.path, class: 'link', data: { 'turbo-method': :put }  %>
+</p>

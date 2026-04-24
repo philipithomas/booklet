@@ -1,0 +1,16 @@
+<div class="rounded-md bg-gray-200 dark:bg-gray-800 p-4 mb-6 hidden">
+  <div class="flex md:items-center">
+    <div class="flex-shrink-0">
+      <%= heroicon "bell", options: { class: "h-5 w-5 text-gray-800 dark:text-gray-200", variant: :solid } %>
+    </div>
+    <div class="ml-3 flex-1 md:flex items-center md:justify-between">
+      <p class="text-sm text-black dark:text-white"><%= I18n.t('communities.settings.notifications.push_subscribe.notifications_available') %></p>
+      <p class="mt-3 md:ml-6 md:mt-0">
+        <button class="btn btn-primary btn-small" data-action="click->push#requestNotificationPermission">
+          <%= I18n.t('communities.settings.notifications.push_subscribe.enable') %>
+          <span aria-hidden="true"> &rarr;</span>
+        </button>
+      </p>
+    </div>
+  </div>
+</div>

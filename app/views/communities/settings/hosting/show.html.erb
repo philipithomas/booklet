@@ -1,0 +1,54 @@
+<h1 class="page-subtitle pb-6  flex items-center space-x-4 md:space-x-6">
+  <span><%= title I18n.t('communities.settings.hosting.title') %></span>
+  <%= render "components/shared/docs_pill", url: "https://docs.booklet.group/docs/settings/visibility/" %>
+</h1>
+
+<%= simple_form_for(@community, url: request.path, builder: Bklt::FormBuilder, method: :put) do |f| %>
+  <div class="space-y-4">
+    <%= f.error_notification %>
+
+    <div class="">
+      <label class="form-label" for="community_slug">
+        <% if @community.domains.any? %>
+          <%= I18n.t('communities.settings.hosting.email') %>
+        <% else %>
+          <%= I18n.t('communities.settings.hosting.subdomain') %>
+        <% end %>
+      </label>
+      <div class="flex rounded-md shadow-sm border border-gray-200 dark:border-gray-800">
+        <input class="flex-1 min-w-0 form-input !border-0" type="text" value="<%= @community.slug %>" name="community[slug]" id="community_slug">
+        <span class="inline-flex items-center px-3 bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 sm:text-sm">
+          <% if @community.domains.any? %>@<% else %>.<% end %><%= Rails.configuration.app_apex_host %>
+        </span>
+      </div>
+    </div>
+
+    <%= f.input :visibility, as: :select, collection: Community.visibilities.keys.map { |k| [I18n.t("communities.settings.hosting.visibility.#{k}"), k] }, value: @community.visibility %>
+
+    <%= f.input :signups, as: :select, collection: Community.signups.keys.map { |k| [I18n.t("communities.settings.hosting.signups.#{k}"), k] }, value: @community.signups %>
+
+    <div>
+      <div class="form-label">
+        <%= I18n.t('communities.settings.hosting.custom_domain') %>
+      </div>
+      <div>
+        <% if @community.domains.any? %>
+          <% domain = @community.domains.where(redirect_for_name: nil).first %>
+          <span class="record"><%= domain.domain %></span>
+          <% if domain.verified %>
+            <span class="text-gray-500 text-sm">(<%= link_to I18n.t('communities.settings.hosting.remove'), request.path, class: 'link', data: { turbo_confirm: I18n.t('communities.settings.hosting.remove_custom_domain_confirm'), turbo_method: :delete } %>)</span>
+          <% else %>
+            <span class="text-gray-500">(<%= link_to "Verifying", settings_custom_domain_path(:configure), class: 'link' %>)</span>
+          <% end %>
+        <% else %>
+          <a href="<%= settings_custom_domain_path(:connect) %>" class="link text-sm mt-1">
+            <%= I18n.t('communities.settings.hosting.add_custom_domain') %> →
+          </a>
+        <% end %>
+      </div>
+    </div>
+
+    <%= f.button :submit, t('.save') %>
+
+  </div>
+<% end %>

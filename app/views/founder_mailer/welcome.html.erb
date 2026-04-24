@@ -1,0 +1,21 @@
+<p>
+  Hey <%= @member.first_name || "there" %>,
+</p>
+
+<p>
+  Thanks for creating a community on Booklet.
+</p>
+
+<p>Here are some tips for getting started:</p>
+<ol>
+  <li><strong>Brand your community:</strong> Booklet has many customizations. Adding a logo and icon is the best place to start.</li>
+  <li><strong>Write a welcome post:</strong> Tell members what your community is about, and how they should interact.</li>
+  <li><strong>Write a second post asking a question or asking members to introduce themselves:</strong> This will help get the conversation started with new members.</li>
+  <li><strong>Invite your first members:</strong> Add their email addresses on the <a href="<%= new_member_url(host: @community.host ) %>">Invitations</a> page.</li>
+</ol>
+<p>
+  Let us know if you have any questions or feedback as you get started.
+</p>
+<p>
+  The Booklet Team
+</p>

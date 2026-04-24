@@ -1,0 +1,9 @@
+<%= turbo_stream.append "results", partial: "results", locals: { results: @results } %>
+
+<% if @limit == @results.count %>
+  <%= turbo_stream.replace "infinite_scroll",
+    partial: "communities/search/scroll_frame",
+    locals: { offset: (@offset + @limit), query: @search.query } %>
+<% else %>
+  <%= turbo_stream.remove "infinite_scroll" %>
+<% end %>

@@ -1,0 +1,84 @@
+<div class="flow-root mt-2">
+  <ul role="list" class="-mb-8">
+    <%
+      class_icons = { "Post" => "pencil", "Reply" => "chat-bubble-left" }
+    %>
+    <% @member.activities.visible_to(current_member).each do |activity| %>
+    <li>
+      <div class="relative pb-8">
+        <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200 dark:bg-gray-800" aria-hidden="true"></span>
+        <div class="relative flex space-x-3">
+          <div>
+            <span class="flex items-center justify-center w-8 h-8 bg-gray-600 rounded-full dark:bg-gray-400 ring-8 ring-gray-100 dark:ring-gray-950 md:ring-gray-050 md:dark:ring-gray-900">
+              <%= heroicon class_icons[activity.target.class.name], options: { class: "w-5 h-5 text-gray-050 dark:text-gray-950" } %>
+            </span>
+          </div>
+          <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+            <div>
+              <p class="text-sm text-gray-700 dark:text-gray-300">
+                <% if activity.target.class.name == "Post" %>
+                  <%= t("activities.posted") %> <%= link_to activity.target.title, post_path(activity.target), class: "link" %>
+                <% elsif activity.target.class.name == "Reply" %>
+                  <%= t("activities.replied_to") %> <%= link_to activity.target.post.title, post_reply_path(activity.target.post, activity.target), class: "link" %>
+                <% end %>
+              </p>
+            </div>
+            <div class="text-sm text-right text-gray-500 whitespace-nowrap">
+              <%= relative_time_tag(activity.created_at) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    <% end %>
+
+    <% if member.confirmed_at.present? %>
+      <li>
+        <div class="relative pb-8">
+          <% if member.invited_by.present? %>
+            <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200 dark:bg-gray-800" aria-hidden="true"></span>
+          <% end %>
+          <div class="relative flex space-x-3">
+            <div>
+              <span class="flex items-center justify-center w-8 h-8 bg-gray-600 rounded-full dark:bg-gray-400 ring-8 ring-gray-100 dark:ring-gray-950 md:ring-gray-050 md:dark:ring-gray-900">
+                <%= heroicon "user-plus", options: { class: "w-5 h-5 text-gray-050 dark:text-gray-950" }, variant: :solid %>
+              </span>
+            </div>
+            <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+              <div>
+                <p class="text-sm text-gray-700 dark:text-gray-300">Joined <a href="<%= posts_path %>" class="link"><%= @community.name %></a></p>
+              </div>
+              <div class="text-sm text-right text-gray-500 whitespace-nowrap">
+                <%= relative_time_tag(member.confirmed_at) %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    <% end %>
+
+    <% if member.invited_by.present? %>
+      <li>
+        <div class="relative pb-8">
+          <div class="relative flex space-x-3">
+            <div>
+              <span class="flex items-center justify-center w-8 h-8 bg-gray-600 rounded-full dark:bg-gray-400 ring-8 ring-gray-100 dark:ring-gray-950 md:ring-gray-050 md:dark:ring-gray-900">
+                <%= heroicon "envelope", options: { class: "w-5 h-5 text-gray-050 dark:text-gray-950" }, variant: :solid %>
+              </span>
+            </div>
+            <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+              <div>
+                <p class="text-sm text-gray-700 dark:text-gray-300"><%= t("activities.invited_by") %> <a href="<%= member_path(member.invited_by) %>" class="link">
+                  <%= member.invited_by.name %>
+                </a></p>
+              </div>
+              <div class="text-sm text-right text-gray-500 whitespace-nowrap">
+                <%= relative_time_tag(member.created_at) %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>

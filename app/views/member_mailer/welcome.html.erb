@@ -1,0 +1,17 @@
+<% content_for :summary do %>
+  <%= t("mailers.welcome.line_1", community_name: @community.name) %>
+<% end %>
+
+<p>
+    <%= t("mailers.welcome.line_2", community_name: @community.name) %>
+</p>
+
+<p>
+    <%= t("mailers.welcome.line_3", email: @member.email) %>
+</p>
+
+<% content_for :button_label do %>
+  <%= t("mailers.welcome.cta") %> &rarr;
+<% end %>
+
+<% content_for :button_link do %><%= @url %><% end %>

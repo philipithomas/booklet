@@ -1,0 +1,29 @@
+<% content_for :heading do %><%= title t(".title") %><% end %>
+
+<div class="community-container community-page-vertical-padding">
+  <div class="md:max-w-prose md:mx-auto">
+    <h1 class="page-title"><%= t(".title") %></h1>
+    <%= simple_form_for(@member, url: member_path(@member), builder: Bklt::FormBuilder) do |f| %>
+      <div class="form-space">
+        <%= f.error_notification %>
+
+        <%= f.input :name,
+                    required: true,
+                    autofocus: true,
+                    input_html: { autocomplete: "name" } %>
+
+        <%= f.input :email,
+                    required: true,
+                    input_html: { autocomplete: "email" } %>
+
+        <%= render "photo_field", f: f, member: @member %>
+
+        <%= f.input :about, as: :rich_text_area,
+            input_html: { autocomplete: "off", class: "trix-editor prose dark:prose-invert" } %>
+
+
+        <%= f.button :submit_dynamic, label: t(".save"), full_width: true %>
+      </div>
+    <% end %>
+  </div>
+</div>

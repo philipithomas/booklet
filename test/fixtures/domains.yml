@@ -1,0 +1,36 @@
+# == Schema Information
+#
+# Table name: domains
+#
+#  id                :bigint           not null, primary key
+#  apex              :boolean          default(FALSE)
+#  domain            :string           not null
+#  redirect_for_name :string
+#  verified          :boolean          default(FALSE)
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  community_id      :bigint           not null
+#
+# Indexes
+#
+#  index_domains_on_community_id  (community_id)
+#  index_domains_on_domain        (domain) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (community_id => communities.id)
+#
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the "{}" from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+other_domain:
+  domain: other.fbi.com
+  verified: true
+  community: other
+www_other_domain:
+  domain: www.other.fbi.com
+  verified: true
+  community: other
+  redirect_for_name: other.fbi.com

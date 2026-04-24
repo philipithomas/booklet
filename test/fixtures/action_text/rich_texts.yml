@@ -1,0 +1,20 @@
+before_post_body:
+  record: before_post (Post)
+  name: body
+  body: <div><strong>Hello world!</strong> This is the body of the before post.</div>
+post_body:
+  record: post (Post)
+  name: body
+  body: <div><strong>Hello world!</strong> This is the body of the first post.</div>
+after_post_body:
+  record: after_post (Post)
+  name: body
+  body: <div><strong>Hello world!</strong> This is the body of the after post.</div>
+new_reply_to_before_post_body:
+  record: new_reply_to_before_post (Reply)
+  name: body
+  body: <div><strong>Hello world!</strong> This is a new reply to an old post..</div>
+hello_world_reply_body:
+  record: reply_to_hello_world (Reply)
+  name: body
+  body: <div><strong>Hello world!</strong> This is the body of the first reply.</div>

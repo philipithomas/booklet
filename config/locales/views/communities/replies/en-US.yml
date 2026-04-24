@@ -1,0 +1,23 @@
+---
+en-US:
+  communities:
+    replies:
+      flash:
+        created: Reply created.
+        destroyed: Reply deleted.
+        failed_create: Failed to create the reply..
+        updated: Reply updated.
+      form:
+        cancel: Cancel
+      quarantined_alert:
+        are_you_sure_you_want_to_remove_quarantine: Are you sure you want to unhide this reply?
+        remove_quarantine: Unhide reply
+        reply_quarantined: Reply hidden from the community
+      show:
+        are_you_sure_you_want_to_delete_this_reply: Are you sure you want to delete this reply?
+        delete: Delete
+        edit: Edit
+        replied: Replied
+        view_full: View post and other replies
+      sign_in_to_reply:
+        sign_in_to_reply_to_this_post: Sign in to reply to this post

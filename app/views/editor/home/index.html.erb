@@ -1,0 +1,22 @@
+<div class="community-container mt-8">
+  <div class="prose dark:prose-invert">
+    <p>Hello, Editor!</p>
+    <p><%= link_to "Growth chart", growth_chart_path %></p>
+    <p>Models:</p>
+    <ul>
+      <li><%= link_to "Communities", editor_communities_path %></li>
+      <li><%= link_to "Posts", editor_posts_path %></li>
+      <li><%= link_to "Replies", editor_replies_path %></li>
+      <li><%= link_to "Members", editor_members_path %></li>
+    </ul>
+
+    <p>Tools:</p>
+    <ul>
+      <li><%= link_to "Analytics", blazer_path %></li>
+      <li><%= link_to "Jobs", "/jobs" %></li>
+      <li><%= link_to "DB", pg_hero_path %></li>
+    </ul>
+    <!-- Sign out -->
+    <%= button_to "Sign out", destroy_editor_session_path, method: :delete, class: :link %>
+  </div>
+</div>

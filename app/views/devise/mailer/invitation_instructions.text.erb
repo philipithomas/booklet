@@ -1,0 +1,8 @@
+<%= t("devise.mailer.invitation_instructions.someone_invited_you", name: @resource.community.name) %>
+
+
+<%= t("devise.mailer.invitation_instructions.accept") %>:
+
+<%= accept_invitation_url(@resource, invitation_token: @token, host: @resource.community.host) %>
+
+<%= t("devise.mailer.invitation_instructions.ignore") %>

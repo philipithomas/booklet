@@ -1,0 +1,59 @@
+<% noindex unless @community.directory_enabled? %>
+
+<div class="community-container gap-4 md:gap-8 lg:gap-12 community-page-vertical-padding md:grid md:grid-cols-3 lg:grid-cols-4">
+  <div class="col-span-1">
+    <div class="">
+      <h1 class="sr-only">
+        <%= title @member.name %>
+      </h1>
+      <%= render :partial => 'components/member/card', locals: { member: @member, background_hidden: true } %>
+    </div>
+
+    <% if current_member&.manager_or_admin? %>
+      <div class="flex items-center justify-center">
+        <%= render "communities/members/status", member: @member %>
+      </div>
+    <% end %>
+
+    <div class="pt-4 space-y-4">
+      <% if @community.email_visibility_open? && member_signed_in? %>
+        <%= render :partial => 'components/member/email', locals: { member: @member, community: @community } %>
+      <% elsif @community.email_visibility_protected? && member_signed_in? %>
+        <%= render :partial => 'components/member/protected_email', locals: { member: @member, community: @community } %>
+      <% end %>
+
+      <% if MemberPolicy.new(current_member, @member).edit? %>
+        <%= link_to t(".edit_profile"), edit_member_path(@member), class: "w-full btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-span-2 lg:col-span-3 mt-4 md:mt-0 space-y-4">
+    <% if @member.locked_at.present? and (current_member&.manager_or_admin? or current_editor) %>
+      <%= render "locked_alert", member: @member %>
+    <% end %>
+
+    <% if @member.quarantined_at.present? and (current_member&.manager_or_admin? or current_editor) %>
+      <%= render "quarantined_alert", member: @member %>
+    <% end %>
+
+    <% if (@member.invited_to_sign_up? && !@member.confirmed? && !@member.locked_at) and (current_member&.manager_or_admin? or current_editor) %>
+      <%= render "invited_alert", member: @member %>
+    <% end %>
+
+
+    <% unless @member.about.blank? %>
+      <div class="md:card">
+        <h2 class="card-title">
+          About
+        </h2>
+        <%= @member.about %>
+      </div>
+    <% end %>
+    <div class="md:card">
+      <h2 class="card-title">
+        Activity
+      </h2>
+      <%= render :partial => 'components/member/activity', locals: { member: @member } %>
+    </div>
+  </div>
+</div>

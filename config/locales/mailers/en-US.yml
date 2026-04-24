@@ -1,0 +1,47 @@
+---
+en-US:
+  mailers:
+    identity_verified:
+      identity_verified: Good to go! Your identity has been verified.
+      sign_in_to_community: Sign in to %{community_name}
+      subject: Your identity has been verified
+      summary: Successfully verified
+    index_login_pin:
+      line_1: 'Use this code to log in to your Booklet communities:'
+      line_2: The code is valid for 10 minutes.
+      line_3: If you didn't request this code, ignore this email.
+      subject: "%{code} is your Booklet login code"
+    login_pin:
+      line_1: 'Use this code to log in to %{community_name}:'
+      line_2: The code is valid for 10 minutes.
+      line_3: If you didn't request this code, ignore this email.
+      subject: "%{code} is your %{community_name} login code"
+    new_newsletter:
+      existing_post_with_new_replies: Active discussions
+      latest: Latest
+      new: New
+      new_members: New members
+      new_posts: New posts
+      preamble: "%{community_name} newsletter"
+      view_community: View %{community_name}
+    new_post:
+      new_post: 'New post:'
+      new_post_in_community: 'New post in %{community_name}:'
+      view_post: View post
+    new_post_mention:
+      subject: "%{author_name} mentioned you: %{title}"
+    new_reply:
+      new_reply_to_post: 'New reply to post:'
+      new_reply_to_post_in_community: 'New reply to post in %{community_name}:'
+      subject: 'Re: %{title}'
+      unsubscribe_from_replies_for_this_post: Unfollow this post and stop receiving notifications
+      view_post: View post
+    new_reply_mention:
+      subject: "%{author_name} mentioned you in a reply: %{title}"
+    update_preferences_or_unsubscribe: Email preferences + unsubscribe
+    welcome:
+      cta: Sign in
+      line_1: Welcome to %{community_name}.
+      line_2: You are now a member of %{community_name} and will begin receiving its newsletter.
+      line_3: Sign in with %{email} to browse posts and the member directory.
+      subject: Welcome to %{community_name}

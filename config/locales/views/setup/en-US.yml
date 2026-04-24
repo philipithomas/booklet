@@ -1,0 +1,15 @@
+---
+en-US:
+  setup:
+    new:
+      community_name: Group name
+      contact_support: Contact support
+      email: Email
+      questions: Questions?
+      submit: Create
+      title: Create a new group
+    welcome:
+      community_created_check_email: Success! Check your email for a setup link.
+      contact_support: Contact support
+      questions: Questions?
+      welcome_to_booklet: Welcome to Booklet - your group has been created. Check your email for an activation link from your community to set up your account.

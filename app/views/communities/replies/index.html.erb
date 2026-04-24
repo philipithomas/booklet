@@ -1,0 +1,28 @@
+
+<turbo-frame id="post_replies">
+  <%= turbo_stream_from "#{@post.id}_replies" %>
+
+  <div class="h-full md:border-t-0 border-t border-gray-100 dark:border-gray-900 my-4 md:my-6">
+    <ul role="list" id="replies" class="h-full">
+      <%= render partial: "reply", collection: @replies, as: :reply %>
+    </ul>
+
+    <% if @pagy.next.present? %>
+      <%= render "scroll_frame", page: @pagy.next %>
+    <% end %>
+
+    <% if ReplyPolicy.new(current_member, @post).create? %>
+      <%= turbo_frame_tag "new_reply_frame" do %>
+        <div class="transition duration-150 ease-in-out border-b border-gray-200 border-solid dark:border-gray-900 md:border-0">
+          <div class="md:max-w-prose mx-auto p-4 md:p-0">
+            <%= render partial: 'form', locals: { reply: Reply.new, post: @post } %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+    <% unless member_signed_in? %>
+      <%= render "sign_in_to_reply" %>
+    <% end %>
+
+  </div>
+</turbo-frame>

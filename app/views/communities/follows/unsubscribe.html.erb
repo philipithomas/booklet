@@ -1,0 +1,11 @@
+
+<% content_for :heading do %><%= title t(".title") %><% end %>
+<% noindex %>
+
+<div class="prose dark:prose-invert text-center">
+  <p><%= title t('.description') %></p>
+</div>
+
+<div class="text-center">
+  <%= button_to t('.confirm_unsubscribe') , follow_confirm_unsubscribe_path(signed_id: params[:signed_id]), method: :post, class: "btn btn-primary btn-big" %>
+</div>

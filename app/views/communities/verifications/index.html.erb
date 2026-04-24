@@ -1,0 +1,12 @@
+<% content_for :heading do %>
+  <%= title t(".verification_processing") %>
+<% end %>
+
+<div class="prose dark:prose-invert">
+  <p><%= t(".verification_processing_description") %></p>
+</div>
+<% if policy(Member).create? %>
+  <a href="<%= new_member_path %>" class="btn btn-primary w-full mt-4"><%= t(".continue") %></a>
+<% else %>
+  <a href="<%= posts_path %>" class="btn btn-primary w-full mt-4"><%= t(".continue") %></a>
+<% end %>
