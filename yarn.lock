@@ -1576,23 +1576,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rails/actiontext@npm:^7.1.3":
-  version: 7.1.3
-  resolution: "@rails/actiontext@npm:7.1.3"
+"@rails/actiontext@npm:^8.1.300":
+  version: 8.1.300
+  resolution: "@rails/actiontext@npm:8.1.300"
   dependencies:
-    "@rails/activestorage": ">= 7.1.0-alpha"
+    "@rails/activestorage": ">= 8.1.0-alpha"
   peerDependencies:
     trix: ^2.0.0
-  checksum: a259d1522a224a405c5690f757c06deff1a8e8e7b79c1bdfaa0556049daa5ee7cf026946ddc16fe3e270ad637ee53801583bea60651de139759986495c5414ab
+  checksum: fe839cc0f18fbdcc446650df617bc2a9d03ae475315a3404f1689cc7893b331ca60fa94f8cea950853bb7697534597e5586e0b8abfdde2648031774484714d30
   languageName: node
   linkType: hard
 
-"@rails/activestorage@npm:>= 7.1.0-alpha":
-  version: 7.1.2
-  resolution: "@rails/activestorage@npm:7.1.2"
+"@rails/activestorage@npm:>= 8.1.0-alpha":
+  version: 8.1.300
+  resolution: "@rails/activestorage@npm:8.1.300"
   dependencies:
     spark-md5: ^3.0.1
-  checksum: 034e96346bef2408c206d7ff88cae6c0a6314727ee72a856eb5f7535d07a199fbb8436150a81d9a46058a01312cc51059b41d41a26cea21909e5aad1a7556b47
+  checksum: ea6d5014cd8cad60887291237aa30a5ce983db9fd894d39dd3d46ee17fcf584fd0229c4d04ee8b3a09dc19168a46a077032b65d3b99fe968cdc6838552910204
   languageName: node
   linkType: hard
 
@@ -1987,7 +1987,7 @@ __metadata:
     "@babel/preset-env": ^7.24.6
     "@hotwired/stimulus": ^3.2.2
     "@hotwired/turbo-rails": ^8.0.0
-    "@rails/actiontext": ^7.1.3
+    "@rails/actiontext": ^8.1.300
     "@rails/activestorage": ^7.1.3
     ahoy.js: ^0.4.4
     babel-loader: ^9.1.3
