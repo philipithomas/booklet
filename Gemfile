@@ -112,7 +112,7 @@ group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
   gem "brakeman", "~> 6.1"
   gem "annotate", "~> 3.2"
-  gem "faker", "~> 3.3"
+  gem "faker", "~> 3.8"
   gem "solargraph", "~> 0.50.0", require: false
   gem "i18n-tasks", "~> 1.0.14"
   gem "bundler-audit", "~> 0.9.1"
