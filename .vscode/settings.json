@@ -2,7 +2,6 @@
   "ruby.useBundler": true,
   "ruby.useLanguageServer": true,
   "ruby.intellisense": "rubyLocate",
-  "workbench.colorTheme": "Nord Deep",
   "css.lint.unknownAtRules": "ignore",
   "[css]": {
     "editor.defaultFormatter": "bradlc.vscode-tailwindcss"

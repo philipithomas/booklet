@@ -1,10 +1,6 @@
 ---
 en-US:
   booklet: Booklet
-  contraption_co:
-    address:
-      line_1: '169 Madison Ave. #2174'
-      line_2: New York, NY 10016 USA
   days:
     friday: Friday
     monday: Monday

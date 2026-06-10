@@ -3,8 +3,6 @@ class EnqueueNewslettersJob < ApplicationJob
 
   def perform(*_)
     Community.find_each do |community|
-      next if community.slug == "autrix" && community.id == 217
-
       today_in_nyc = Time.current.in_time_zone("Eastern Time (US & Canada)").strftime("%A")
       if community.newsletter_on?(today_in_nyc)
         GenerateNewsletterJob.perform_later(community)

@@ -110,7 +110,14 @@ class Post < ApplicationRecord
   private
 
   def post_in_admin_chat
-    share_url = community.visibility_private? ? Rails.application.routes.url_helpers.editor_post_url(self, host: Rails.configuration.editor_host) : Rails.application.routes.url_helpers.post_url(self, host: community.host)
+    # The editor panel (and its routes) only exists in multiuser mode; posts in
+    # private communities are only reachable there. In solo mode the operator
+    # can always open the post directly.
+    share_url = if community.visibility_private? && Rails.configuration.multiuser_mode
+      Rails.application.routes.url_helpers.editor_post_url(self, host: Rails.configuration.editor_host)
+    else
+      Rails.application.routes.url_helpers.post_url(self, host: community.host)
+    end
     PostInAdminChatJob.perform_later("[New post - #{community.slug} - #{member.email}] #{title} #{share_url}")
   end
 

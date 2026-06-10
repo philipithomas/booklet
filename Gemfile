@@ -1,15 +1,15 @@
 source "https://rubygems.org"
 
-ruby "3.2.2"
+ruby "3.3.5"
 
 # Explicitly specify stringio version to avoid installation errors
 gem "stringio", "~> 3.0.5"
 
 # core
-gem "rails", "~>7.2"
+gem "rails", "~> 7.2.3", ">= 7.2.3.1"
 gem "tzinfo-data", ">= 1.2016.7"  # Don't rely on OSX/Linux timezone data
 gem "sprockets-rails"
-gem "puma", "~> 6.4.2"
+gem "puma", "~> 7.2"
 gem "turbo-rails"
 gem "stimulus-rails"
 gem "jbuilder"
@@ -24,7 +24,7 @@ gem "simple_form", "~> 5.2"
 gem "simple_form_tailwind_css", "~> 1.0"
 
 # auth
-gem "devise", "~> 4.9"
+gem "devise", "~> 5.0", ">= 5.0.4"
 gem "devise-i18n", "~> 1.12"
 gem "devise_invitable", "~> 2.0"
 
@@ -46,10 +46,10 @@ gem "wcag_color_contrast", "~> 0.1.0"
 gem "rails-i18n", "~> 7.0"
 gem "countries", "~> 5.7"
 gem "safely_block", "~> 0.4.0"
-gem "httparty", "~> 0.21.0"
+gem "httparty", "~> 0.23"
 gem "lograge", "~> 0.14.0"
 gem "pagy", "~> 8.4"
-gem "nokogiri", "~> 1.16.5"
+gem "nokogiri", "~> 1.18"
 gem "wicked", "~> 2.0"
 gem "memoist", "~> 0.16.2"
 gem "friendly_id", "~> 5.5"
@@ -64,7 +64,7 @@ gem "premailer-rails", "~> 1.12"
 
 # security
 gem "honeypot-captcha", "~> 1.0"
-# gem "rack-attack", "~> 6.7"
+gem "rack-attack", "~> 6.7"
 gem "audited", "~> 5.3"
 gem "authtrail", "~> 0.5.0"
 gem "recaptcha", "~> 5.16"

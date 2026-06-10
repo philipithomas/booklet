@@ -1,3 +1,8 @@
+# Seeds create demo data with well-known credentials (admin@example.com /
+# password) and must never run against a production database. For production
+# first-run setup, use `rails booklet:bootstrap` instead.
+abort("Refusing to seed demo data in production") if Rails.env.production?
+
 def random_profile_picture
   image_files = Dir.glob("app/assets/images/sample-profile-photos/*")
   image_files.sample
@@ -24,7 +29,7 @@ if Rails.configuration.solo_mode
   puts "Creating community (solo mode)"
   community = Community.create!(
     name: "My Community",
-    slug: "community",
+    slug: "my-community",
     visibility: :public,
     email: "admin@example.com",
     brand_color: "#4D3DF7"
@@ -129,21 +134,19 @@ else
     end
   end
 
-  puts "Creating DSV"
-  dsv = Community.create!(name: "Dimes Square Ventures", slug: "dsv", visibility: :private, email: "dsv@example.com", brand_color: "#099AA4")
+  puts "Creating Demo Ventures"
+  dsv = Community.create!(name: "Demo Ventures", slug: "demo-ventures", visibility: :private, email: "demo@example.com", brand_color: "#099AA4")
   dsv.set_payment_processor :fake_processor, allow_fake: true
   dsv.payment_processor.subscribe(plan: "fake")
-  dsv.icon.attach(io: File.open("app/assets/images/dsv/icon.png"), filename: "icon.png")
-  dsv.logo.attach(io: File.open("app/assets/images/dsv/wordmark.png"), filename: "wordmark.png")
 
-  puts "Creating DSV members"
+  puts "Creating Demo Ventures members"
   5.times { create_member!(community: dsv) }
 
   member = Member.create!(
     community: dsv,
     name: "Admin User",
     permission: :member,
-    email: "dsv-member@example.com",
+    email: "demo-member@example.com",
     password: "password",
     confirmed_at: Time.now,
     source: :public_join
@@ -152,7 +155,7 @@ else
   member.about = "Community member."
   member.save!
 
-  puts "Creating DSV posts"
+  puts "Creating Demo Ventures posts"
   dsv.members.active.each do |member|
     rand(0..5).times do
       post = Post.create!(

@@ -30,15 +30,23 @@ pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 # Workers do not work on JRuby or Windows (both of which do not support
 # processes).
 #
-workers ENV.fetch("WEB_CONCURRENCY") { 2 }
+# Clustered mode is production-only: forking workers in development trips
+# macOS Objective-C fork-safety checks and crashes the server.
+if ENV.fetch("RAILS_ENV", "development") == "production"
+  workers ENV.fetch("WEB_CONCURRENCY") { 2 }
 
-# Use the `preload_app!` method when specifying a `workers` number.
-# This directive tells Puma to first boot the application and load code
-# before forking the application. This takes advantage of Copy On Write
-# process behavior so workers use less memory.
-#
-preload_app!
+  # Use the `preload_app!` method when specifying a `workers` number.
+  # This directive tells Puma to first boot the application and load code
+  # before forking the application. This takes advantage of Copy On Write
+  # process behavior so workers use less memory.
+  #
+  preload_app!
+end
 
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
-plugin :solid_queue
+
+# In production, Solid Queue runs inside the Puma process so a single
+# container serves web and background jobs. In development, Procfile.dev
+# runs it as a separate process instead (bundle exec rake solid_queue:start).
+plugin :solid_queue if ENV.fetch("RAILS_ENV", "development") == "production"

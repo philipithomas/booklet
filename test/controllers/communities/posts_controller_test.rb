@@ -2,6 +2,7 @@ class Communities::PostsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   setup do
+    requires_multiuser_mode!
     @community = communities(:lab)
     @post = posts(:post)
     @member = members(:member)

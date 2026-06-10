@@ -4,6 +4,7 @@ class Members::PasswordlessSessionsControllerTest < ActionDispatch::IntegrationT
   include Devise::Test::IntegrationHelpers
 
   setup do
+    requires_multiuser_mode!
     @community = communities(:lab)
     @member = members(:member)
     host! @community.host

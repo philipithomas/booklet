@@ -1,10 +1,8 @@
 class Ahoy::Store < Ahoy::DatabaseStore
 end
 
-# set to true for geocoding (and add the geocoder gem to your Gemfile)
-# we recommend configuring local geocoding as well
-# see https://github.com/ankane/ahoy#geocoding
-Ahoy.geocode = true
+# Geocoding requires the local GeoLite2 database (see config/initializers/geocoder.rb)
+Ahoy.geocode = File.exist?(Rails.root.join("config/data/GeoLite2-City.mmdb"))
 Ahoy.job_queue = :low
 Ahoy.user_method = :current_member
 Ahoy.cookies = true

@@ -1,5 +1,8 @@
 name: Tests
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
 jobs:
   test:
     runs-on: ubuntu-22.04
@@ -22,7 +25,7 @@ jobs:
       - name: Install Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2.2
+          ruby-version: 3.3.5
           bundler-cache: true
       - name: Set Node.js 18.x
         uses: actions/setup-node@v4
@@ -70,7 +73,13 @@ jobs:
         run: ./bin/rubocop
       - name: Run i18n-tasks
         run: bundle exec i18n-tasks health
-      - name: Check seed data integrity
+      - name: Check seed data integrity (MULTIUSER)
         run: bundle exec rails db:seed
+      - name: Check seed data integrity (SOLO)
+        env:
+          APP_MODE: SOLO
+        run: |
+          bundle exec rails db:drop db:create db:schema:load
+          bundle exec rails db:seed
       - name: Check bundle integrity
         run: bundle exec bundle-audit check

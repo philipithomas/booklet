@@ -4,7 +4,7 @@ Truemail.configure do |config|
 
   # Optional parameter. Must be an existing domain on behalf of which verification will be performed.
   # By default verifier domain based on verifier email
-  # config.verifier_domain = "contraption.co"
+  # config.verifier_domain = "example.com"
 
   # Optional parameter. You can override default regex pattern
   # config.email_pattern = /regex_pattern/

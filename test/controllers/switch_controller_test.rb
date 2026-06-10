@@ -4,6 +4,7 @@ class SwitchControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   setup do
+    requires_multiuser_mode!
     @member = members(:member)
     @other_member = members(:after_member)
     @community = communities(:lab)

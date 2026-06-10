@@ -10,6 +10,14 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
+  # Many integration tests resolve a specific fixture community through its
+  # host, which only works with multiuser-mode routing — solo mode always
+  # serves Community.first. Call this in setup to skip such tests when the
+  # suite runs with APP_MODE=SOLO.
+  def requires_multiuser_mode!
+    skip("Depends on multiuser host-based community resolution") if Rails.configuration.solo_mode
+  end
+
   # Add more helper methods to be used by all tests here...
   def assert_permit(member, record, action)
     msg = "Member #{member.inspect} should be permitted to #{action} #{record.inspect}, but isn't permitted"

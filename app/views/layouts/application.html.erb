@@ -31,7 +31,7 @@
   <% og_url = @community.present? ?  ( @post&.published_at? ? post_og_image_url(@post, @post.updated_at.to_i, host: @community.host) : community_og_image_url(@community.updated_at.to_i, host: @community.host)) : asset_url("og.jpg") %>
   <%=
       display_meta_tags reverse: true,
-        site: current_editor.present? ? "Editor" : (@community.present? ? @community.name : I18n.translate(:booklet)),
+        site: (defined?(current_editor) && current_editor.present?) ? "Editor" : (@community.present? ? @community.name : I18n.translate(:booklet)),
         # TODO - switch to community description
         description: @community.present? ? @community.name : I18n.translate(:description),
         separator: '-',
@@ -97,7 +97,8 @@
   <%= content_for?(:content) ? yield(:content) : yield %>
 
   <%= render :partial => 'layouts/flash_messages', locals: { } %>
-  <%= render :partial => "layouts/switch_modal" %>
+  <%# Community switching only exists in multiuser mode (see resources :switch in routes) %>
+  <%= render :partial => "layouts/switch_modal" if Rails.configuration.multiuser_mode %>
 </body>
 
 </html>

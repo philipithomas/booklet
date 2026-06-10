@@ -39,7 +39,7 @@
                 </td>
                 <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
                   <%
-                    value = domain.apex? ? '137.66.55.154' : "#{@community.slug}.#{Rails.configuration.app_apex_host}"
+                    value = domain.apex? ? ENV.fetch("APEX_DNS_IP", "<your server's IPv4 address>") : "#{@community.slug}.#{Rails.configuration.app_apex_host}"
                   %>
                   <button
                     class="record"

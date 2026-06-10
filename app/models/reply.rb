@@ -85,7 +85,13 @@ class Reply < ApplicationRecord
   private
 
   def post_in_admin_chat
-    share_url = community.visibility_private? ? Rails.application.routes.url_helpers.editor_reply_url(self, host: Rails.configuration.editor_host) : Rails.application.routes.url_helpers.post_reply_url(self.post, self.slug, host: community.host)
+    # The editor panel (and its routes) only exists in multiuser mode; see
+    # Post#post_in_admin_chat.
+    share_url = if community.visibility_private? && Rails.configuration.multiuser_mode
+      Rails.application.routes.url_helpers.editor_reply_url(self, host: Rails.configuration.editor_host)
+    else
+      Rails.application.routes.url_helpers.post_reply_url(self.post, self.slug, host: community.host)
+    end
     PostInAdminChatJob.perform_later("[New reply - #{community.slug} - #{member.email} - #{post.title.truncate(20)}] #{body.to_plain_text.truncate(20)} #{share_url}")
   end
 

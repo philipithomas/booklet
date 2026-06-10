@@ -1,35 +1,33 @@
 <%# locals: (member:) %>
 
-<a href="https://docs.booklet.group/docs/management/member-statuses/" target="_blank" rel="noopener">
-  <% case member.status %>
-  <% when :locked %>
-    <span class="inline-flex items-center rounded-full bg-gray-800 px-2 py-1 text-xs font-medium text-gray-100 ring-1 ring-inset ring-gray-900">
-      <%= t('activerecord.attributes.member.status.locked') %>
-    </span>
-  <% when :quarantined %>
-    <span class="inline-flex items-center rounded-full bg-gray-600 px-2 py-1 text-xs font-medium text-white dark:text-black ring-1 ring-inset ring-gray-600">
-      <%= t('activerecord.attributes.member.status.quarantined') %>
-    </span>
-  <% when :admin %>
-    <span class="inline-flex items-center rounded-full bg-red-500/10 px-2 py-1 text-xs font-medium text-gray-800 dark:text-gray-200 ring-1 ring-inset ring-red-500">
-      <%= t('activerecord.attributes.member.status.admin') %>
-    </span>
-  <% when :active %>
-    <span class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium btn-primary ring-1 ring-inset ring-accent">
-      <%= t('activerecord.attributes.member.status.active') %>
-    </span>
-  <% when :subscribed %>
-    <span class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium text-gray-800 dark:text-gray-200 ring-1 ring-inset ring-accent">
-      <%= t('activerecord.attributes.member.status.subscribed') %>
-    </span>
-  <% when :invited %>
-    <span class="inline-flex items-center rounded-full bg-blue-500/10 px-2 py-1 text-xs font-medium text-gray-800 dark:text-gray-200 ring-1 ring-inset ring-blue-500">
-      <%= t('activerecord.attributes.member.status.invited') %>
-    </span>
-  <% when :unconfirmed %>
-    <span class="inline-flex items-center rounded-full bg-gray-500/10 px-2 py-1 text-xs font-medium text-gray-600 dark:text-gray-400 ring-1 ring-inset ring-gray-600 dark:ring-gray-400">
-      <%= t('activerecord.attributes.member.status.unconfirmed') %>
-    </span>
-  <% else %>
-  <% end %>
-</a>
+<% case member.status %>
+<% when :locked %>
+  <span class="inline-flex items-center rounded-full bg-gray-800 px-2 py-1 text-xs font-medium text-gray-100 ring-1 ring-inset ring-gray-900">
+    <%= t('activerecord.attributes.member.status.locked') %>
+  </span>
+<% when :quarantined %>
+  <span class="inline-flex items-center rounded-full bg-gray-600 px-2 py-1 text-xs font-medium text-white dark:text-black ring-1 ring-inset ring-gray-600">
+    <%= t('activerecord.attributes.member.status.quarantined') %>
+  </span>
+<% when :admin %>
+  <span class="inline-flex items-center rounded-full bg-red-500/10 px-2 py-1 text-xs font-medium text-gray-800 dark:text-gray-200 ring-1 ring-inset ring-red-500">
+    <%= t('activerecord.attributes.member.status.admin') %>
+  </span>
+<% when :active %>
+  <span class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium btn-primary ring-1 ring-inset ring-accent">
+    <%= t('activerecord.attributes.member.status.active') %>
+  </span>
+<% when :subscribed %>
+  <span class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium text-gray-800 dark:text-gray-200 ring-1 ring-inset ring-accent">
+    <%= t('activerecord.attributes.member.status.subscribed') %>
+  </span>
+<% when :invited %>
+  <span class="inline-flex items-center rounded-full bg-blue-500/10 px-2 py-1 text-xs font-medium text-gray-800 dark:text-gray-200 ring-1 ring-inset ring-blue-500">
+    <%= t('activerecord.attributes.member.status.invited') %>
+  </span>
+<% when :unconfirmed %>
+  <span class="inline-flex items-center rounded-full bg-gray-500/10 px-2 py-1 text-xs font-medium text-gray-600 dark:text-gray-400 ring-1 ring-inset ring-gray-600 dark:ring-gray-400">
+    <%= t('activerecord.attributes.member.status.unconfirmed') %>
+  </span>
+<% else %>
+<% end %>

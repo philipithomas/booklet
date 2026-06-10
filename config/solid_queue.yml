@@ -9,9 +9,6 @@ default: &default
         enqueue_newsletters:
           class: EnqueueNewslettersJob
           schedule: '0 0 8 * * * America/New_York'
-        enqueue_u_k_newsletters:
-          class: EnqueueUKNewslettersJob
-          schedule: '0 0 3 * * * America/New_York'
         visits_in_last_day:
           class: VisitsInLastDayJob
           schedule: "0 8 * * * America/Los_Angeles"

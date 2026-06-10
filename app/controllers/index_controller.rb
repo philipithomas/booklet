@@ -41,7 +41,6 @@ class IndexController < ApplicationController
       # No pin code provided, create a new IndexPin
       @index_pin = IndexPin.create_pin(@email)
       if @index_pin.persisted?
-        # TODO: Send the pin to the member's email
         render :create, status: :created and return
       else
         # Failed to create IndexPin, render the new form with an error

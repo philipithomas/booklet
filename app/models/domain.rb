@@ -96,7 +96,7 @@ class Domain < ApplicationRecord
       raise "Error reading domain #{domain} in Fly.io - response not received"
     end
 
-    puts "Domain #{domain} status: #{response["certificate"]["clientStatus"]}"
+    Rails.logger.info "Domain #{domain} status: #{response["certificate"]["clientStatus"]}"
     return if response["certificate"]["clientStatus"] != "Ready"
 
     begin

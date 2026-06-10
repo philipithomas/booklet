@@ -3,7 +3,6 @@
   <div class="md:max-w-prose md:mx-auto">
     <h1 class="page-title block mb-4 flex justify-between items-center">
       <%= title t('.title') %>
-      <%= render "components/shared/docs_pill", url: "https://docs.booklet.group/docs/management/adding-members/" %>
     </h1>
 
     <%= simple_form_for(@member, url: members_path, builder: Bklt::FormBuilder, html: { id: 'member-form', data: { controller: 'new-member' } }) do |f| %>

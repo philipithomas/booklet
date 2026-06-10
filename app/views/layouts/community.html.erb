@@ -39,7 +39,7 @@ secondaryMenuItems = [
     name: I18n.t("communities.nav.switch"),
     newTab: false,
     to: "#",
-    show: member_signed_in?,
+    show: member_signed_in? && Rails.configuration.multiuser_mode,
     classes: "pwa:hidden",
     data: { 'action': 'click->switch-modal#open:prevent' },
   },
@@ -58,7 +58,7 @@ secondaryMenuItems = [
   {
     name: I18n.t("communities.nav.docs"),
     newTab: true,
-    to: 'https://docs.booklet.group',
+    to: 'https://github.com/philipithomas/booklet',
     show: current_member&.manager_or_admin?,
   },
   {

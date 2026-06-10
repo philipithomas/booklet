@@ -46,3 +46,10 @@
 
 .DS_Store
 /node_modules
+
+# Yarn artifacts (dependencies are fetched by `yarn install`)
+/.yarn/cache
+/.yarn/install-state.gz
+
+# MaxMind GeoLite2 database — download with your own license key (see README)
+/config/data/*.mmdb

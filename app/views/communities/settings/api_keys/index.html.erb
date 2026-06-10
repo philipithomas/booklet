@@ -6,13 +6,6 @@
   <p>
     <%= I18n.t('communities.settings.api_keys.description') %>
   </p>
-  <!--
-  <p>
-    <a href="https://docs.booklet.group" target="_blank" rel="noopener noreferrer">
-      <%= I18n.t('communities.settings.api_keys.view_api_documentation') %> →
-    </a>
-  </p>
-  -->
 </div>
 
 <%= render partial: "communities/settings/api_keys/table", locals: { api_keys: @api_keys } %>

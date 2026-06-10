@@ -37,7 +37,7 @@ en-US:
       header:
         add: Member
       import_member_limit:
-        alternatively_contact_support_for_help: Alternatively, contact Booklet support for help with importing members.
+        alternatively_contact_support_for_help: Alternatively, contact support for help with importing members.
         imported_members: Imported members
         increase_limit: Increase limit
         raise_your_import_limit: Raise your import limit

@@ -137,7 +137,6 @@ class Member < ApplicationRecord
     SubscribeToNewsletterJob.perform_later(self.email, self.name) if admin?
     FounderMailer.welcome(self).deliver_later(wait: 20.minutes) if admin? && Member.where(email: email, permission: :admin).count <= 1 && community.members.count <= 1
     InviteToHQJob.set(wait: 21.minutes).perform_later self if admin?
-    # EditorMailer.new_invitation(self).deliver_later unless admin? || %w[hq frctnl dimes-square-ventures].include?(community.slug)
     PostInAdminChatJob.perform_later("➕ New member - #{community.slug} - #{status} #{email}")
     enqueue_search_embedding
   }
@@ -242,7 +241,6 @@ class Member < ApplicationRecord
   def after_confirmation
     enqueue_search_embedding
     PostInAdminChatJob.perform_later("📩 Email confirmed: #{email} for community #{community.slug}")
-    FounderMailer.frctnl_welcome(self).deliver_later        if community.slug == "frctnl"
   end
 
   def send_login_pin
@@ -259,7 +257,7 @@ class Member < ApplicationRecord
     email = email.downcase.strip
     return false if email.blank?
     disposable = DisposableEmailService.disposable?(email)
-    Rails.logger.info "Email #{email} is disposable" if disposable
+    Rails.logger.debug { "Rejected disposable email address" } if disposable
 
     Member.exists?(email: email) || (Truemail.validate(email).result.success && !disposable)
   end

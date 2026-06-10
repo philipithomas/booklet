@@ -8,6 +8,7 @@ class CommunityAdminMailerTest < ActionMailer::TestCase
   end
 
   test "domain_verified" do
+    requires_multiuser_mode!
     assert @admins.present?, "Community should have admins"
     email = CommunityAdminMailer.domain_verified(@community)
 

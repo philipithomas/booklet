@@ -93,5 +93,4 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Host configuration is in config/initializers/app_config.rb
-
 end

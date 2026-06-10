@@ -43,7 +43,6 @@ class Search < ApplicationRecord
       where: where,
       results: results,
     )
-    # debugger
 
     SearchableContent.find(results.map(&:id))
   end

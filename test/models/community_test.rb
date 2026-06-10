@@ -153,25 +153,30 @@ class CommunityTest < ActiveSupport::TestCase
   end
 
   test "when no custom domain, then host should be app host subdomain" do
+    requires_multiuser_mode!
     assert_equal "lab.localtest.me", @community.host
   end
 
   test "when custom domain but not verified, then host should be app host subdomain" do
+    requires_multiuser_mode!
     Domain.create!(community: @community, domain: "lab.fbi.com", verified: false)
     assert_equal "lab.localtest.me", @community.host
   end
 
   test "when custom domain and verified, then host should be custom domain" do
+    requires_multiuser_mode!
     Domain.create!(community: @community, domain: "lab.fbi.com", verified: true)
     assert_equal "lab.fbi.com", @community.host
   end
 
   test "when custom domain and verified but redirect_for_name, then host should be app host subdomain" do
+    requires_multiuser_mode!
     Domain.create!(community: @community, domain: "www.lab.fbi.com", verified: true, redirect_for_name: "lab.fbi.com")
     assert_equal "lab.localtest.me", @community.host
   end
 
   test "when multiple custom domains and verified, then host should be first custom domain without redirect_for_name" do
+    requires_multiuser_mode!
     Domain.create!(community: @community, domain: "www.lab.fbi.com", verified: true, redirect_for_name: "lab.fbi.com")
     Domain.create!(community: @community, domain: "lab.fbi.com", verified: true)
     Domain.create!(community: @community, domain: "old.fbi.com", verified: true, redirect_for_name: "lab.fbi.com")

@@ -40,6 +40,10 @@ class CommunitiesController < ApplicationController
   end
 
   def is_editor_request
+    # The editor panel only exists in multiuser mode; in solo mode every host
+    # (including editor_host) is the apex host, so this must not match there.
+    return false unless Rails.configuration.multiuser_mode
+
     request.host == Rails.configuration.editor_host and (request.path == "/" || request.path.start_with?("/editors/"))
   end
 

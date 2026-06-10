@@ -40,11 +40,16 @@ RSpec.configure do |config|
       servers: [
         {
           url: "{defaultHost}",
+          description: "Multiuser mode (api. subdomain)",
           variables: {
             defaultHost: {
-              default: "https://api.booklet.group"
+              default: "https://api.example.com"
             }
           }
+        },
+        {
+          url: "/api",
+          description: "Solo mode (same host, /api prefix)"
         }
       ]
     }

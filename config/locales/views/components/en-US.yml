@@ -4,6 +4,3 @@ en-US:
     member:
       protected_email:
         contact: Contact
-    shared:
-      docs_pill:
-        docs: Docs

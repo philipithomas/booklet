@@ -119,7 +119,7 @@ end
 
 ### API
 
-REST API at `/api/v1/members` with Swagger/OpenAPI docs via rswag.
+REST API with Swagger/OpenAPI docs via rswag. In multiuser mode it is served on the `api.` subdomain (`/members`); in solo mode it lives under `/api` (`/api/members`) with docs at `/api-docs`.
 
 ## Environment Variables
 

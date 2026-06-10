@@ -28,15 +28,15 @@
     </div>
   </div>
   <div class="col-span-2 lg:col-span-3 mt-4 md:mt-0 space-y-4">
-    <% if @member.locked_at.present? and (current_member&.manager_or_admin? or current_editor) %>
+    <% if @member.locked_at.present? and (current_member&.manager_or_admin? or (defined?(current_editor) && current_editor)) %>
       <%= render "locked_alert", member: @member %>
     <% end %>
 
-    <% if @member.quarantined_at.present? and (current_member&.manager_or_admin? or current_editor) %>
+    <% if @member.quarantined_at.present? and (current_member&.manager_or_admin? or (defined?(current_editor) && current_editor)) %>
       <%= render "quarantined_alert", member: @member %>
     <% end %>
 
-    <% if (@member.invited_to_sign_up? && !@member.confirmed? && !@member.locked_at) and (current_member&.manager_or_admin? or current_editor) %>
+    <% if (@member.invited_to_sign_up? && !@member.confirmed? && !@member.locked_at) and (current_member&.manager_or_admin? or (defined?(current_editor) && current_editor)) %>
       <%= render "invited_alert", member: @member %>
     <% end %>
 

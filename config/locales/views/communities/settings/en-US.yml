@@ -23,7 +23,6 @@ en-US:
           delete: Delete
           never_used: Never used
         title: Community API keys
-        view_api_documentation: View API documentation
       branding:
         flash:
           update: Branding updated

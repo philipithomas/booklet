@@ -53,7 +53,9 @@ Rails.application.configure do
   end
 
   # Email configuration
-  config.default_email_from = ENV.fetch("DEFAULT_EMAIL_FROM", "hello@booklet.group")
+  config.default_email_from = ENV.fetch("DEFAULT_EMAIL_FROM") { "no-reply@#{config.app_apex_host}" }
   config.admin_email = ENV.fetch("ADMIN_EMAIL", "admin@example.com")
   config.support_email = ENV.fetch("SUPPORT_EMAIL", "support@example.com")
+  # Physical mailing address shown in email footers (e.g. for CAN-SPAM compliance)
+  config.mailing_address = ENV.fetch("MAILING_ADDRESS", "")
 end

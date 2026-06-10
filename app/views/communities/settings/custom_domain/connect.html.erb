@@ -3,10 +3,6 @@
 <% content_for :heading do %>
   Connect a domain
 <% end %>
-<% content_for :subheading do %>
-  <%= render "components/shared/docs_pill", url: "https://docs.booklet.group/docs/settings/custom-domain/" %>
-<% end %>
-
 <%= simple_form_for(
   :domain,
   url: request.path,

@@ -3,7 +3,7 @@
 <div class="">
   <div class="community-container mt-8">
     <%= turbo_stream_from @post %>
-    <% if @post.quarantined_at.present? and (current_member&.manager_or_admin? or current_editor) %>
+    <% if @post.quarantined_at.present? and (current_member&.manager_or_admin? or (defined?(current_editor) && current_editor)) %>
       <%= render "quarantined_alert", post: @post %>
     <% end %>
     <%= render "components/post/post", post: @post %>

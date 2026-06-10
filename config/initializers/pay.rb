@@ -2,8 +2,8 @@
 
 Pay.setup do |config|
   # For use in the receipt/refund/renewal mailers
-  config.business_name = "Contraption Co. LLC"
-  config.business_address = "169 Madison Ave #2174, New York, NY 10016"
+  config.business_name = ENV.fetch("BUSINESS_NAME", "Booklet")
+  config.business_address = ENV.fetch("BUSINESS_ADDRESS", "")
   config.application_name = "Booklet"
   config.support_email = ENV.fetch("SUPPORT_EMAIL", "support@example.com")
 

@@ -168,6 +168,9 @@ paths:
                     type: string
                   updated_at:
                     type: string
+                  locked_at:
+                    type: string
+                    nullable: true
                   status:
                     type: string
                   slug:
@@ -223,6 +226,9 @@ security:
 - api_key: []
 servers:
 - url: "{defaultHost}"
+  description: Multiuser mode (api. subdomain)
   variables:
     defaultHost:
-      default: https://api.booklet.group
+      default: https://api.example.com
+- url: "/api"
+  description: Solo mode (same host, /api prefix)

@@ -12,7 +12,7 @@
       </p>
     </div>
 
-    <% if @reply.quarantined_at.present? and (current_member&.manager_or_admin? || current_editor) %>
+    <% if @reply.quarantined_at.present? and (current_member&.manager_or_admin? || (defined?(current_editor) && current_editor)) %>
       <%= render "quarantined_alert", reply: @reply %>
     <% end %>
   </div>

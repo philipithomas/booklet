@@ -6,8 +6,6 @@ namespace :action_text do
       trix.body.fragment.find_all("action-text-attachment").each do |node|
         embed = trix.embeds.find { |attachment| attachment.filename.to_s == node["filename"] && attachment.byte_size.to_s == node["filesize"] }
 
-        puts embed.inspect
-
         # Files
         if embed.present?
           node.attributes["url"].value = Rails.application.routes.url_helpers.rails_storage_redirect_url(embed.blob, host: "localhost:3000")

@@ -4,6 +4,7 @@ class Members::RegistrationsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   setup do
+    requires_multiuser_mode!
     @community = communities(:lab)
     host! @community.host
   end

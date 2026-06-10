@@ -1,5 +1,4 @@
 Devise.setup do |config|
-  # config.mailer_sender = "accounts@booklet.community"
   config.parent_controller = "CommunitiesController"
 
   # Configure the class responsible to send e-mails.
@@ -98,7 +97,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'ffa4cf96d7f8d84fc78e4da9848ac72dbc2ed801dd1eaa0b8058fdaa817a4f646618e3960271e0cf444a53f839f9501ab71ee74e8f47ed5199767eeae3436f76'
+  # config.pepper = "<generate with `rails secret`>"
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false

@@ -8,12 +8,4 @@ class FounderMailer < ApplicationMailer
 
     mail subject: subject, to: @member.email
   end
-
-  def frctnl_welcome(member)
-    @member = member
-    @community = member.community
-    subject = @community.name
-
-    mail subject: subject, to: @member.email
-  end
 end

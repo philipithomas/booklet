@@ -100,18 +100,21 @@ class Community < ApplicationRecord
     exclusion: { in: DISALLOWED_SLUGS },
     uniqueness: true
 
-  # has_many :email_messages, dependent: :destroy
-
   after_create_commit -> {
     generate_vapid_keys
-    # EditorMailer.new_community(self).deliver_later(wait: 1.minutes)
     PostInAdminChatJob.perform_later("[New community] #{name} #{url}")
   }
 
   def host
     @host ||= begin
-      custom_domain = domains.where(redirect_for_name: nil, verified: true).first
-      custom_domain ? custom_domain.domain : "#{slug}.#{Rails.configuration.app_apex_host}"
+      if Rails.configuration.solo_mode
+        # Solo mode serves the single community on the apex host directly —
+        # slug subdomains only exist in multiuser mode.
+        Rails.configuration.base_host
+      else
+        custom_domain = domains.where(redirect_for_name: nil, verified: true).first
+        custom_domain ? custom_domain.domain : "#{slug}.#{Rails.configuration.app_apex_host}"
+      end
     end
   end
 

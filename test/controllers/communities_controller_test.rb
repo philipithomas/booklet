@@ -2,6 +2,7 @@ require "test_helper"
 
 class CommunitiesControllerTest < ActionDispatch::IntegrationTest
   setup do
+    requires_multiuser_mode!
     @community = communities(:lab)
   end
 

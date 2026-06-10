@@ -127,7 +127,6 @@ export default class extends Controller {
       .then((response) => {
         if (response.ok) {
           ahoy.track("push_subscription_saved");
-          console.log("Subscription successfully saved on the server.");
         } else {
           ahoy.track("push_subscription_error");
           console.error("Error saving subscription on the server.");

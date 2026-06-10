@@ -1,5 +1,0 @@
-<%= turbo_frame_tag "infinite_scroll",
-  src: posts_path(page: page, format: :turbo_stream),
-  loading: "lazy" do %>
-  <%= render "components/shared/loading" %>
-<% end %>

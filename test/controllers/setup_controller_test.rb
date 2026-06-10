@@ -1,6 +1,10 @@
 require "test_helper"
 
 class SetupControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    requires_multiuser_mode!
+  end
+
   test "new community form should be available" do
     get new_community_url(host: "new.localtest.me")
     assert_response :success
@@ -13,7 +17,7 @@ class SetupControllerTest < ActionDispatch::IntegrationTest
       post new_community_url(host: "new.localtest.me"), params: {
         community: {
           name: "New Community",
-          email: "me@gmail.com"
+          email: "me@example.com"
         }
       }
     end

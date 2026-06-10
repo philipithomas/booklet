@@ -2,32 +2,6 @@ Rails.application.routes.draw do
   get "/health", to: proc { [ 200, {}, [ "bklt" ] ] }
 
   if Rails.configuration.multiuser_mode
-    # Domain redirects (legacy domains to current)
-    domain_redirects = {
-      "oimc.bklt.app" => "oimc.booklet.group",
-      "bklt.app" => "app.booklet.group",
-      "new.booklet.community" => "new.booklet.group",
-      "hq.booklet.community" => "hq.booklet.group",
-      "demo.booklet.community" => "demo.booklet.group",
-      "docs.booklet.community" => "docs.booklet.group",
-      "booklet.community" => "booklet.group",
-      "www.booklet.community" => "www.booklet.group",
-      "booklet.work" => "booklet.group",
-      "www.booklet.work" => "booklet.group",
-      "members.frctnl.xyz" => "www.frctnl.xyz",
-      "frctnl.xyz" => "www.frctnl.xyz",
-      "aidev.forum" => "www.aidev.forum"
-    }.freeze
-
-    domain_redirects.each do |source, target|
-      constraints(host: source) do
-        root to: redirect("https://#{target}"), as: "redirect_#{source.tr(".", "_")}"
-        match "*path", via: :all, to: redirect { |params, request|
-          "https://#{target}#{request.fullpath}"
-        }
-      end
-    end
-
     # New communities
     get "/" => "setup#new", :constraints => { host: Rails.configuration.signup_host }, :as => :new_community
     post "/" => "setup#create", :constraints => { host: Rails.configuration.signup_host }, :as => :communities
@@ -79,12 +53,23 @@ Rails.application.routes.draw do
 
   mount Ahoy::Engine => "/labyrinth"
 
-  constraints(host: Rails.configuration.api_host) do
-    scope module: :api do
-      mount Rswag::Ui::Engine => "/"
-      mount Rswag::Api::Engine => "/api-docs"
-      resources :members, param: :id, constraints: { id: /[^\/]+/ }
+  # REST API. In multiuser mode it lives on the api. subdomain. In solo mode
+  # there are no subdomains, so it is served under /api (docs at /api-docs) —
+  # mounting it at the root would shadow the community routes.
+  if Rails.configuration.multiuser_mode
+    constraints(host: Rails.configuration.api_host) do
+      scope module: :api do
+        mount Rswag::Ui::Engine => "/"
+        mount Rswag::Api::Engine => "/api-docs"
+        resources :members, param: :id, constraints: { id: /[^\/]+/ }
+      end
     end
+  else
+    scope module: :api, path: "/api" do
+      resources :members, param: :id, constraints: { id: /[^\/]+/ }, as: :api_members
+    end
+    mount Rswag::Ui::Engine => "/api-docs"
+    mount Rswag::Api::Engine => "/api-docs"
   end
 
   # Communities
@@ -110,7 +95,7 @@ Rails.application.routes.draw do
 
     resources :search, path: "search", param: :query
     resources :mentions, only: [ :index ]
-    resources :push_subscriptions
+    resources :push_subscriptions, only: [ :create ]
     resources :verifications
 
     root to: "posts#index", as: :posts
