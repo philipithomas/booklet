@@ -5,7 +5,6 @@
 #  id           :bigint           not null, primary key
 #  content_type :string           not null
 #  document     :text
-#  embedding    :vector(3072)
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  community_id :bigint           not null

@@ -86,8 +86,6 @@ gem "notable", "~> 0.5.2"
 # ai
 gem "ruby-openai", "~> 7.0"
 gem "strong_migrations", "~> 1.8"
-gem "pgvector", "~> 0.2.2"
-gem "neighbor", "~> 0.3.2"
 gem "tiktoken_ruby", "~> 0.0.9"
 gem "chroma-db", "~> 0.8.2"
 

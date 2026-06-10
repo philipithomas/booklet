@@ -3,7 +3,6 @@
 # Table name: searches
 #
 #  id         :bigint           not null, primary key
-#  embedding  :vector(3072)
 #  query      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -20,10 +19,13 @@
 class Search < ApplicationRecord
   belongs_to :member
   validates :query, presence: true
-  has_neighbors :embedding, dimensions: 3072, normalize: true
+
+  # The query embedding is only needed for the lifetime of the request — it
+  # is generated here and passed straight to Chroma, never persisted.
+  attr_accessor :embedding
 
   def embed
-    update!(embedding: SearchEmbeddingService.new(self).call)
+    self.embedding = SearchEmbeddingService.new(self).call
     self
   end
 
@@ -35,8 +37,6 @@ class Search < ApplicationRecord
         community_slug: member.community.slug
       }
     )
-    id = self.id
-    embedding = self.embedding
 
     results = collection.query(
       query_embeddings: [ embedding ],

@@ -46,6 +46,10 @@ class SearchableContentEmbeddingService
     end
   end
 
+  def test_response
+    [ test_vector, extract_text(@model) ]
+  end
+
   def test_vector
     3072.times.map { rand(-1.0..1.0) }
   end

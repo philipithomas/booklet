@@ -16,7 +16,7 @@ Solo mode runs a single community on a single domain — no subdomains, no billi
 
 - Ruby 3.3.5
 - Rails 7.2
-- PostgreSQL with the [pgvector](https://github.com/pgvector/pgvector) extension
+- PostgreSQL
 - Node.js 18+ and Yarn
 - [libvips](https://www.libvips.org/) for image processing
 

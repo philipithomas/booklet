@@ -10,10 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_04_01_051054) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_10_190000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "vector"
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -683,7 +682,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_01_051054) do
     t.bigint "content_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.vector "embedding", limit: 3072
     t.text "document"
     t.index ["community_id"], name: "index_searchable_contents_on_community_id"
     t.index ["content_type", "content_id"], name: "index_searchable_contents_on_content"
@@ -694,7 +692,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_01_051054) do
     t.bigint "member_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.vector "embedding", limit: 3072
     t.index ["member_id"], name: "index_searches_on_member_id"
   end
 

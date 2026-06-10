@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-22.04
     services:
       postgres:
-        image: ankane/pgvector:latest
+        image: postgres:16
         env:
           POSTGRES_PASSWORD: postgres
         ports: ["5432:5432"]
@@ -41,10 +41,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install libvips-dev
-      - name: Install pgvector
-        run: |
-          sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y
-          sudo apt-get install postgresql-14-pgvector
       - name: Setup the Rails application
         run: |
           sudo apt-get -yqq install libpq-dev

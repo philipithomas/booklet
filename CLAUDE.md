@@ -55,7 +55,7 @@ Set via `APP_MODE` environment variable (default: `SOLO`). Configuration lives i
 - **Reply** — comment on a post.
 - **Newsletter** — weekly email digest per community. AI-generated summaries when OpenAI configured.
 - **Domain** — custom domain mapping for communities (multiuser).
-- **SearchableContent** — vector embeddings for semantic search (pgvector).
+- **SearchableContent** — indexable documents for semantic search; embeddings are stored in Chroma.
 - **Editor** — separate auth model for internal admin panel (multiuser only).
 
 ### Background Jobs (Solid Queue)

@@ -3,7 +3,6 @@
 # Table name: searches
 #
 #  id         :bigint           not null, primary key
-#  embedding  :vector(3072)
 #  query      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

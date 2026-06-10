@@ -40,6 +40,10 @@ class SearchEmbeddingService
     res.dig("data", 0, "embedding")
   end
 
+  def test_response
+    test_vector
+  end
+
   def test_vector
     3072.times.map { rand(-1.0..1.0) }
   end
