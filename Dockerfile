@@ -82,8 +82,10 @@ COPY --from=build /rails/node_modules /rails/node_modules
 ENV PATH=/usr/local/node/bin:$PATH
 
 
-# Run and own only the runtime files as a non-root user for security
+# Run and own only the runtime files as a non-root user for security.
+# log/ and tmp/ are excluded by .dockerignore, so create them here.
 RUN useradd rails --create-home --shell /bin/bash && \
+  mkdir -p db log storage tmp && \
   chown -R rails:rails /rails && \
   chown -R rails:rails db log storage tmp /rails/node_modules
 USER rails:rails
