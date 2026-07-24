@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html class="min-h-full" lang="<%= I18n.locale %>">
+
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+  <% if @community.present? %>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="apple-mobile-web-app-title" content="<%= @community.name %>">
+  <% end %>
+
+  <% if Rails.env.production? && ENV["PLAUSIBLE_SCRIPT_URL"].present? && params[:controller]!='accept_invitations' %>
+  <script defer data-domain="<%= Rails.configuration.app_apex_host %>" src="<%= ENV["PLAUSIBLE_SCRIPT_URL"] %>"></script>
+  <script>
+    window.plausible = window.plausible || function() {
+      (window.plausible.q = window.plausible.q || []).push(arguments)
+    }
+  </script>
+  <% end %>
+
+  <meta name="current-member-id" content="<%= current_member&.id %>">
+  <meta name="current-member-permission" content="<%= current_member&.permission %>">
+
+  <% og_url = @community.present? ?  ( @post&.published_at? ? post_og_image_url(@post, @post.updated_at.to_i, host: @community.host) : community_og_image_url(@community.updated_at.to_i, host: @community.host)) : asset_url("og.jpg") %>
+  <%=
+      display_meta_tags reverse: true,
+        site: (defined?(current_editor) && current_editor.present?) ? "Editor" : (@community.present? ? @community.name : I18n.translate(:booklet)),
+        # TODO - switch to community description
+        description: @community.present? ? @community.name : I18n.translate(:description),
+        separator: '-',
+        icon: [
+          { href: @community&.icon&.attached? ? cdn_proxy_url(@community.icon.variant(:thumb).processed) : asset_path('logo/icon.png'), type: 'image/png' },
+          { href: @community&.icon&.attached? ? cdn_proxy_url(@community.icon.variant(:thumb).processed) : asset_path('logo/icon.png'), rel: 'apple-touch-icon-precomposed', type: 'image/png' },
+        ],
+        og: {
+          title: :title,
+          site_name: :site,
+          description: :description,
+          url: request.url.split('?').first,
+          type: @post.present? ? 'article' : 'website',
+          image: og_url,
+        },
+        canonical: request.url.split('?').first
+    %>
+
+  <% if @community&.brand_color %>
+  <meta name="theme-color" content="<%= @community.brand_color %>" />
+  <%# TODO - apple-mobile-web-app-status-bar-style ? %>
+  <% end %>
+
+  <% if request.host == Rails.configuration.signup_host %>
+  <script src="https://js.stripe.com/v3/"></script>
+  <% end %>
+
+  <% if @community&.vapid_public_key.present? %>
+  <%= tag.meta name: "vapid-public-key", content: @community.vapid_public_key %>
+  <% end %>
+
+  <% turbo_refreshes_with method: :morph, scroll: :preserve %>
+</head>
+
+<body class="h-full min-h-screen font-sans bg-white dark:bg-black invisible-functioning-scrollbar" data-controller="search-palette switch-modal">
+  <%= render :partial => "layouts/community/search_palette" %>
+  <%= render :partial => "layouts/community/pwa_install_banner" %>
+
+  <%# Put overrides in body bc of turbolinks %>
+  <% if @community&.persisted? %>
+  <% cache @community do %>
+  <%= render "layouts/community_brand_colors_override" %>
+  <% end %>
+  <% elsif @community.present? %>
+  <%= render "layouts/community_brand_colors_override" %>
+  <% end %>
+
+  <% if current_member %>
+  <!-- Current member CSS -->
+  <style>
+    [data-member~="<%= current_member.id %>"] .current_member\:block,
+    [data-member~="<%= current_member.id %>"].current_member\:block {
+      display: block
+    }
+
+    [data-member~="<%= current_member.id %>"] .current_member\:hidden,
+    [data-member~="<%= current_member.id %>"].current_member\:hidden {
+      display: none
+    }
+  </style>
+  <% end %>
+
+  <%= content_for?(:content) ? yield(:content) : yield %>
+
+  <%= render :partial => 'layouts/flash_messages', locals: { } %>
+  <%# Community switching only exists in multiuser mode (see resources :switch in routes) %>
+  <%= render :partial => "layouts/switch_modal" if Rails.configuration.multiuser_mode %>
+</body>
+
+</html>

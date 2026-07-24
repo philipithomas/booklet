@@ -1,0 +1,19 @@
+<% content_for :title do %>
+  <%= title t('.title') %>
+<% end %>
+
+<%= render 'communities/members/header', community: @community, current_member: current_member %>
+
+<div class="community-page-vertical-padding">
+  <% if MemberPolicy.new(current_member, @community).index_all? %>
+    <%= render 'tabs' %>
+  <% end %>
+
+
+  <div class="community-container">
+    <%= render "communities/members/all/table", members: @members %>
+    <% if @pagy.next.present? %>
+      <%= render "communities/members/all/scroll_frame", page: 2 %>
+    <% end %>
+  </div>
+</div>

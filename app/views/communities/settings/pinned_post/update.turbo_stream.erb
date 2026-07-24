@@ -1,0 +1,9 @@
+<%= turbo_stream.remove 'pinned-post' %>
+
+<%= turbo_stream.prepend "flash_messages" do %>
+  <% if @community.pinned_post_id %>
+    <%= render :partial => "layouts/flash", locals: { message: t('communities.settings.pinned_post.flash.pinned') } %>
+  <% else %>
+    <%= render :partial => "layouts/flash", locals: { message: t('communities.settings.pinned_post.flash.unpinned') } %>
+  <% end %>
+<% end %>

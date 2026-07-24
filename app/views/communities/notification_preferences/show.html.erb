@@ -1,0 +1,10 @@
+<% content_for :heading do %><%= title t("communities.settings.notifications.title") %><% end %>
+
+<% noindex %>
+
+<%= render "communities/settings/notifications/form", member: @member, target_url: request.path %>
+
+<div class="mt-4 text-center prose prose-sm dark:prose-invert">
+  <%= t('.or_comma') %>
+  <%= link_to t('.sign_in'), new_member_session_path, class: 'link' %>
+</div>

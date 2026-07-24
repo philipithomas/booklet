@@ -1,0 +1,20 @@
+<% content_for :summary do %>
+  New member invitation
+<% end %>
+
+<% content_for :button_label do %><%= @community.host %><% end %>
+
+<% content_for :button_link do %><%= @community.url %><% end %>
+
+<p>
+  <%= @member.email %> has been invited to join <%= @community.name %>
+</p>
+<p>
+  <b>Status:</b> <%= @member.status %>
+</p>
+<p>
+  <b>Open invitations:</b> <%= @community.members.invited.count %>
+</p>
+<p>
+  <b>Accepted invitations:</b> <%= @community.members.active.count %>
+</p>

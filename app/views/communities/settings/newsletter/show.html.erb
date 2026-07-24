@@ -1,0 +1,32 @@
+<h1 class="page-subtitle pb-6  flex items-center space-x-4 md:space-x-6">
+  <span><%= title I18n.t('communities.settings.newsletter.title') %></span>
+</h1>
+
+<div class="prose prose-sm dark:prose-invert pb-8 text-gray-700 dark:text-gray-300">
+  <p>
+    <%= I18n.t('communities.settings.newsletter.description') %>
+  </p>
+</div>
+
+
+<%= simple_form_for :notifications, url: request.path, method: :put, builder: Bklt::FormBuilder do |f| %>
+  <div class="space-y-4">
+    <%= f.error_notification %>
+
+    <div class="form-group <% if @newsletter_is_subscribed %>hidden<% end %>">
+      <%= f.label I18n.t('communities.settings.notifications.newsletter_days') , class: 'form-label' %>
+      <div class="flex flex-col items-stretch">
+        <% NewsletterDaysBitmask::DAYS.keys.each do |day| %>
+          <div class="flex items-center space-x-2 py-1 w-full">
+            <span class="inline-block py-1">
+              <%= check_box_tag 'notifications[newsletter_days][]', day, @newsletter_days.include?(day), id: "newsletter_day_#{day.downcase}", class: 'form-input' %>
+            </span>
+            <%= label_tag "newsletter_day_#{day.downcase}", I18n.t("days.#{day.downcase}"), class: 'text-sm text-gray-800 dark:text-gray-200 font-normal' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <%= f.button :submit_dynamic, label: t('.save') %>
+  </div>
+<% end %>

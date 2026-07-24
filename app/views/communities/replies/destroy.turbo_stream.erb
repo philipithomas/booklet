@@ -1,0 +1,5 @@
+<%= turbo_stream.remove dom_id(@reply) %>
+
+<%= turbo_stream.prepend "flash_messages" do %>
+  <%= render :partial => "layouts/flash", locals: { message: t('communities.replies.flash.destroyed') } %>
+<% end %>

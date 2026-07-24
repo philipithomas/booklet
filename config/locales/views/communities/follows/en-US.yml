@@ -1,0 +1,12 @@
+---
+en-US:
+  communities:
+    follows:
+      confirm_unsubscribe:
+        description: You have successfully unsubscribed from these emails.
+        unsubscribed_successfully: Unsubscribed successfully
+      unsubscribe:
+        confirm_unsubscribe: Confirm unsubscribe
+        description: Are you sure you want to unsubscribe from these emails?
+        not_found: Not found or already unsubscribed
+        title: Unsubscribe

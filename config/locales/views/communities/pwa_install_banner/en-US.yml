@@ -1,0 +1,7 @@
+---
+en-US:
+  layouts:
+    community:
+      pwa_install_banner:
+        install: Install
+        progressive_web_app: Progressive Web App

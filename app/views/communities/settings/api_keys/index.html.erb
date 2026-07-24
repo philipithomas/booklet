@@ -1,0 +1,13 @@
+<h1 class="page-subtitle pb-6">
+  <%= title I18n.t('communities.settings.api_keys.title') %>
+</h1>
+
+<div class="prose prose-sm dark:prose-invert pb-8 text-gray-700 dark:text-gray-300">
+  <p>
+    <%= I18n.t('communities.settings.api_keys.description') %>
+  </p>
+</div>
+
+<%= render partial: "communities/settings/api_keys/table", locals: { api_keys: @api_keys } %>
+
+<%= link_to "New API Key", new_settings_api_key_path(@community), class: "btn btn-primary" %>

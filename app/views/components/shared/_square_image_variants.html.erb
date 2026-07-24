@@ -1,0 +1,33 @@
+<% classes ||= "" %>
+<% imageClasses = local_assigns[:imageClasses]  || "" %>
+
+<div class="<%= classes %>  shrink-0 overflow-hidden aspect-square">
+  <% unless image.variable? %>
+    <!-- For non-variable images, resize and pad to maintain aspect ratio -->
+    <div class="">
+      <img src="<%= cdn_proxy_url(image.variant(resize_to_limit: [size, size], pad: true, background: :transparent)) %>"
+          alt="<%= alt %>"
+          class="object-contain <%= imageClasses %>"
+      />
+    </div>
+  <% else %>
+    <!-- For variable images, ensure square presentation with CSS -->
+    <picture>
+      <!-- SIZE <%= size %> -->
+      <source type="image/webp"
+              srcset="<%= cdn_proxy_url(image.variant(convert: :webp, resize_to_limit: [size, size])) %>,
+                      <%= cdn_proxy_url(image.variant(convert: :webp, resize_to_limit: [size*2, size*2])) %> 2x,
+                      <%= cdn_proxy_url(image.variant(convert: :webp, resize_to_limit: [size*3, size*3])) %> 3x"
+      >
+      <img width="<%= size %>"
+          height="<%= size %>"
+          src="<%= cdn_proxy_url(image.variant(resize_to_limit: [size, size])) %>"
+          alt="<%= alt %>"
+          srcset="<%= cdn_proxy_url(image.variant(resize_to_limit: [size, size])) %>,
+                  <%= cdn_proxy_url(image.variant(resize_to_limit: [size*2, size*2])) %> 2x,
+                  <%= cdn_proxy_url(image.variant(resize_to_limit: [size*3, size*3])) %> 3x"
+          class="object-cover  <%= imageClasses %>"
+      />
+    </picture>
+  <% end %>
+</div>

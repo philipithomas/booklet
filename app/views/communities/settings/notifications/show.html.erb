@@ -1,0 +1,8 @@
+<h1 class="page-subtitle pb-6">
+  <%= title I18n.t('communities.settings.notifications.title') %>
+</h1>
+
+<%= render 'push_subscribe' %>
+
+<%= render 'communities/settings/notifications/form', member: @member, target_url: request.path %>
+

@@ -1,0 +1,44 @@
+<div class="md:mt-8 mt-4 sticky top-4 mx-auto z-40">
+  <nav class="w-auto h-8 px-2 md:px-4 my-2 rounded-full space-x-4 sm:space-x-6 md:space-x-8 items-stretch backdrop-blur-sm">
+    <% if menuItems.count > 1 %>
+    <% menuItems.each do |item| %>
+    <% if item[:show] %>
+    <a href="<%= item[:to] %>" <% if item[:active] %> aria-current="page" class="inline-flex items-center px-0 text-sm font-medium text-gray-800 dark:text-gray-200 border-b-2 border-accent" <% else %> class="inline-flex items-center px-0 text-sm font-medium text-gray-800 dark:text-gray-200 hover:pb-1" <% end %>>
+
+      <%= item[:name] %>
+    </a>
+    <% end %>
+    <% end %>
+    <% end %>
+  </nav>
+</div>
+
+<div class="absolute mt-4 md:mt-8 w-full z-30">
+  <div class="community-container flex justify-between items-center h-8 my-2">
+    <a href="<%= posts_path %>" class="flex w-full flex-start">
+      <% cache ["community", @community&.id, @community&.updated_at] do %>
+      <div class="hidden sm:block">
+        <%= render "components/community/logo", community: @community %>
+      </div>
+      <div class="block sm:hidden">
+        <%= render "components/community/icon", community: @community %>
+      </div>
+      <% end %>
+    </a>
+    <div class="flex items-center whitespace-nowrap space-x-2 md:space-x-4"">
+      <% unless current_member %>
+        <div class=" h-8 flex items-center">
+      <%= link_to "Sign in", new_member_session_path, class: "text-gray-800 text-sm font-medium dark:text-gray-200" %>
+    </div>
+    <% end %>
+    <% if current_member %>
+    <span class="">
+      <%= render :partial => "layouts/community/search_button" %>
+    </span>
+    <span class="">
+      <%= render :partial => "layouts/community/settings_dropdown", locals: {member: current_member, secondaryMenuItems: secondaryMenuItems} %>
+    </span>
+    <% end %>
+  </div>
+</div>
+</div>

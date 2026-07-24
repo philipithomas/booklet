@@ -1,0 +1,10 @@
+<% if MemberPolicy.new(current_member, Member).new? %>
+  <% content_for :floating_action_button do %>
+    <a
+      href="<%= new_member_path %>"
+      class="w-full sm:w-auto btn btn-primary">
+      <%= heroicon "plus-circle", options: { class: "-ml-1 mr-2 h-4 w-5", variant: :mini  } %>
+      <%= t "communities.members.header.add" %>
+    </a>
+  <% end %>
+<% end %>

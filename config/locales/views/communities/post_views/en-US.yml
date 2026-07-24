@@ -1,0 +1,6 @@
+---
+en-US:
+  communities:
+    post_views:
+      views:
+        seen_by: Seen by %{count} %{member}

@@ -1,0 +1,30 @@
+<% content_for :heading do %><%= title t("index.sign_in") %><% end %>
+
+<% noindex %>
+
+<div class="prose dark:prose-invert text-center">
+  <p><%= t('.code_sent_to_email', email: @email) %></p>
+</div>
+
+
+<%= simple_form_for(Member.new, url: index_path, builder: Bklt::FormBuilder, method: :post) do |f| %>
+  <div class="form-space">
+    <%= f.error_notification %>
+
+    <%= f.hidden_field :email, value: @email %>
+
+    <%= f.input :password,
+                label: t(".code"),
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "one-time-code", type: "number", pattern: "[0-9]*", inputmode: "numeric" } %>
+
+    <%= f.button :submit_dynamic, label: t(".sign_in"), full_width: true %>
+  </div>
+<% end %>
+
+<div class="mt-8 text-center prose prose-sm dark:prose-invert">
+  <p>
+    <%= link_to t(".try_again"), new_member_session_path %>
+  </p>
+</div>

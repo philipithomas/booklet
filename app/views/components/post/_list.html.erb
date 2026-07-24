@@ -1,0 +1,16 @@
+<div class="h-full pt-2 md:pt-4">
+  <ul role="list" id="posts" class="h-full border-t border-gray-100 dark:border-gray-900 md:border-0">
+    <div class="only:block hidden">
+      <%= render "components/post/empty" %>
+    </div>
+
+    <% if defined?(pinned_post) && pinned_post.present? %>
+      <%= render "components/post/card", post: pinned_post, pinned: true %>
+    <% end %>
+
+    <%= render "components/post/cards", posts: @posts %>
+  </ul>
+  <% if @pagy.next.present? %>
+    <%= render "components/post/scroll_frame", page: 2 %>
+  <% end %>
+</div>

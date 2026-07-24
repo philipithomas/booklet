@@ -1,0 +1,29 @@
+<%# locals: (members:) %>
+
+<div class="inline-block w-full align-middle w-full overflow-x-scroll pb-36">
+  <table class="min-w-full">
+    <thead class="sr-only">
+      <tr>
+        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+          <%= I18n.t("activerecord.attributes.member.name") %>
+        </th>
+        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+        <%= I18n.t("activerecord.attributes.member.email") %>
+        </th>
+        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+          <%= I18n.t("activerecord.attributes.member.status") %>
+        </th>
+        <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+          <span class="sr-only">
+            <%= I18n.t("communities.members.actions.edit") %>
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody class="" id="all_members">
+      <% members.each do |member| %>
+        <%= render "communities/members/all/row", member: member %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

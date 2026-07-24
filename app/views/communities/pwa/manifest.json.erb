@@ -1,0 +1,24 @@
+{
+  <% cache ["community", @community&.id, @community&.updated_at] do %>
+  "name": "<%= @community.present? ? @community.name : I18n.t('booklet') %>",
+  "icons": [
+    {
+      "src": "<%= @community&.icon&.attached? ? cdn_proxy_url(@community.icon.variant(convert: 'png', resize_to_fill: [512, 512, { crop: :attention }]).processed) : asset_path('logo/icon.png') %>",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "<%= @community&.icon&.attached? ? cdn_proxy_url(@community.icon.variant(convert: 'png', resize_to_fill: [512, 512, { crop: :attention }]).processed) : asset_path('logo/icon.png') %>",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "scope": "/",
+  "description": "Community",
+  "theme_color": "<%= @community.present? ? @community.brand_color : '#ffffff' %>",
+  "background_color": "<%= @community.present? ? @community.brand_color : '#ffffff' %>"
+  <% end %>
+}

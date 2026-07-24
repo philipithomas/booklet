@@ -1,0 +1,20 @@
+<% content_for :summary do %>
+  <%= I18n.t("mailers.new_reply.new_reply_to_post_in_community", community_name: @community.name) %> <%= @reply.body.to_plain_text.sub /\s*\[.+\]$/, '' %>
+<% end %>
+
+<%= content_for :preamble do %>
+  <span class="text-gray-700">
+    <%= I18n.t("mailers.new_reply.new_reply_to_post") %> <%= link_to truncate(@post.title, length: 42), post_url(@post, host: @community.host, email_token: @email_token || ""), class: "underline text-gray-700" %>
+    (<a href="<%= @community.url %>" class="underline text-gray-700"><%= @community.name %>)
+  </span>
+<% end %>
+
+<% content_for :button_label do %><%= t 'mailers.new_reply.view_post' %> →<% end %>
+<% content_for :button_link do %><%= post_url(@post, host: @community.host, email_token: @email_token || "") %><% end %>
+
+<% if @follow.present? %>
+  <% content_for :unsubscribe_link do %><%= follow_unsubscribe_url(@follow.generate_unsubscribe_signed_id, host: @community.host, email_token: @email_token || "") %><% end %>
+  <% content_for :unsubscribe_text do %><%= t('mailers.new_reply.unsubscribe_from_replies_for_this_post')%><% end %>
+<% end %>
+
+<%= inline_action_text_attachments(@reply.body.to_s).html_safe %>

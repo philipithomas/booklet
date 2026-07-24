@@ -1,0 +1,29 @@
+<% content_for :heading do %><%= title t(".save_api_key", community_name: @community.name) %><% end %>
+
+<% noindex %>
+
+<div id="key-copied-tmp" class="hidden">
+  <%# Event name must match one below in copy controller %>
+  <%= render "layouts/flash", message: t('.key_copied') %>
+</div>
+
+
+<div class="prose dark:prose-invert text-gray-700 dark:text-gray-300">
+  <p>
+    <%= t(".description") %>
+  </p>
+</div>
+
+<div class="w-full text-sm text-gray-500 whitespace-nowrap" data-controller="copy">
+  <button
+    class="record w-full justify-between px-2 py-1 flex items-center rounded-sm"
+    data-controller="copy"
+    data-clipboard-text="<%= @api_key.external_key %>"
+    data-copy-template-id-value="key-copied-tmp"
+  >
+    <span class="truncate"><%= @api_key.external_key %></span>
+    <%= heroicon "clipboard", options: { class: "inline-block w-4 h-4 ml-1 text-gray-400 hover:text-gray-500 dark:text-gray-600 shrink-0" } %>
+  </button>
+</div>
+
+<%= link_to t(".done"), settings_api_keys_path, class: "btn btn-primary w-full" %>

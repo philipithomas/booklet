@@ -1,0 +1,19 @@
+<% content_for :content do %>
+
+  <% if content_for?(:top_nav) %>
+    <header class="fixed z-20 w-full inline-block">
+      <div class="relative z-10 flex h-16 lg:h-20 flex-shrink-0 border-b border-gray-200 bg-gray-050 dark:bg-gray-950 dark:border-gray-900">
+        <%= yield :top_nav %>
+      </div>
+    </header>
+  <% end %>
+
+  <!-- Content area -->
+  <main class="grow flex flex-1 flex-col items-stretch lg:pb-0 h-full overflow-y-auto <% if content_for?(:top_nav) %> pt-16 lg:pt-20 <% end %>" id="main">
+    <%= content_for?(:dashboard_content) ? yield(:dashboard_content) : yield %>
+  </main>
+<% end %>
+
+
+<%= render template: "layouts/application" %>
+

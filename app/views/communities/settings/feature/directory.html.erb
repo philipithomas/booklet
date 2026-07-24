@@ -1,0 +1,23 @@
+<%= render "communities/settings/feature/breadcrumb" %>
+
+<h1 class="page-subtitle pb-6  flex items-center space-x-4 md:space-x-6">
+  <span><%= title I18n.t('communities.settings.features.directory.title') %></span>
+</h1>
+
+<div class="prose prose-sm dark:prose-invert pb-8 text-gray-700 dark:text-gray-300">
+  <p>
+    <%= I18n.t('communities.settings.features.directory.description') %>
+  </p>
+</div>
+
+
+<%= simple_form_for(@community, url: request.path, builder: Bklt::FormBuilder, method: :put) do |f| %>
+  <div class="space-y-4">
+    <%= f.error_notification %>
+
+    <%= f.input :directory_enabled, as: :boolean, boolean_style: :inline, input_html: { checked: @community.directory_enabled } %>
+
+    <%= f.button :submit, t('communities.settings.features.save'), class: "btn btn-primary" %>
+
+  </div>
+<% end %>

@@ -1,0 +1,7 @@
+<p class="mt-1_5 mb-5 text-xs leading-6 text-center text-gray-500" style="line-height: 1.2rem;">
+  Sent with <a class="underline text-gray-500" href="https://github.com/philipithomas/booklet"><%= t("booklet") %></a>
+  <% if Rails.configuration.mailing_address.present? %>
+    <br />
+    <%= Rails.configuration.mailing_address %>
+  <% end %>
+</p>

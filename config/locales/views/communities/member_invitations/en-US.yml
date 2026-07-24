@@ -1,0 +1,20 @@
+---
+en-US:
+  communities:
+    member_invitations:
+      empty:
+        empty: No invitations
+      flash:
+        failed_create: No new emails detected
+        invited: Invitation sent
+        multiple_invited: "%{count} invitations sent"
+        revoked: Invitation revoked
+      form:
+        invite_by_email: Invite by email
+        send: Send
+      index:
+        pending_invitations: Open invitations
+        title: Invitations
+      invitation:
+        are_you_sure_you_want_to_revoke_this_invitation: Are you sure you want to revoke this invitation?
+        revoke: Revoke

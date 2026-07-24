@@ -1,0 +1,65 @@
+<!-- Settings dropdown -->
+
+<div class="shrink-0 relative"
+  data-action="click->dropdown#toggle click@window->dropdown#hide"
+  data-controller="dropdown"
+  data-dropdown-active-target="#settings-menu-button"
+  data-dropdown-open-value="false"
+  >
+  <div
+    id="settings-menu-button"
+    >
+    <button
+      type="button"
+      class="flex w-full text-gray-700 dark:text-gray-300 focus:outline-none focus:text-gray-900 hover:text-gray-900  dark:focus:text-gray-100 dark:hover:text-gray-100"
+      aria-expanded="false"
+      aria-haspopup="true"
+      role="button"
+      data-dropdown-target="button"
+      >
+
+      <span class="sr-only">Open settings menu</span>
+      <% cache current_member do %>
+        <%= render "components/member/photo", member: current_member, size: 8 %>
+      <% end %>
+    </button>
+  </div>
+
+  <div
+    data-dropdown-target="menu"
+    class="dropdown-menu hidden right-0 mt-1 transition origin-top-right transform z-30"
+    role="menu"
+    aria-orientation="vertical"
+    aria-labelledby="settings-menu-button"
+    tabindex="-1"
+    data-transition-enter-from="opacity-0 scale-95"
+    data-transition-enter-to="opacity-100 scale-100"
+    data-transition-leave-from="opacity-100 scale-100"
+    data-transition-leave-to="opacity-0 scale-95"
+    >
+
+    <% secondaryMenuItems.each do |item| %>
+      <% if item[:show] %>
+        <% if item[:newTab] %>
+          <%= link_to item[:name],
+                      item[:to],
+                      class: "block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-050",
+                      role: "menuitem",
+                      tabindex: "-1",
+                      target: "_blank",
+                      data: item[:data]
+          %>
+        <% else %>
+          <%= link_to item[:name],
+                      item[:to],
+                      class: "block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-050 " + (item[:classes] ? item[:classes] : ""),
+                      role: "menuitem",
+                      tabindex: "-1",
+                      data: item[:data],
+                      method: item[:data] && item[:data]['turbo-method'] ? item[:data]['turbo-method'] : :get
+          %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

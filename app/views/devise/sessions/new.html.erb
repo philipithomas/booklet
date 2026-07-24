@@ -1,0 +1,24 @@
+<% content_for :heading do %><%= title t(".sign_in", community_name: @community.name) %><% end %>
+
+<% noindex %>
+
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), builder: Bklt::FormBuilder, html: { honeypot: true }) do |f| %>
+  <div class="form-space">
+    <%= f.error_notification %>
+
+    <%= f.input :email,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "email", value: session.delete(:prefill_email) } %>
+
+    <%= f.hidden_field :community_id, value: @community.id %>
+
+    <%= f.button :submit_dynamic, label: t(".next"), full_width: true %>
+  </div>
+<% end %>
+
+<div class="mt-8 text-center prose-sm dark:prose-invert">
+  <% if @community.signups_open? %>
+    <p><%= link_to t("devise.registrations.new.sign_up"), new_registration_path(resource_name), class: :link %></p>
+  <% end %>
+</div>

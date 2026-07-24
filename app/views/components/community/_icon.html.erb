@@ -1,0 +1,7 @@
+<% if community.icon.attached? %>
+  <%= render "components/shared/square_image_variants", image: community.icon, size: 32, classes: "h-8 w-8", alt: community.name %>
+<% else %>
+  <div class="text-2xl font-bold text-gray-900 dark:text-gray-100">
+    <%= community.initials %>
+  </div>
+<% end %>

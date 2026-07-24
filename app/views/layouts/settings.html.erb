@@ -1,0 +1,96 @@
+
+<%
+menuItems = [
+  {
+    name: 'Notifications',
+    to: settings_notifications_path,
+    icon: "bell",
+    active: request.path == settings_notifications_path,
+    show: true,
+    newTab: false,
+  },
+  {
+    name: 'Branding',
+    to: settings_branding_path,
+    icon: "photo",
+    active: request.path == settings_branding_path,
+    show: current_member&.admin?,
+    newTab: false,
+  },
+  {
+    name: 'Newsletter',
+    to: settings_newsletter_path,
+    icon: "envelope",
+    active: request.path == settings_newsletter_path,
+    show: current_member&.admin?,
+    newTab: false,
+  },
+  {
+    name: 'Moderation',
+    to: settings_moderation_path,
+    icon: "flag",
+    active: request.path == settings_moderation_path,
+    show: current_member&.admin?,
+    newTab: false,
+  },
+
+  {
+    name: 'Hosting',
+    to: settings_hosting_path,
+    icon: "map-pin",
+    active: request.path == settings_hosting_path,
+    show: current_member&.admin?,
+    newTab: false,
+  },
+  {
+    name: 'Features',
+    to: settings_features_path,
+    icon: "adjustments-horizontal",
+    active: request.path == settings_features_path,
+    show: current_member&.admin?,
+    newTab: false,
+  },
+  {
+    name: 'Integrations',
+    to: settings_integrations_path,
+    icon: "link",
+    active: request.path == settings_integrations_path,
+    show: current_member&.admin?,
+    newTab: false,
+  },
+  {
+    name: 'API keys',
+    to: settings_api_keys_path,
+    icon: "key",
+    active: request.path.start_with?(settings_api_keys_path),
+    show: current_member&.admin?,
+    newTab: false,
+  },
+  {
+    name: 'Subscription',
+    to: settings_subscription_path,
+    icon: "credit-card",
+    active: request.path.start_with?(settings_subscription_path),
+    show: current_member&.admin?,
+    newTab: false,
+  }
+]
+%>
+
+
+
+<% content_for :community_content do %>
+  <div class="community-container community-page-vertical-padding lg:flex lg:gap-x-16"">
+    <aside class="flex overflow-x-auto border-b border-gray-900/5 pb-4 mb-4 lg:block lg:w-64 lg:flex-none lg:border-0 lg:pb-0 lb:mb-0 invisible-functioning-scrollbar">
+      <%= render "layouts/settings/menu", menuItems: menuItems %>
+    </aside>
+
+    <main class="lg:flex-auto">
+      <%= content_for?(:community_settings_content) ? yield(:content) : yield %>
+    </main>
+  </div>
+<% end %>
+
+
+<%= render template: "layouts/community" %>
+

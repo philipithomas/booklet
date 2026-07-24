@@ -1,0 +1,34 @@
+<% content_for :content do %>
+  <main class="grid min-h-screen h-full place-items-center px-6 py-24 sm:py-32 lg:px-8">
+    <div class="text-center">
+      <p class="text-base font-semibold text-accent-if-contrast">
+        <%= yield(:error_code) %>
+      </p>
+      <h1 class="mt-4 text-3xl font-bold tracking-tight text-gray-950 dark:text-gray-050 sm:text-5xl">
+        <%= yield(:title) %>
+      </h1>
+      <p class="mt-6 text-base leading-7 text-gray-600 dark:text-gray-400">
+        <%= yield(:message) %>
+      </p>
+      <div class="mt-10 flex items-center justify-center gap-x-6">
+        <a
+          href="<%= @community.present? ? '/' : marketing_url %>"
+          class="btn btn-primary"
+        >
+          <%= t("errors.buttons.back") %>  <span aria-hidden="true">&rarr;</span>
+        </a>
+        <a href="mailto:<%= support_email %>" class="text-sm font-semibold link">
+          <%= t("errors.buttons.support") %>
+        </a>
+      </div>
+      <% if @trace and Rails.env.development? %>
+        <div class="prose dark:prose-invert mt-12">
+          <h1><%= @exception.try(:message) %></h1>
+          <pre class="bg-gray-900 text-gray-100"><%= @trace.join("\n") %></pre>
+        </div>
+      <% end %>
+    </div>
+  </main>
+<% end %>
+
+<%= render template: "layouts/application" %>

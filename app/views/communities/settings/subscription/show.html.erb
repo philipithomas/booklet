@@ -1,0 +1,101 @@
+<%
+plans = [
+  {
+    name: 'Community',
+    price: 'Free',
+    per_month: false,
+    label: nil,
+    description: 'For social and hobby communities that want unlimited usage, free forever.',
+    features: [
+      'Unlimited members',
+      'Unlimited posts and replies',
+      'Public or private communities',
+      'Up to 2 admins',
+    ],
+    cta: 'Current plan',
+    cta_disabled: true,
+    cta_url: '#'
+  },
+  {
+    name: 'Network',
+    price: '$100',
+    per_month: true,
+    label: nil,
+    description: 'For professional communities that want more community management tools.',
+    features: [
+      'Everything in Community',
+      'Unlimited admins',
+      'Custom domain',
+      'API access',
+    ],
+    cta: 'Upgrade',
+    cta_disabled: false,
+    cta_url: settings_billing_path,
+  },
+  {
+    name: 'Company',
+    price: '$300',
+    per_month: true,
+    label: 'Coming soon',
+    description: 'For companies that want to communicate calmer',
+    features: [
+      'Everything in Network',
+      'Multiple groups',
+      'Advanced API',
+    ],
+    cta: 'Coming soon',
+    cta_disabled: true,
+    cta_url: '#'
+  }
+]
+%>
+
+
+<h1 class="page-subtitle pb-6">
+  <%= title I18n.t('communities.settings.subscription.title') %>
+</h1>
+
+
+<!-- Tiers -->
+<div class="space-y-12 md:space-y-0 md:grid md:grid-cols-3 md:gap-x-8">
+  <% plans.each do |plan| %>
+    <div class="relative flex flex-col p-8 border border-gray-200 shadow-sm bg-gray-050 dark:bg-gray-950 dark:border-gray-800 rounded-2xl">
+    <div class="flex-1">
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100"><%= plan[:name] %></h3>
+
+      <% if plan[:label] %>
+        <p class="absolute top-0 py-1.5 px-4 bg-accent rounded-full text-xs font-semibold uppercase tracking-wide text-gray-050 dark:text-gray-950 transform -translate-y-1/2">
+          <%= plan[:label] %>
+        </p>
+      <% end %>
+      <p class="flex items-baseline mt-4 text-gray-900 dark:text-gray-100">
+        <span class="text-5xl font-bold tracking-tight <%= 'text-accent' unless plan[:per_month] %>"><%= plan[:price] %></span>
+        <% if plan[:per_month] %>
+          <span class="ml-1 text-xl font-semibold">/mo</span>
+        <% end %>
+      </p>
+
+      <!-- Feature list -->
+      <ul role="list" class="mt-6 space-y-6">
+        <% plan[:features].each do |feature| %>
+        <li class="flex">
+          <%= heroicon "check", options: { class: "flex-shrink-0 w-6 h-6 text-accent" }, variant: :outline %>
+          <span class="ml-3 text-gray-700 dark:text-gray-300"><%= feature %></span>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <a
+      href="<%= plan[:cta_url] %>"
+      data-turbo-method="put"
+      data-turbo-disable="true"
+      class="block w-full mt-8 btn <% if plan[:cta_disabled] %>opacity-50 btn-secondary cursor-not-allowed<% else %> btn-primary <% end %>"
+      <% if plan[:cta_disabled] %>disabled="disabled" style="cursor: not-allowed !important;"<% end %>
+      data-turbo="false"
+    >
+      <%= plan[:cta] %>
+    </a>
+  </div>
+  <% end %>
+</div>

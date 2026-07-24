@@ -1,0 +1,27 @@
+---
+en-US:
+  booklet: Booklet
+  days:
+    friday: Friday
+    monday: Monday
+    saturday: Saturday
+    sunday: Sunday
+    thursday: Thursday
+    tuesday: Tuesday
+    wednesday: Wednesday
+  description: Booklet's online community platform enables both active members and passive readers to stay engaged in the conversation.
+  legalese:
+    i_agree_to_the: By signing up, you agree to the
+    terms_and_privacy: terms and privacy policy
+  pundit:
+    not_authorized: You are not authorized to perform this action.
+  search: Search
+  simple_form:
+    error_notification:
+      default_message: There’s a problem
+    'no': 'No'
+    required:
+      mark: "*"
+      text: required
+    'yes': 'Yes'
+  support_email: support@example.com

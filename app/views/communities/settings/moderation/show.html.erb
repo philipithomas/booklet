@@ -1,0 +1,26 @@
+<h1 class="page-subtitle pb-6  flex items-center space-x-4 md:space-x-6">
+  <span><%= title I18n.t('communities.settings.moderation.title') %></span>
+</h1>
+
+<div class="prose prose-sm dark:prose-invert pb-8 text-gray-700 dark:text-gray-300">
+  <p>
+    <%= I18n.t('communities.settings.moderation.description') %>
+  </p>
+  <p>
+    <a href="https://platform.openai.com/docs/guides/moderation/overview" target="_blank" rel="noopener noreferrer">
+      <%= I18n.t('communities.settings.moderation.learn_more') %> →
+    </a>
+  </p>
+</div>
+
+<%= simple_form_for(@community, url: request.path, builder: Bklt::FormBuilder, method: :put) do |f| %>
+  <div class="space-y-4">
+    <%= f.error_notification %>
+
+    <%= f.input :open_ai_content_moderation_enabled, as: :boolean, checked_value: '1', unchecked_value: '0', boolean_style: :inline, input_html: { checked: @community.open_ai_content_moderation_enabled } %>
+
+    <%= f.input :open_ai_member_moderation_enabled, as: :boolean, checked_value: '1', unchecked_value: '0', boolean_style: :inline, input_html: { checked: @community.open_ai_member_moderation_enabled } %>
+
+    <%= f.button :submit_dynamic, label: t('.save') %>
+  </div>
+<% end %>

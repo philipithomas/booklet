@@ -1,0 +1,28 @@
+# == Schema Information
+#
+# Table name: mentions
+#
+#  id          :bigint           not null, primary key
+#  source_type :string           not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  member_id   :bigint           not null
+#  source_id   :bigint           not null
+#
+# Indexes
+#
+#  index_mentions_on_member_id                                (member_id)
+#  index_mentions_on_source                                   (source_type,source_id)
+#  index_mentions_on_source_type_and_source_id_and_member_id  (source_type,source_id,member_id) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (member_id => members.id)
+#
+require "test_helper"
+
+class MentionTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
+end

@@ -1,0 +1,10 @@
+<%= turbo_stream.replace "new_invitation" do %>
+  <%= render 'form', member: @invited_member %>
+<% end %>
+
+
+<%= turbo_stream.prepend "flash_messages" do %>
+  <%= render :partial => "layouts/flash", locals: {
+    message: t('communities.member_invitations.flash.failed_create')
+  } %>
+<% end %>

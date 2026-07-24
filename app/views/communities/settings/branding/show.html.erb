@@ -1,0 +1,21 @@
+<h1 class="page-subtitle pb-6 flex items-center space-x-4 md:space-x-6">
+  <span><%= title I18n.t('communities.settings.branding.title') %></span>
+</h1>
+
+<%= simple_form_for(@community, url: request.path, builder: Bklt::FormBuilder, method: :put) do |f| %>
+  <div class="space-y-4">
+    <%= f.error_notification %>
+
+    <%= f.input :name, required: true, input_html: { autocomplete: "off" } %>
+
+    <%= render "components/community/brand_color_field", f: f, community: @community %>
+
+    <%= render "components/community/logo_field", f: f, community: @community %>
+
+    <%= render "components/community/logo_for_dark_background_field", f: f, community: @community %>
+
+    <%= render "components/community/icon_field", f: f, community: @community %>
+
+    <%= f.button :submit_dynamic, label: t('.save') %>
+  </div>
+<% end %>

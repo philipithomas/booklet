@@ -1,0 +1,7 @@
+<div id="follow-button">
+  <% if following %>
+    <%= button_to t('communities.posts.follow_button.following'), post_follow_path(post.slug), method: :delete, form: { class: 'btn btn-primary btn-small' } %>
+  <% else %>
+    <%= button_to t('communities.posts.follow_button.follow'), post_follow_path(post.slug), method: :post, form: { class: 'btn btn-secondary btn-small' } %>
+  <% end %>
+</div>

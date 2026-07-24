@@ -1,0 +1,8 @@
+<% cache ["member", member.id, member.updated_at] do %>
+<a class="mention no-underline inline-flex justify-start items-center  flex-row flex-shrink-0 overflow-hidden" href="<%= member_url(member, host: member.community.host) %>" target="_top">
+  <span class="absolute mail:hidden">
+    <%= render :partial => 'components/member/photo', locals: { member: member, size: 5 } %>
+  </span>
+  <span class="font-medium no-underline text-sm ps-6"><%= member.name %></span>
+</a>
+<% end %>

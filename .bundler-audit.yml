@@ -1,0 +1,5 @@
+---
+ignore:
+  # Booklet explicitly enables Stripe only, so the vulnerable Paddle Billing
+  # webhook route is not mounted. Upgrading Pay requires major data migrations.
+  - GHSA-mjgf-xj26-9qf9

@@ -1,0 +1,15 @@
+<%= simple_form_for(member, url: member.persisted? ? member_path(member) : members_path, builder: Bklt::FormBuilder, html: { id: 'member-form' }) do |f| %>
+  <div class="form-space">
+    <%= f.error_notification %>
+
+    <%= f.input :name,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "off" } %>
+
+    <%= f.input :email, as: :email,
+                input_html: { autocomplete: "off" } %>
+
+    <%= f.button :submit_dynamic, label: t(member.persisted? ? ".update" : ".submit"), full_width: true %>
+  </div>
+<% end %>

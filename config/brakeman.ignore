@@ -1,0 +1,24 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Unmaintained Dependency",
+      "warning_code": 122,
+      "fingerprint": "98b26f60d776fd41ee6f088c833725145be9aac2d7c5b33780241c273622db42",
+      "check_name": "EOLRails",
+      "message": "Support for Rails 7.2.3.1 ends on 2026-08-09",
+      "file": "Gemfile.lock",
+      "line": 407,
+      "link": "https://brakemanscanner.org/docs/warning_types/unmaintained_dependency/",
+      "code": null,
+      "render_path": null,
+      "location": null,
+      "user_input": null,
+      "confidence": "Medium",
+      "cwe_id": [
+        1104
+      ],
+      "note": "Heads-up about the upcoming Rails 7.2 EOL date, not a vulnerability. Track the Rails 8 upgrade separately."
+    }
+  ],
+  "brakeman_version": "6.2.2"
+}

@@ -1,0 +1,142 @@
+<%# locals: (member:) %>
+
+<div class="flex items-center w-full h-full ">
+  <div class="shrink-0 relative"
+    data-controller="dropdown"
+    data-action="click->dropdown#toggle click@window->dropdown#hide"
+    data-dropdown-active-target="#member-actions-<%= member.id %>"
+  >
+    <button
+      id="member-actions-<%= member.id %>"
+      type="button"
+      class="flex w-full text-gray-900 dark:text-gray-100 focus:outline-none focus:text-black hover:text-black dark:focus:text-white dark:hover:text-white"
+      aria-expanded="false"
+      aria-haspopup="true"
+      role="button"
+      data-dropdown-target="button"
+      >
+        <%= heroicon "ellipsis-vertical", options: { class: "w-5 h-5" } %>
+        <span class="sr-only">Open menu for <%= member.name || member.email %> </span>
+    </button>
+    <div
+      data-dropdown-target="menu"
+      class="dropdown-menu hidden right-0 mt-1 transition origin-top-right transform z-30 border border-gray-100 dark:border-gray-900 rounded-md bg-white dark:bg-gray-800 shadow-lg"
+      role="menu"
+      aria-orientation="vertical"
+      tabindex="-1"
+      aria-labelledby="member-actions-<%= member.id %>"
+      data-transition-enter-from="opacity-0 scale-95"
+      data-transition-enter-to="opacity-100 scale-100"
+      data-transition-leave-from="opacity-100 scale-100"
+      data-transition-leave-to="opacity-0 scale-95"
+    >
+      <% if member.name.present? %>
+        <%= link_to t(".view_profile"),
+                    member_path(member),
+                    class: "block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-050 text-left",
+                    role: "menuitem",
+                    data: { action: "click->dropdown#toggle" }
+        %>
+      <% end %>
+      <%= link_to t(".edit_profile"),
+                  edit_member_path(member),
+                  class: "block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-050 text-left",
+                  role: "menuitem",
+                  data: { action: "click->dropdown#toggle" }
+      %>
+
+      <% if member.locked_at? %>
+        <%= button_to t('.unlock_account'),
+                      member_path(member),
+                      method: :patch,
+                      params: { member: { locked_at: nil } },
+                      class: "block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-050 text-left",
+                      role: "menuitem",
+                      form: {
+                        data: {
+                          action: "click->dropdown#hide"
+                        }
+                      }
+        %>
+      <% end %>
+
+      <% if [:active, :quarantined].include?(member.status) %>
+        <%= button_to t('.lock_account'),
+                      member_path(member),
+                      method: :patch,
+                      params: { member: { locked_at: Time.zone.now } },
+                      class: "block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-050 text-left",
+                      role: "menuitem",
+                      form: {
+                        data: {
+                          turbo_confirm: t('.lock_account_confirm'),
+                          action: "click->dropdown#hide"
+                        }
+                      }
+        %>
+      <% end %>
+
+      <% if [:locked, :invited, :subscribed, :unconfirmed].include?(member.status) %>
+        <%= button_to t('.destroy_account'),
+                      member_path(member),
+                      method: :delete,
+                      class: "block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-050 text-left",
+                      role: "menuitem",
+                      form: {
+                        data: {
+                          action: "click->dropdown#hide",
+                          turbo_confirm: t('.destroy_account_confirm')
+                        }
+                      }
+        %>
+      <% end %>
+
+      <% if member.status == :active %>
+        <%= button_to t('.grant_admin'),
+                      member_path(member),
+                      method: :patch,
+                      params: { member: { permission: :admin } },
+                      class: "block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-050 text-left",
+                      role: "menuitem",
+                      form: {
+                        data: {
+                          action: "click->dropdown#hide",
+                          turbo_confirm: t('.grant_admin_confirm')
+                        }
+                      }
+        %>
+      <% end %>
+
+      <% if member.status == :admin && member != current_member %>
+        <%= button_to t('.revoke_admin'),
+                      member_path(member),
+                      method: :patch,
+                      params: { member: { permission: :member } },
+                      class: "block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-050 text-left",
+                      role: "menuitem",
+                      form: {
+                        data: {
+                          action: "click->dropdown#hide",
+                        }
+                      }
+        %>
+      <% end %>
+
+      <% if member.status == :quarantined %>
+                <%= button_to t('.remove_quarantine'),
+                      member_path(member),
+                      method: :patch,
+                      params: { member: { quarantined_at: nil } },
+                      class: "block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-050 text-left",
+                      role: "menuitem",
+                      form: {
+                        data: {
+                          action: "click->dropdown#hide",
+                        }
+                      }
+        %>
+      <% end %>
+
+    </div>
+  </div>
+</div>

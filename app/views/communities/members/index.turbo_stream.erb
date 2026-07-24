@@ -1,0 +1,9 @@
+<%= turbo_stream.append "members", partial: "components/member/tiles", locals: { members: @members } %>
+
+<% if @pagy.next.present? %>
+  <%= turbo_stream.replace "infinite_scroll",
+    partial: "components/member/scroll_frame",
+    locals: { page: @pagy.next } %>
+<% else %>
+  <%= turbo_stream.remove "infinite_scroll" %>
+<% end %>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="x-apple-disable-message-reformatting">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no, url=no">
+  <title><%= message.subject %></title>
+  <style>
+    /* Custom styles */
+    .btn-primary {
+      background-color: <%= @community ? @community.brand_color : Rails.configuration.booklet_brand_color %>;
+      color: <%= @community ? @community.light_mode_label_color : "#111111" %>;
+      border-color: <%= @community ? @community.brand_color : Rails.configuration.booklet_brand_color %>;
+    }
+    .text-primary {
+      color: <%= @community ? @community.brand_color : Rails.configuration.booklet_brand_color %>;
+    }
+    .border-primary {
+      border-color: <%= @community ? @community.brand_color : Rails.configuration.booklet_brand_color %>;
+    }
+    /* Global styles */
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      background-color: #ffffff;
+    }
+    /* Your custom utility classes */
+    .page-title {
+      margin-top: 16px;
+      margin-bottom: 16px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #111111;
+    }
+    .btn {
+      padding: 12px 32px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration-line: none;
+      cursor: pointer;
+      background-color: <%= @community ? @community.brand_color : Rails.configuration.booklet_brand_color %>;
+      color: <%= @community ? @community.light_mode_label_color : "#111111" %>;
+    }
+
+    .btn:focus {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+      --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+      box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+      --tw-ring-offset-width: 2px;
+      --tw-ring-opacity: 1;
+      --tw-ring-color: rgb(126 126 126 / var(--tw-ring-opacity));
+    }
+
+    .link {
+      <% if (@community ? @community.brand_color_has_sufficient_contrast_to_light : true) %>
+        color: <%= @community ? @community.brand_color : Rails.configuration.booklet_brand_color %>;
+        text-decoration: underline;
+      <% else %>
+        color: #222222;
+        text-decoration-color: <%= @community ? @community.brand_color : Rails.configuration.booklet_brand_color %>;
+        text-underline-color: <%= @community ? @community.brand_color : Rails.configuration.booklet_brand_color %>;
+      <% end %>
+    }
+    .prose > a,
+    .prose > p > a {
+      <% if (@community ? @community.brand_color_has_sufficient_contrast_to_light : true) %>
+        color: <%= @community ? @community.brand_color : Rails.configuration.booklet_brand_color %>;
+        text-decoration: underline;
+      <% else %>
+        color: #222222;
+        text-decoration-color: <%= @community ? @community.brand_color : Rails.configuration.booklet_brand_color %>;
+        text-underline-color: <%= @community ? @community.brand_color : Rails.configuration.booklet_brand_color %>;
+      <% end %>
+    }
+        /* Tailwind utility classes */
+    .m-0 {
+      margin: 0;
+    }
+    .mx-auto {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .my-10 {
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+    .mb-5 {
+      margin-bottom: 20px;
+    }
+    .mb-5px {
+      margin-bottom: 5px;
+    }
+    .mt-0 {
+      margin-top: 0;
+    }
+    .mt-1 {
+      margin-top: 4px;
+    }
+    .mt-1_5 {
+      margin-top: 6px;
+    }
+    .block {
+      display: block;
+    }
+    .table {
+      display: table;
+    }
+    .hidden {
+      display: none;
+    }
+    .h-8 {
+      height: 32px;
+    }
+    .h-auto {
+      height: auto;
+    }
+    .w-570px {
+      width: 570px;
+    }
+    .w-auto {
+      width: auto;
+    }
+    .w-full {
+      width: 100%;
+    }
+    .bg-white {
+      background-color: #ffffff;
+    }
+    .p-0 {
+      padding: 0;
+    }
+    .p-30px {
+      padding: 30px;
+    }
+    .pb-0px {
+      padding-bottom: 0px;
+    }
+    .pt-30px {
+      padding-top: 30px;
+    }
+    .text-center {
+      text-align: center;
+    }
+    .font-sans {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    .text-base {
+      font-size: 16px;
+    }
+    .text-xs {
+      font-size: 12px;
+    }
+    .font-bold {
+      font-weight: 700;
+    }
+    .font-light {
+      font-weight: 300;
+    }
+    .font-normal {
+      font-weight: 400;
+    }
+    .leading-6 {
+      line-height: 24px;
+    }
+    .text-gray-500{
+      color: #7e7e7e;
+    }
+    .text-gray-700 {
+      color: #515151;
+    }
+    .text-gray-800 {
+      color: #3B3B3B;
+    }
+    .underline {
+      text-decoration-line: underline;
+    }
+    .-webkit-font-smoothing-antialiased {
+      -webkit-font-smoothing: antialiased;
+    }
+    .text-decoration-none {
+      text-decoration: none;
+    }
+    .word-break-break-word {
+      word-break: break-word;
+    }
+
+  </style>
+</head>
+
+<body class="m-0 p-0 w-full word-break-break-word -webkit-font-smoothing-antialiased bg-white">
+  <% if content_for?(:summary) %>
+    <div class="hidden">
+      <%= yield(:summary) %>&#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &zwnj;
+        &#160;&#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &zwnj;
+        &#160;&#847; &#847; &#847; &#847; &#847;
+      </div>
+  <% end %>
+  <div role="article" aria-roledescription="email" aria-label="<%= message.subject %>" lang="<%= I18n.locale %>">
+    <table class="email-wrapper w-full font-sans" cellpadding="0" cellspacing="0" role="presentation">
+      <tr>
+        <td align="center">
+          <table class="email-content w-full" cellpadding="0" cellspacing="0" role="presentation">
+            <!-- Email header with community logo -->
+            <% if @community %>
+              <% if @community&.logo&.attached? %>
+                <tr>
+                  <td align="center" class="email-masthead pt-30px pb-0px text-base text-center h-auto">
+                    <a href="https://<%= @community.host %>" class="email-masthead_name text-base font-bold text-decoration-none text-gray-800 h-auto w-auto">
+                      <img src="<%= email_logo_url(host: @community.host) %>" alt="<%= @community.name %>" class="h-8 w-auto" height="32" width="auto">
+                    </a>
+                  </td>
+                </tr>
+              <% end %>
+            <% else %>
+              <tr>
+                <td align="center" class="email-masthead pt-30px pb-0px text-base text-center h-auto">
+                  <a href="https://<%= Rails.configuration.base_host %>" class="email-masthead_name text-base font-bold text-decoration-none text-gray-800 h-auto w-auto">
+                    <img src="<%= asset_path("logo/email-header.png") %>" alt="Booklet" class="h-8 w-auto" height="32" width="auto">
+                  </a>
+                </td>
+              </tr>
+            <% end %>
+            <!-- Email body -->
+            <tr>
+              <td class="email-body w-full">
+                <table align="center" class="email-body_inner w-570px mx-auto sm-w-full" cellpadding="0" cellspacing="0" role="presentation">
+                  <tr>
+                    <td class="p-30px">
+                      <div class="text-base">
+                        <% if content_for?(:title) %>
+                          <h1 class="mt-0 page-title">
+                            <%= yield(:title) %>
+                          </h1>
+                        <% end %>
+                        <div class="prose mt-1_5 mb-5px">
+                          <%= content_for?(:content) ? yield(:content) : yield %>
+                        </div>
+                        <% if content_for?(:button_label) and content_for?(:button_link) %>
+                        <table align="center" class="w-full my-10 mx-auto" cellpadding="0" cellspacing="0" role="presentation">
+                          <tr>
+                            <td align="">
+                              <table class="w-full" cellpadding="0" cellspacing="0" role="presentation">
+                                <tr>
+                                  <td align="" class="text-base">
+                                    <a href="<%= yield :button_link %>" class="btn"><%= yield :button_label %></a>
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                        <% end %>
+                        <% if content_for?(:after_button_content) %>
+                        <div class="prose mt-1_5 mb-5px">
+                          <%= yield(:after_button_content) %>
+                        </div>
+                        <% end %>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <!-- Email footer -->
+            <tr>
+              <td>
+                <table align="center" class="email-footer w-570px mx-auto text-center sm-w-full font-light" cellpadding="0" cellspacing="0" role="presentation">
+                  <tr>
+                      <% if @email_token.present?  && @community.present? %>
+                        <p class="mt-1_5 mb-5 text-xs leading-6 text-center text-gray-500 font-normal">
+                          <a href="<%= notification_preference_url(token: @email_token, host: @community.host) %>" class="underline text-gray-700"><%= t('mailers.update_preferences_or_unsubscribe') %></a>
+                        </p>
+                      <% end %>
+
+
+                    <td align="center" class="content-cell p-30px text-base">
+                      <%= render 'layouts/mail/legalese' %>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+</body>
+
+</html>

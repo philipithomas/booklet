@@ -1,0 +1,17 @@
+<%# locals: (member:, community:) %>
+
+<div>
+  <div id="email-copied-tmpl" class="hidden">
+    <%# Event name must match one below in copy controller %>
+    <%= render "layouts/flash", message: 'Copied!' %>
+  </div>
+
+  <button class="flex justify-center space-x-1 items-center w-full"
+    data-controller="copy"
+    data-clipboard-text="<%= @member.email %>"
+    data-clipboard-text="<%= @member.email %>"
+    data-copy-template-id-value="email-copied-tmpl">
+    <span class="link text-sm"><%= @member.email %></span>
+  </button>
+</div>
+

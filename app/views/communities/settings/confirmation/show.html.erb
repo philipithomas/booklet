@@ -1,0 +1,9 @@
+<% content_for :heading do %>
+  <%= title t(".thank_you") %>
+<% end %>
+
+<div class="prose">
+  Your account has been upgraded. Our team will email you shortly to check in and see if we can help you get set up. Please <a class="link" href="mailto:<%= Rails.configuration.support_email %>">email us</a> if you have any questions.
+</div>
+
+<a href="<%= posts_path %>" class="btn w-full btn-primary mt-8">Back to Booklet →</a>

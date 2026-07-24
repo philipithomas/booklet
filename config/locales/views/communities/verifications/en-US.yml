@@ -1,0 +1,10 @@
+---
+en-US:
+  communities:
+    verifications:
+      flash:
+        verified: Verified
+      index:
+        continue: Continue
+        verification_processing: Verification processing
+        verification_processing_description: Your verification is being processed. We will email you once it's complete - usually within a few minutes.

@@ -1,0 +1,14 @@
+<% cache ["member", member.id, member.updated_at] do %>
+<a href="<%= member_path(member) %>" target="_top" class="flex-shrink-0 block w-full community">
+  <span class="flex items-center justify-start min-w-0 space-x-3">
+    <%= render :partial => 'components/member/photo', locals: { member: member, size: 10 }, class: "flex-shrink-0" %>
+
+    <span class="flex flex-col flex-1 min-w-0 text-left">
+      <span class="text-sm font-medium text-gray-900 truncate dark:text-gray-100"><%= member.name %></span>
+      <%# Might reactivate this when person has a headline
+        <span class="text-sm font-light text-gray-500 truncate">Headline</span>
+        %>
+    </span>
+  </span>
+</a>
+<% end %>

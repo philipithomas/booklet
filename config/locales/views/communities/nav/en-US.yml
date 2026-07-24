@@ -1,0 +1,15 @@
+---
+en-US:
+  communities:
+    nav:
+      billing: Billing
+      booklet_support: Support
+      docs: Docs
+      home: Home
+      join: Join
+      login: Sign in
+      logout: Sign out
+      members: Members
+      profile: Profile
+      settings: Settings
+      switch: Switch community

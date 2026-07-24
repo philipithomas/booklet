@@ -1,0 +1,11 @@
+<div>
+  <a href="<%= post_url(post, host: @community.host, email_token: @email_token) %>">
+    <span class="font-semibold"><%= post.title %></span>
+  </a>
+  <a href="<%= post_url(post, host: @community.host, email_token: @email_token) %>" style="text-decoration: none !important;">
+    <div class="text-sm text-gray-600" style="padding-bottom: 4px;">
+      <span class="font-semibold">⚡️ <%= t "mailers.new_newsletter.latest" %>:</span>
+      <%= @newsletter.new_replies_summary(post) %>
+    </div>
+  </a>
+</div>

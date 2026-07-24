@@ -1,0 +1,50 @@
+<% content_for :summary do %>
+  Latest updates in <%= @community.name %>
+<% end %>
+
+<%= content_for :preamble do %>
+  <% if @community&.logo&.attached? %>
+    <div align="center" class="email-masthead pt-30px pb-8 text-base text-center h-auto">
+      <a href="https://<%= @community.host %>" class="email-masthead_name text-base font-bold text-decoration-none text-gray-800 h-auto w-auto">
+        <img src="<%= email_logo_url(host: @community.host) %>" alt="<%= @community.name %>" class="w-auto" height="32" width="auto" style="height: 32px">
+      </a>
+    </div>
+  <% else %>
+    <span class="text-gray-700">
+      <%= link_to t('mailers.new_newsletter.preamble', community_name: @community.name), posts_url(host: @community.host, email_token: @email_token), class: "underline text-gray-700" %>
+    </span>
+  <% end %>
+<% end %>
+
+
+<p>
+  Here are the latest updates from <%= @community.name %>.
+</p>
+
+<% if @newsletter.new_posts.any? %>
+  <h1>
+    <%= t('mailers.new_newsletter.new_posts') %>
+  </h1>
+  <% @newsletter.new_posts.each do |post| %>
+    <%= render 'post_summary', post: post %>
+  <% end %>
+<% end %>
+
+<% if @newsletter.existing_post_with_new_replies.any? %>
+  <h1>
+    <%= t('mailers.new_newsletter.existing_post_with_new_replies') %>
+  </h1>
+  <% @newsletter.existing_post_with_new_replies.each do |post| %>
+    <%= render 'reply_summary', post: post %>
+  <% end %>
+<% end %>
+
+<% if @newsletter.new_members.any? %>
+  <h1>
+    <%= t('mailers.new_newsletter.new_members') %>
+  </h1>
+  <%= render 'members', members: @newsletter.new_members %>
+<% end %>
+
+<% content_for :button_label do %><%= t 'mailers.new_newsletter.view_community', community_name: @community.name %> →<% end %>
+<% content_for :button_link do %><%= posts_url(host: @community.host, email_token: @email_token) %><% end %>

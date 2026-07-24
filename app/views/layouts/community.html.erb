@@ -1,0 +1,128 @@
+<%
+menuItems = [
+  {
+    name: I18n.t("communities.nav.home"),
+    to: posts_path,
+    icon: "home",
+    active: request.path.start_with?("/posts/") || request.path == posts_path,
+    show: true,
+    newTab: false,
+  },
+]
+
+menuItems << {
+  name: I18n.t("communities.nav.members"),
+  to: (@community.directory_enabled? ? members_path : all_members_path),
+  icon: "user-group", # users, user-community
+  active: request.path.start_with?(members_path),
+  show: true,
+  newTab: false,
+} if (@community.directory_enabled? || current_member&.admin?)
+
+menuItems << {
+  name: I18n.t("communities.nav.settings"),
+  to: settings_notifications_path,
+  icon: "cog-6-tooth",
+  active: request.path.start_with?('/settings'),
+  show: current_member.present?,
+  newTab: false,
+} if current_member.present?
+
+secondaryMenuItems = [
+  {
+    name: I18n.t("communities.nav.profile"),
+    newTab: false,
+    to: current_member ? member_path(current_member) : '#',
+    show: current_member.present?,
+  },
+  {
+    name: I18n.t("communities.nav.switch"),
+    newTab: false,
+    to: "#",
+    show: member_signed_in? && Rails.configuration.multiuser_mode,
+    classes: "pwa:hidden",
+    data: { 'action': 'click->switch-modal#open:prevent' },
+  },
+  {
+    name: I18n.t("communities.nav.billing"),
+    newTab: false,
+    to: '#',
+    show: false,
+  },
+  {
+    name: I18n.t("communities.nav.booklet_support"),
+    newTab: true,
+    to: "mailto:#{Rails.configuration.support_email}",
+    show: current_member&.manager_or_admin?,
+  },
+  {
+    name: I18n.t("communities.nav.docs"),
+    newTab: true,
+    to: 'https://github.com/philipithomas/booklet',
+    show: current_member&.manager_or_admin?,
+  },
+  {
+    name: I18n.t("communities.nav.logout"),
+    newTab: false,
+    to: destroy_member_session_path,
+    show: current_member.present?,
+    data: { 'turbo-method': :delete },
+  },
+  {
+    name: I18n.t("communities.nav.login"),
+    newTab: false,
+    to: new_member_session_path,
+    show: current_member.blank?,
+  },
+  {
+    name: I18n.t("communities.nav.join"),
+    newTab: false,
+    to: new_member_registration_path,
+    show: current_member.blank? && @community.signups_open?,
+  },
+]
+%>
+
+<% content_for :content do %>
+  <div class="h-full min-h-screen flex flex-1 flex-col"
+    <% if current_member.present? %>
+      data-controller="push" data-action="turbo:load@window->push#requestNotificationPermission"
+    <% end %>
+  >
+
+    <%= render "layouts/community/top_nav", menuItems: menuItems, secondaryMenuItems: secondaryMenuItems %>
+
+    <% if content_for?(:floating_action_button) %>
+      <div class="md:sticky w-full top-0 z-20 community-container py-2 md:pt-4 md:pb-0 flex items-center justify-end">
+        <div class="shrink-0">
+          <%= yield(:floating_action_button) %>
+        </div>
+      </div>
+    <% elsif @community.signups_open? && !current_member %>
+      <div class="md:sticky w-full top-0 z-20 community-container py-4 md:pb-0 flex">
+        <div class="flex grow justify-end">
+          <a
+            href="<%= new_member_registration_path %>"
+            class="w-full sm:w-auto btn btn-primary">
+            <%= heroicon "plus-circle", options: { class: "-ml-1 mr-2 h-4 w-4", variant: :mini  } %>
+            <%= t "communities.nav.join" %>
+          </a>
+        </div>
+      </div>
+    <% end %>
+
+    <% if content_for?(:action_bar) %>
+      <div class="w-full mt-2 md:mt-4 h-8 flex items-center">
+        <div class="overflow-x-auto whitespace-nowrap invisible-functioning-scrollbar h-auto">
+          <%= yield(:action_bar) if content_for?(:action_bar) %>
+        </div>
+      </div>
+    <% end %>
+
+    <main class="">
+      <%= content_for?(:community_content) ? yield(:community_content) : yield %>
+    </main>
+<% end %>
+
+
+<%= render template: "layouts/application" %>

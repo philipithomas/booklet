@@ -1,0 +1,17 @@
+<% content_for :summary do %>
+  <%= t 'mailers.index_login_pin.subject', code: @code %>
+<% end %>
+
+<p>
+  <%= t 'mailers.index_login_pin.line_1', code: @code %>
+</p>
+<p>
+  <b><%= @code %></b>
+</p>
+<p>
+  <%= t 'mailers.index_login_pin.line_2' %>
+</p>
+<p>
+  <%= t 'mailers.index_login_pin.line_3' %>
+</p>
+

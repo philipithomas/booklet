@@ -1,0 +1,8 @@
+User-Agent: *
+<% if @public %>
+Allow: /
+Disallow: /cdn-cgi/
+Sitemap: <%= @sitemap_url %>
+<% else %>
+Disallow: /
+<% end %>

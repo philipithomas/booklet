@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+  <meta charset="utf-8">
+  <meta name="x-apple-disable-message-reformatting">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
+  <!--[if mso]>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings xmlns:o="urn:schemas-microsoft-com:office:office">
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <style>
+    td,th,div,p,a,h1,h2,h3,h4,h5,h6 {font-family: "Segoe UI", sans-serif; mso-line-height-rule: exactly;}
+  </style>
+  <![endif]-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  <title><%= message.subject %></title>
+  <style>
+body{
+  margin: 0;
+  width: 100%;
+  padding: 0;
+  word-break: break-word;
+  -webkit-font-smoothing: antialiased;
+}
+img{
+  max-width: 100%;
+  vertical-align: middle;
+  line-height: 100%;
+  border: 0;
+}
+.text-center {
+  text-align: center;
+}
+.mx-0{
+  margin-left: 0;
+  margin-right: 0;
+}
+.my-2{
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+.ml-4 {
+  margin-left: 4px;
+}
+.ml-8 {
+  margin-left: 8px;
+}
+.ml-12{
+  margin-left: 12px;
+}
+.mb-24{
+  margin-bottom: 24px;
+}
+.mt-1{
+  margin-top: 0.25rem;
+}
+.mt-24{
+  margin-top: 24px
+}
+.block{
+  display: block;
+}
+.inline-block{
+  display: inline-block;
+}
+.hidden{
+  display: none;
+}
+.mention, figure {
+  display: inline !important;
+}
+figure {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.mail\:hidden {
+  display: none !important;
+}
+.h-44{
+  height: 44px;
+}
+.h-32{
+  height: 32px;
+}
+.h-24{
+  height: 24px;
+}
+.h-16 {
+  height: 16px;
+}
+
+.h-12 {
+  height: 12px;
+}
+.h-8 {
+  height: 8px;
+}
+.w-full{
+  width: 100%;
+}
+.w-600{
+  width: 600px;
+}
+.w-44{
+  width: 44px;
+}
+.rounded-full{
+  border-radius: 9999px;
+}
+.border-0{
+  border-width: 0px;
+}
+.bg-gray-050{
+  background-color: #f7f7f7;
+}
+.bg-gray-200{
+  background-color: #cfcfcf;
+}
+.px-48{
+  padding-left: 48px;
+  padding-right: 48px;
+}
+.px-24 {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.py-2{
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.pt-32{
+  padding-top: 32px;
+}
+.pb-2 {
+  padding-bottom: 2px;
+}
+.pb-4 {
+  padding-bottom: 4px;
+}
+.pb-8{
+  padding-bottom: 8px;
+}
+.pb-12 {
+  padding-bottom: 12px;
+}
+.pt-24{
+  padding-top: 24px;
+}
+.pt-16{
+  padding-top: 16px;
+}
+.rounded-xl{
+  border-radius: 12px;
+}
+.pb-16{
+  padding-bottom: 16px;
+}
+.text-left{
+  text-align: left;
+}
+.align-middle{h
+  vertical-align: middle;
+}
+.font-sans{
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+.text-xl{
+  font-size: 20px;
+}
+.text-sm{
+  font-size: 14px;
+}
+.text-xs{
+  font-size: 12px;
+}
+.text-base{
+  font-size: 16px;
+}
+.font-light {
+  font-weight: 300;
+}
+.font-normal{
+  font-weight: 400;
+}
+.font-semibold{
+  font-weight: 600;
+}
+.font-medium{
+  font-weight: 500;
+}
+.leading-6{
+  line-height: 6px;
+}
+.leading-tight{
+  line-height: 1.15;
+}
+.leading-20{
+  line-height: 20px;
+}
+.text-gray-925{
+  color: #1a1a1a;
+}
+.text-gray-900{
+  color: #222222;
+}
+.text-gray-800{
+  color: #3b3b3b;
+}
+.text-gray-700{
+  color: #515151;
+}
+.text-gray-600{
+  color: #626262;
+}
+.text-gray-500{
+  color: #7e7e7e;
+}
+.underline{
+  text-decoration: underline;
+}
+.no-underline{
+  text-decoration: none;
+}
+.btn{
+  display: inline-block;
+  padding: 16px 32px;
+  border-radius: 6px;
+  font-weight: 600
+}
+.btn:focus{
+  outline: 2px solid transparent;
+  outline-offset: 2px
+}
+.btn{
+  text-decoration: none;
+  cursor: pointer
+}
+.btn-primary {
+  background-color: <%= @community.brand_color %>;
+  color: <%= @community.light_mode_label_color %>
+}
+
+.prose{
+  line-height: 1.625;
+}
+.prose a{
+    <% if @community.brand_color_has_sufficient_contrast_to_light %>
+      color: <%= @community.brand_color %>;
+      text-decoration: underline;
+    <% else %>
+      color: #222222;
+      text-decoration-color: <%= @community.brand_color %>;
+      text-underline-color: <%= @community.brand_color %>;
+    <% end %>
+}
+.prose > div, .prose > h1, .prose > h2, .prose h3, .prose > action-text-attachment, .prose > pre{
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+.prose h1, h2{
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #1a1a1a;
+  margin-bottom: 0;
+  margin-top: 16px;
+}
+.prose h3 {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #1a1a1a;
+  margin-bottom: 0;
+  margin-top: 16px;
+}
+.prose blockquote{
+  font-weight: 400;
+  font-style: normal;
+  border-color: <%= @community.brand_color %>;
+  border-top-width: 0;
+  border-right-width: 0;
+  border-bottom-width: 0;
+  border-left-width: 2px;
+  border-left-style: solid;
+  margin-left: 0;
+  padding-left: 16px;
+}
+.prose strong{
+  font-weight: 700;
+}
+.prose a{
+  font-weight: 400;
+}
+.prose img {
+  max-width: 100%;
+  height: auto !important;
+}
+.prose action-text-attachment{
+  height: auto;
+  max-width: 100%;
+  display: block;
+}
+@media (max-width: 600px){
+  .sm-w-full{
+    width: 100%;
+  }
+  .sm-px-24{
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .sm-pt-0{
+    padding-top: 0;
+  }
+}
+@media (min-width: 601px){
+  .lg-px-48 {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+  .lg-pt-16 {
+    padding-top: 16px;
+  }
+}
+
+.text-left{
+  text-align: left;
+}
+.align-middle{
+  vertical-align: middle;
+}
+.text-xl{
+  font-size: 20px;
+}
+.text-sm{
+  font-size: 14px;
+}
+.text-gray-700{
+  color: #515151;
+}
+.text-gray-600{
+  color: #626262;
+}
+.text-gray-500{
+  color: #7e7e7e;
+}
+.underline{
+  text-decoration: underline;
+}
+.py-2{
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.pt-32{
+  padding-top: 32px;
+}
+.pb-2 {
+  padding-bottom: 2px;
+}
+.pb-4 {
+  padding-bottom: 4px;
+}
+
+
+
+
+</style>
+
+</head>
+<body>
+  <% if content_for?(:summary) %>
+    <div class="hidden">
+      <%= yield(:summary).truncate(100, separator: '.') %> &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &zwnj;
+        &#160;&#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &zwnj;
+        &#160;&#847; &#847; &#847; &#847; &#847;
+    </div>
+  <% end %>
+  <div role="article" aria-roledescription="email" aria-label="<%= message.subject %>" lang="en">
+  <table class="w-full font-sans text-base font-normal" cellpadding="0" cellspacing="0" role="presentation">
+      <tr>
+        <td align="center" class="pt-24 sm-pt-0">
+          <table class="sm-w-full" cellpadding="0" cellspacing="0" role="presentation" style="width: 100%; max-width: 600px;">
+            <% if content_for?(:preamble) %>
+            <tr>
+              <td align="center">
+                <p class="mt-1_5 text-xs leading-6 text-center text-gray-600" style="line-height: 1.2rem; padding-bottom: 10px;">
+                  <%= yield(:preamble) %>
+                </p>
+              </td>
+            </tr>
+            <% end %>
+            <tr>
+              <td align="center">
+                <table class="w-full" cellpadding="0" cellspacing="0" role="presentation">
+                  <tr>
+                    <td class="px-24 text-base text-left text-gray-900 lg-px-48 sm-px-24 leading-20 prose">
+                      <%= content_for?(:content) ? yield(:content) : yield %>
+
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="h-8"></td>
+                  </tr>
+									<tr>
+										<td class="px-24 lg-px-48">
+											<div style="height: 1px;" class="w-full"></div>
+										</td>
+									</tr>
+
+                  <% if @author %>
+                  <tr>
+                    <td class="px-24 lg-px-48 sm-px-24">
+                      <table class="mx-0" style="margin: 0 0 12px 0" cellpadding="0" cellspacing="0" role="presentation">
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div>
+                                <a href="<%= member_url(@author, host: @community.host, email_token: @email_token || "") %>" target="_blank">
+                                    <div>
+                                      <%= image_tag @author.photo.attached? ? @author.photo.variant(resize_to_fill: [88, 88, { crop: :attention }]).processed : (@community.icon.attached? ? @community.icon.variant(resize_to_fill: [88, 88, { crop: :attention }]).processed : asset_path('logo/icon.png')),
+                                        width: 44, height: 44,
+                                        class: @author.photo.attached? ? "border-0 rounded-full h-44 w-44" : "border-0 h-44 w-44",
+                                        alt: @author.photo.attached? ? @author.name : I18n.t('booklet') %>
+                                    </div>
+                                </a>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="ml-12 leading-tight">
+                                <div class="text-sm leading-tight text-gray-900">
+                                  <a href="<%= member_url(@author, host: @community.host , email_token: @email_token || "") %>" class="font-medium text-gray-800 no-underline" target="_blank">
+                                    <%= @author.name %>
+                                  </a>
+                                </div>
+                                <table style="margin:4px 0 0 0" cellspacing="0" cellpadding="0" role="presentation">
+                                  <tbody>
+                                    <tr>
+                                      <td class="py-2 ml-12 text-xs text-gray-700 align-middle">
+                                        <% if @post.present? %>
+                                          <%= time_tag @post.published_at do %>
+                                            <%= @post.published_at.strftime('%B %-d, %Y') %>
+                                          <% end %>
+                                        <% else %>
+                                          <a href="<%= @community.url %>" class="font-normal text-gray-800 no-underline" target="_blank">
+                                            <%= @community.host %>
+                                          </a>
+                                        <% end %>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                  <% end %>
+
+                  <% if content_for?(:button_label) and content_for?(:button_link) %>
+                  <tr>
+                    <td class="h-24"></td>
+                  </tr>
+                  <tr>
+                    <td class="px-24 text-base text-left text-gray-900 lg-px-48 sm-px-24 leading-20">
+                      <div class="leading-full" style="text-align: center">
+                        <a href="<%= yield :button_link %>" class="btn btn-primary">
+                          <!--[if mso]><i style="letter-spacing: 24px; mso-font-width: -100%; mso-text-raise:30px;">&#8202;</i><![endif]-->
+                          <span style="mso-text-raise: 16px;"><%= yield :button_label %></span>
+                          <!--[if mso]><i style="letter-spacing: 24px; mso-font-width: -100%;">&#8202;</i><![endif]-->
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                  <% end %>
+
+                  <tr>
+                    <td class="px-24 pb-16 text-xs text-left text-gray-500 lg-px-48 pt-24">
+                      <% if @email_token.present? %>
+                        <p class="mt-1_5 mb-5 text-xs leading-6 text-center text-gray-500 font-normal">
+                          <a href="<%= notification_preference_url(token: @email_token, host: @community.host) %>" class="underline text-gray-700"><%= t('mailers.update_preferences_or_unsubscribe') %></a>
+                        </p>
+                      <% end %>
+
+                      <%= render 'layouts/mail/legalese' %>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

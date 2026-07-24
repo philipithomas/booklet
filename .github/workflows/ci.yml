@@ -1,0 +1,81 @@
+name: Tests
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      RAILS_ENV: test
+      APP_MODE: MULTIUSER
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3.5
+          bundler-cache: true
+      - name: Set Node.js 18.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
+      - name: Install libvips
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          sudo apt-get update
+          sudo apt-get install libvips-dev
+      - name: Setup the Rails application
+        run: |
+          sudo apt-get -yqq install libpq-dev
+          bundle install --no-deployment --jobs 4 --retry 3
+          cp config/database.github.yml config/database.yml
+          bundle exec rails db:create
+          bundle exec rails db:schema:load
+          bundle exec rake assets:precompile
+      - name: Run zeitwerk
+        run: ./bin/rails zeitwerk:check
+      - name: Run unit tests (MULTIUSER)
+        env:
+          APP_MODE: MULTIUSER
+        run: bundle exec rails test:all
+      - name: Run unit tests (SOLO)
+        env:
+          APP_MODE: SOLO
+        run: bundle exec rails test:all
+      - name: Run rspec
+        run: bundle exec rspec
+      - name: Run swaggerize
+        run: bundle exec rake rswag:specs:swaggerize
+      - name: Run brakeman
+        run: bundle exec brakeman
+      - name: Run rubocop
+        run: ./bin/rubocop
+      - name: Run i18n-tasks
+        run: bundle exec i18n-tasks health
+      - name: Check seed data integrity (MULTIUSER)
+        run: bundle exec rails db:seed
+      - name: Check seed data integrity (SOLO)
+        env:
+          APP_MODE: SOLO
+        run: |
+          bundle exec rails db:drop db:create db:schema:load
+          bundle exec rails db:seed
+      - name: Check bundle integrity
+        run: bundle exec bundle-audit check

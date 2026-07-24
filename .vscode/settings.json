@@ -1,0 +1,13 @@
+{
+  "ruby.useBundler": true,
+  "ruby.useLanguageServer": true,
+  "ruby.intellisense": "rubyLocate",
+  "css.lint.unknownAtRules": "ignore",
+  "[css]": {
+    "editor.defaultFormatter": "bradlc.vscode-tailwindcss"
+  },
+  "editor.formatOnSave": true,
+  "[ruby]": {
+    "editor.defaultFormatter": "rubocop.vscode-rubocop"
+  }
+}

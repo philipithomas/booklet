@@ -1,0 +1,164 @@
+# == Schema Information
+#
+# Table name: members
+#
+#  id                      :bigint           not null, primary key
+#  confirmation_sent_at    :datetime
+#  confirmation_token      :string
+#  confirmed_at            :datetime
+#  email                   :string
+#  encrypted_password      :string           default(""), not null
+#  invitation_accepted_at  :datetime
+#  invitation_created_at   :datetime
+#  invitation_limit        :integer
+#  invitation_sent_at      :datetime
+#  invitation_token        :string
+#  invitations_count       :integer          default(0)
+#  invited_by_type         :string
+#  locked_at               :datetime
+#  name                    :string           default(""), not null
+#  newsletter_days_bitmask :integer
+#  notify_mentions_email   :boolean          default(TRUE), not null
+#  notify_mentions_push    :boolean          default(TRUE), not null
+#  notify_new_posts_email  :boolean          default(FALSE), not null
+#  notify_new_posts_push   :boolean          default(FALSE), not null
+#  notify_newsletter_email :boolean          default(TRUE), not null
+#  notify_newsletter_push  :boolean          default(TRUE), not null
+#  permission              :integer          default("member"), not null
+#  quarantined_at          :datetime
+#  remember_created_at     :datetime
+#  reset_password_sent_at  :datetime
+#  reset_password_token    :string
+#  slug                    :string           default(""), not null
+#  source                  :string
+#  subscribed_at           :datetime
+#  unconfirmed_email       :string
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  ahoy_join_visit_id      :bigint
+#  community_id            :bigint           not null
+#  invited_by_id           :bigint
+#  person_id               :integer
+#
+# Indexes
+#
+#  email_unique_per_community                  (email,community_id) UNIQUE
+#  index_members_on_community_id               (community_id)
+#  index_members_on_confirmation_token         (confirmation_token) UNIQUE
+#  index_members_on_invitation_token           (invitation_token) UNIQUE
+#  index_members_on_invited_by                 (invited_by_type,invited_by_id)
+#  index_members_on_invited_by_id              (invited_by_id)
+#  index_members_on_locked_at                  (locked_at)
+#  index_members_on_lowercase_name             (lower((name)::text))
+#  index_members_on_permission                 (permission)
+#  index_members_on_quarantined_at             (quarantined_at)
+#  index_members_on_reset_password_token       (reset_password_token) UNIQUE
+#  index_members_on_source                     (source)
+#  index_members_on_subscribed_at              (subscribed_at)
+#  index_memberships_on_community_id_and_slug  (community_id,slug) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (person_id => people.id) ON DELETE => nullify
+#
+before_member:
+  name: Lenny Euler
+  confirmed_at: <%= Time.zone.now - 1.hour %>
+  email: leonhard@example.com
+  community: before_lab
+  encrypted_password: <%= Member.new.send(:password_digest, 'password') %>
+  slug: leonhard
+  source: public_join
+new_member:
+  name: New Member Lenny Euler
+  confirmed_at: <%= Time.zone.now - 5.minutes %>
+  email: new@example.com
+  community: lab
+  encrypted_password: <%= Member.new.send(:password_digest, 'password') %>
+  slug: new
+  source: public_join
+member:
+  name: Normal Member Lenny Euler
+  confirmed_at: <%= Time.zone.now - 1.hour %>
+  created_at: <%= Time.zone.now - 1.day %>
+  email: leonhard@example.com
+  community: lab
+  encrypted_password: <%= Member.new.send(:password_digest, 'password') %>
+  slug: leonhard
+  source: public_join
+after_member:
+  name: Lenny Euler
+  confirmed_at: <%= Time.zone.now %>
+  email: leonhard@example.com
+  community: after_lab
+  encrypted_password: <%= Member.new.send(:password_digest, 'password') %>
+  slug: leonhard
+  source: public_join
+other_member:
+  name: Other member Richie Feynman
+  confirmed_at: <%= Time.zone.now %>
+  email: richie@example.com
+  community: other
+  encrypted_password: <%= Member.new.send(:password_digest, 'otherpassword') %>
+  slug: richie
+  source: public_join
+invited_member:
+  name: Invited Member Charlie Darwin
+  email: charlie@darwin.com
+  community: lab
+  permission: member
+  invited_by: member
+  invitation_token: <%= Devise.token_generator.generate(Member, :invitation_token) %>
+  invitation_created_at: <%= Time.zone.now %>
+  invitation_sent_at: <%= Time.zone.now %>
+  newsletter_days_bitmask: 127
+  source: invited
+unactivated_member:
+  name: Unactivated Member Gal Galilei
+  email: gal@example.com
+  community: lab
+  permission: member
+  slug: gal
+  source: public_join
+locked_member:
+  name: Locked Eddy Hubble
+  email: eddy@example.com
+  community: lab
+  confirmed_at: <%= Time.zone.now %>
+  locked_at:  <%= Time.zone.now %>
+  permission: member
+  slug: eddy
+  source: public_join
+quarantined_member:
+  name: Quarantined Member Emmy Noether
+  email: i-r-trouble@example.com
+  community: lab
+  confirmed_at: <%= Time.zone.now %>
+  quarantined_at: <%= Time.zone.now %>
+  permission: member
+  slug: emmy
+  source: public_join
+subscribed_member:
+  name: Subscribed Member Mileva Marić
+  email: mileva@example.com
+  community: lab
+  permission: member
+  subscribed_at: <%= Time.zone.now %>
+  source: added
+  slug: mileva
+manager:
+  name: Manager Steve Hawking
+  confirmed_at: <%= Time.zone.now %>
+  email: steve@example.com
+  community: lab
+  permission: manager
+  slug: manager
+  source: public_join
+admin:
+  name: Admin Marie Curie
+  confirmed_at: <%= Time.zone.now %>
+  email: curieosity@example.com # I'm proud of this one
+  community: lab
+  permission: admin
+  slug: curieosity
+  source: creator

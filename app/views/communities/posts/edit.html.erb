@@ -1,0 +1,46 @@
+<% content_for :top_nav do %>
+  <div class="flex items-center justify-between h-full mx-auto w-full community-container">
+    <div class="flex-grow">
+      <div class="flex items-center space-x-4">
+        <% unless @post.published? %>
+          <%= render "communities/posts/switcher", drafts: @other_drafts %>
+        <% end %>
+        <%= render "communities/posts/autosave_status" %>
+      </div>
+    </div>
+    <div class="space-x-2 md:space-x-4 shrink-0">
+      <% unless @post.published? %>
+        <button type="submit"
+          class="btn btn-secondary"
+          form="post-<%= @post.id %>"
+          name="commit"
+          value="save"
+          >
+            <span class="hidden md:inline">
+              <%= t(".save_and_close") %>
+            </span>
+            <span class="md:hidden">
+              <%= t(".save") %>
+            </span>
+          </button>
+      <% end %>
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        form="post-<%= @post.id %>"
+        name="commit"
+        value="publish"
+        data-turbo-confirm="<%= t(".confirm") %>"
+        >
+        <%= t(".publish") %>
+        <%#= render :partial => "shared/button_loading_arrow" %>
+      </button>
+    </div>
+  </div>
+<% end %>
+
+<% content_for :heading do %><%= title t(".title") %><% end %>
+
+<%= render "form", post: @post %>
+

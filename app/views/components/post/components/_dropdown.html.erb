@@ -1,0 +1,110 @@
+<div class="flex justify-end w-full max-w-prose mx-auto mb-4">
+  <div class="shrink-0 relative"
+    data-controller="dropdown"
+    data-action="click->dropdown#toggle click@window->dropdown#hide"
+    data-dropdown-active-target="#post-settings-menu-button"
+  >
+    <button
+        type="button"
+        class="flex w-full text-gray-900 dark:text-gray-100 focus:outline-none focus:text-black hover:text-black dark:focus:text-white dark:hover:text-white"
+        aria-expanded="false"
+        aria-haspopup="true"
+        role="button"
+        data-dropdown-target="button"
+      >
+        <%= heroicon "ellipsis-vertical", options: { class: "w-5 h-5" } %>
+        <span class="sr-only">Open post menu</span>
+    </button>
+
+    <div
+      data-dropdown-target="menu"
+      class="dropdown-menu hidden right-0 mt-1 transition origin-top-right transform z-30 border border-gray-100 dark:border-gray-900 rounded-md bg-white dark:bg-gray-800 shadow-lg"
+      role="menu"
+      aria-orientation="vertical"
+      aria-labelledby="post-settings-menu-button"
+      tabindex="-1"
+      data-transition-enter-from="opacity-0 scale-95"
+      data-transition-enter-to="opacity-100 scale-100"
+      data-transition-leave-from="opacity-100 scale-100"
+      data-transition-leave-to="opacity-0 scale-95"
+    >
+      <%= link_to t('communities.posts.dropdown.copy_link'),
+                  post_path(post),
+                  class: "block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-050",
+                  role: "menuitem",
+                  tabindex: "-1",
+                  data: {
+                    controller: 'share',
+                    share_title_value: post.title,
+                    share_text_value: "#{post.title} - #{post.community.name}",
+                    share_url_value: post_url(post, host: post.community.host),
+                    share_shareable_label_value: t('communities.posts.share.shareable_label'),
+                    share_copy_success_message_value: t('communities.posts.share.copy_success_message'),
+                    share_copy_error_message_value: t('communities.posts.share.copy_error_message'),
+                    share_share_error_message_value: t('communities.posts.share.share_error_message')
+                  }
+
+      %>
+
+      <span class="hidden" data-post-target="pin">
+        <% if post.community.pinned_post_id != post.id %>
+          <%= button_to t('communities.posts.dropdown.pin_to_community'),
+                        settings_pinned_post_path,
+                        method: :patch,
+                        params: { pinned_post_id: post.id },
+                        class: "block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-050",
+                        role: "menuitem",
+                        tabindex: "-1",
+                        form: {
+                          data: {
+                            turbo_confirm: t('communities.posts.dropdown.are_you_sure_you_want_to_pin_this_post'),
+                            action: "click->dropdown#hide"
+                          }
+                        }
+          %>
+        <% else %>
+          <%= button_to t('communities.posts.dropdown.unpin_from_community'),
+                        settings_pinned_post_path,
+                        method: :patch,
+                        params: { pinned_post_id: nil },
+                        class: "block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-050",
+                        role: "menuitem",
+                        tabindex: "-1",
+                        form: {
+                          data: {
+                            action: "click->dropdown#hide"
+                          }
+                        }
+          %>
+        <% end %>
+      </span>
+
+
+      <span class="hidden" data-post-target="edit">
+        <%= link_to t('communities.posts.show.edit'),
+                    edit_post_path(post),
+                    class: "block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-050",
+                    role: "menuitem",
+                    tabindex: "-1",
+                    data: { turbo_frame: "_top" }
+
+        %>
+      </span>
+      <span class="hidden" data-post-target="delete">
+        <%= button_to t('communities.posts.show.delete'),
+                      post_path(post),
+                      method: :delete,
+                      class: "block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-050",
+                      role: "menuitem",
+                      tabindex: "-1",
+                      form: {
+                        data: {
+                          turbo_confirm: t('communities.posts.show.are_you_sure_you_want_to_delete_this_post'),
+                          action: "click->dropdown#hide"
+                        }
+                      }
+        %>
+      </span>
+    </div>
+  </div>
+</div>

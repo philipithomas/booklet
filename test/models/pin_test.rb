@@ -1,0 +1,26 @@
+# == Schema Information
+#
+# Table name: pins
+#
+#  id         :bigint           not null, primary key
+#  code       :string           not null
+#  expires_at :datetime         not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  member_id  :bigint           not null
+#
+# Indexes
+#
+#  index_pins_on_member_id  (member_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (member_id => members.id)
+#
+require "test_helper"
+
+class PinTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
+end

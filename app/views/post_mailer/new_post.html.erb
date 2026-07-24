@@ -1,0 +1,16 @@
+<% content_for :summary do %>
+  <%= I18n.t("mailers.new_post.new_post_in_community", community_name: @community.name) %> <%= @post.body.to_plain_text.sub /\s*\[.+\]$/, '' %>
+<% end %>
+
+<%= content_for :preamble do %>
+  <span class="text-gray-700">
+    <%= I18n.t("mailers.new_post.new_post") %> <%= link_to @post.title, post_url(@post, host: @community.host, email_token: @email_token || ""), class: "underline text-gray-700" %>
+    (<a href="<%= @community.url %>" class="underline text-gray-700"><%= @community.name %>)
+  </span>
+<% end %>
+
+<%= inline_action_text_attachments(@post.body.to_s).html_safe %>
+
+<% content_for :button_label do %><%= t 'mailers.new_post.view_post' %> →<% end %>
+<% content_for :button_link do %><%= post_url(@post, host: @community.host, email_token: @email_token || "") %><% end %>
+

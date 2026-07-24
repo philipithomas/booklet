@@ -1,0 +1,7 @@
+<% content_for :heading do %><%= title t("devise.passwordless.check_email.title") %><% end %>
+
+<% noindex %>
+
+<div class="prose dark:prose-invert text-center">
+  <p><%= t("devise.passwordless.check_email.description", community_name: @community.name) %></p>
+</div>

@@ -1,0 +1,8 @@
+<div class="community-container community-page-vertical-padding">
+  <ul role="list" id="members" class="w-full py-4 md:py-6 lg:py-8 xl:py-10 grid grid-cols-2 gap-x-8 gap-y-8 md:gap-x-12 md:gap-y-12 lg:gap-x-16 lg:gap-y-16 xl:gap-x-20 xl:gap-y-20 text-center sm:grid-cols-3 md:grid-cols-4 <% if members.count>6 %>lg:grid-cols-5<% end %>">
+    <%= render "components/member/tiles", members: @members %>
+  </ul>
+  <% if @pagy.next.present? %>
+    <%= render "components/member/scroll_frame", page: 2 %>
+  <% end %>
+</div>

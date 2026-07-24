@@ -1,0 +1,21 @@
+---
+en-US:
+  errors:
+    '403':
+      message: You don’t have permission to access this page.
+      title: Forbidden
+    '404':
+      message: The page you were looking for doesn’t exist.
+      title: Page not found
+    '429':
+      message: You’ve made too many requests in a short period of time. Take a break and try again later.
+      title: Too many requests
+    '500':
+      message: Something went wrong, and our engineering team has been alerted. Please try again later.
+      title: There was an error
+    '503':
+      message: The app didn't respond fast enough, so it might be overloaded or undergoing maintenance. Please try again.
+      title: Service unavailable
+    buttons:
+      back: Go back
+      support: Contact support

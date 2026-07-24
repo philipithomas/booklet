@@ -1,0 +1,26 @@
+<% title t(".title") %>
+
+<%= turbo_stream_from "#{@community.id}_invitations" %>
+
+<%= render 'communities/members/header', community: @community, current_member: current_member %>
+
+<div class="community-page-vertical-padding">
+  <% if MemberPolicy.new(current_member, @community).index_all? %>
+  <%= render 'communities/members/tabs' %>
+  <% end %>
+</div>
+
+<div class="community-container community-page-vertical-padding">
+  <%= render("form", member: Member.new) %>
+
+  <h2 class="pt-6 pb-2 form-label"><%= t ".pending_invitations" %></h2>
+  <ul role="list" id="member_invitations" class="border border-gray-200 divide-y divide-gray-200 rounded-md dark:border-gray-800 dark:divide-gray-800  dark:bg-gray-900">
+    <% @members.each do |member| %>
+      <%= render "invitation", member: member %>
+    <% end %>
+    <div class="only:block hidden">
+      <%= render "empty" %>
+    </div>
+
+  </ul>
+</div>

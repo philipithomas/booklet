@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "new-reply" do %>
+  <%= render 'communities/replies/form', reply: @reply, post: @post %>
+<% end %>

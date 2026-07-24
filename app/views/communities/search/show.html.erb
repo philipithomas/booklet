@@ -1,0 +1,22 @@
+<% title "#{t 'search'}: #{@search.query}" %>
+
+<div class="community-container my-8">
+  <%= render "layouts/community/search_form", query: @search.query %>
+</div>
+
+<%= turbo_frame_tag "search_results" do %>
+<ul role="list" class="h-full space-y-4 mb-8" id="results">
+  <div class="only:block hidden">
+    <div class="community-container">
+      <div class="block max-w-prose mx-auto p-12 text-center border border-gray-100 rounded-lg dark:border-gray-900 focus:outline-none">
+        <span class="block mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+          <%= t(".no_results") %>
+        </span>
+      </div>
+    </div>
+  </div>
+  <% @results.each do |result| %>
+  <%= render "result", result: result %>
+  <% end %>
+</ul>
+<% end %>

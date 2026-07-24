@@ -1,0 +1,18 @@
+<% content_for :heading do %><%= title t(".resend_confirmation_instructions") %><% end %>
+
+<%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }, builder: Bklt::FormBuilder) do |f| %>
+  <div class="form-space">
+    <%= f.error_notification %>
+    <%= f.full_error :confirmation_token %>
+
+    <%= f.input :email,
+                required: true,
+                autofocus: true,
+                value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email),
+                input_html: { autocomplete: "email" } %>
+
+    <%= f.hidden_field :community_id, value: @community.id %>
+
+    <%= f.button :submit, label: t(".resend_confirmation_instructions"), full_width: true %>
+  </div>
+<% end %>

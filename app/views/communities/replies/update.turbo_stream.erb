@@ -1,0 +1,7 @@
+<%= turbo_stream.replace dom_id(@reply) do %>
+  <%= render 'reply', reply: @reply %>
+<% end %>
+
+<%= turbo_stream.prepend "flash_messages" do %>
+  <%= render :partial => "layouts/flash", locals: { message: t('communities.replies.flash.updated') } %>
+<% end %>

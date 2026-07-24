@@ -1,0 +1,25 @@
+<div data-controller="upload">
+  <%= f.label :icon, class: 'cursor-pointer' do %>
+    <div class="form-label">
+      <%= t 'activerecord.attributes.community.icon' %>
+    </div>
+    <div class="mt-2">
+      <div class="flex items-center">
+        <img
+          class="h-14 w-14 overflow-hidden shadow-sm"
+          data-upload-target="preview"
+          <% if f.object.icon.attached? %>
+            src="<%= cdn_proxy_url(f.object.icon) %>"
+          <% end %>
+          />
+        <%= f.file_field :icon,
+          accept: "image/png,image/gif,image/jpeg",
+          direct_upload: true,
+          class: "hidden",
+          data: { upload_target: 'input', action: "change->upload#uploadFile" }
+        %>
+        <%= render "components/shared/upload_button" %>
+      </div>
+    </div>
+  <% end %>
+</div>

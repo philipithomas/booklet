@@ -1,0 +1,13 @@
+<!-- check for optional parameter -->
+<% background_hidden = defined?(background_hidden) ? background_hidden : false %>
+<div
+  class="<% unless background_hidden %>md:card<% end %> text-center">
+  <%= render :partial => 'components/member/photo', locals: { member: member, size: 36, class: "mx-auto block" } %>
+
+  <div class="card-title mt-6">
+    <%= member.name %>
+  </div>
+  <%# Might reactivate this when person has a headline
+  <span class="text-sm font-light text-gray-500 truncate">Headline</span>
+  %>
+</div>

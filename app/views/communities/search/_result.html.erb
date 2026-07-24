@@ -1,0 +1,100 @@
+<%
+case result.model_name
+when 'Member'
+  path = member_path(result.slug)
+when 'Reply'
+  path = post_reply_path(result.post.slug, result.slug)
+when 'Post'
+  path = post_path(result.slug)
+else
+  path = '#'
+end
+%>
+
+<li>
+  <a href="<%= path %>" class="block w-full h-full" target="_top">
+    <div
+      class="community-container"
+    >
+      <div class="overflow-hidden card max-w-prose mx-auto">
+
+      <% case result.model_name %>
+      <% when 'Member' %>
+
+        <div
+          class="flex-shrink-0 block w-full community">
+          <span class="flex items-center justify-start min-w-0 space-x-3">
+            <%= render :partial => 'components/member/photo', locals: { member: result, size: 12 }, class: "flex-shrink-0" %>
+
+            <span class="flex flex-col flex-1 min-w-0 text-left">
+              <span class="text-normal font-medium text-gray-900 truncate dark:text-gray-100"><%= result.name %></span>
+            </span>
+          </span>
+        </div>
+
+      <% when 'Reply' %>
+
+        <span class="text-xs font-light leading-5 text-gray-500 md:pt-2">
+          <%= result.model_name.human %>: <%= result.post.title %>
+        </span>
+
+        <div class="pt-2 line-clamp-2 text-sm font-normal text-gray-700 dark:text-gray-300">
+          <%= result.body.to_plain_text %>
+        </div>
+
+        <div class="pt-4">
+          <div
+            class="flex justify-start sm:items-center text-sm flex-col sm:flex-row flex-shrink-0"
+          >
+            <span class="flex items-center">
+              <span class="">
+                <%= render :partial => 'components/member/photo', locals: { member: result.member, size: 7 } %>
+              </span>
+              <span class="font-normal text-gray-600 dark:text-gray-400 pl-2"><%= result.member.name %></span>
+            </span>
+            <span class="text-xs font-light leading-5 text-gray-400 dark:text-gray-600 pt-1 sm:pt-0 sm:pl-2">
+              <%= relative_time_tag(result.created_at) %>
+            </span>
+          </div>
+        </div>
+
+      <% when 'Post' %>
+
+        <div
+          class="flex-1 min-w-0 flex items-center justify-between space-x-4"
+        >
+          <div class="flex-1 min-w-0">
+            <div
+              class="font-medium leading-normal text-gray-900 dark:text-gray-050 text-lg sm:text-base hover:text-gray-700 hover:dark:text-gray-200"
+            >
+              <%= result.title %>
+            </div>
+            <div class="flex mt-4 justify-between items-center">
+              <div
+                class="flex justify-start sm:items-center text-sm flex-col sm:flex-row flex-shrink-0"
+              >
+                <span class="flex items-center">
+                  <span class="">
+                    <%= render :partial => 'components/member/photo', locals: { member: result.member, size: 7 } %>
+                  </span>
+                  <span class="font-normal text-gray-600 dark:text-gray-400 pl-2"><%= result.member.name %></span>
+                </span>
+                <span class="text-xs font-light leading-5 text-gray-400 dark:text-gray-600 pt-1 sm:pt-0 sm:pl-2">
+                  <%= relative_time_tag(result.published_at) %>
+                </span>
+              </div>
+
+              <div class="flex-shrink-0 mt-0 block sm:hidden">
+                <%= render :partial => 'components/post/reply_stacked_avatars', locals: { post: result } %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <% else %>
+        <%= 'Error' %>
+      <% end %>
+      </div>
+    </div>
+  </a>
+</li>

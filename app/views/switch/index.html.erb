@@ -1,0 +1,43 @@
+<turbo-frame id="switch">
+  <ul class="space-y-4">
+    <% @other_memberships.each do |member| %>
+      <li>
+        <a class="card p-4 md:p-4 lg:p-4" href="<%= switch_path(member.community.slug) %>" target="_blank" rel="nofollow noopener">
+          <div class="flex items-stretch">
+            <div class="mr-4 flex-shrink-0">
+              <% if member.community.icon.attached? %>
+                <%= render "components/shared/square_image_variants", image: member.community.icon, size: 64, classes: "h-16 w-16", alt: member.community.name %>
+              <% else %>
+                <div class="text-4xl font-bold h-16 w-16 flex items-center justify-center rounded-md" style="background-color: <%= member.community.brand_color %>; color: <%= member.community.light_mode_label_color %>;">
+                  <%= member.community.initials %>
+                </div>
+              <% end %>
+            </div>
+            <div class="grow content-stretch">
+              <h4 class="text-lg font-bold text-black dark:text-white"><%= member.community.name %></h4>
+              <p class="mt-1 text-gray-800 dark:text-gray-200"><%= pluralize(member.community.members.active.count, I18n.t('activerecord.models.member.one'), I18n.t('activerecord.models.member.other')) %></p>
+            </div>
+            <div class="flex items-center justify-center">
+              <%= heroicon "chevron-right", options: { class: "h-6 w-6 text-gray-500" } %>
+            </div>
+          </div>
+        </a>
+      </li>
+    <% end %>
+    <li>
+      <a class="card p-4 md:p-4 lg:p-4" href="<%= new_community_url(host: Rails.configuration.signup_host) %>" target="_blank" rel="nofollow noopener">
+        <div class="flex">
+          <div class="mr-4 flex-shrink-0">
+            <div class="inline-flex items-center justify-center bg-gray-700 dark:bg-gray-200 rounded-md text-gray-050 dark:text-gray-950 h-16 w-16">
+              <%= heroicon "plus", options: { class: "h-8 w-8" } %>
+            </div>
+          </div>
+          <div>
+            <h4 class="text-lg font-bold text-black dark:text-white"><%= I18n.t('switch.index.new_group') %></h4>
+            <p class="mt-1 text-gray-800 dark:text-gray-200"><%= I18n.t('switch.index.new_group_description') %></p>
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
+</turbo-frame>

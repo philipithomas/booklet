@@ -1,0 +1,31 @@
+<%= turbo_frame_tag dom_id(@reply.post) do %>
+  <div class="community-container flex flex-col justify-between items-center mt-8">
+    <h1 class="page-title block text-center lg:max-w-[80%] text-pretty">
+      <span class="sr-only">Reply to</span>
+      <a href="<%= post_path(@post) %>" class="inline" target="_top">
+        <%= @post.title %>
+      </a>
+    </h1>
+    <div>
+      <p class="text-gray-500">
+        <%= t('communities.posts.show.posted') %> <%= relative_time_tag(@reply.post.published_at) %>
+      </p>
+    </div>
+
+    <% if @reply.quarantined_at.present? and (current_member&.manager_or_admin? || (defined?(current_editor) && current_editor)) %>
+      <%= render "quarantined_alert", reply: @reply %>
+    <% end %>
+  </div>
+
+
+  <!-- Render the specific reply using the _reply.html.erb partial -->
+  <%= render partial: 'communities/replies/reply', locals: { reply: @reply } %>
+
+  <div class="mt-6 community-container">
+    <div class="max-w-prose mx-auto">
+      <a href="<%= post_path(@reply.post) %>" class="link" target="_top">
+        <%= t('communities.replies.show.view_full') %> →
+      </a>
+    </div>
+  </div>
+<% end %>

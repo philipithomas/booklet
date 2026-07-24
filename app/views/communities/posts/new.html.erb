@@ -1,0 +1,8 @@
+<% content_for :heading do %><%= title t(".title") %><% end %>
+
+<div class="community-container community-page-vertical-padding">
+  <div class="md:max-w-prose md:mx-auto">
+    <h1 class="page-title mb-4"><%= t(".title") %></h1>
+    <%= render "form", post: @post %>
+  </div>
+</div>

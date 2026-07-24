@@ -1,0 +1,38 @@
+
+<figure class="attachment attachment--<%= blob.video? ? "video" : (blob.content_type.start_with?('image/') ? "preview" : "file") %> attachment--<%= blob.filename.extension %>">
+  <% if blob.video? %>
+    <%= video_tag rails_blob_url(blob), controls: true, class: "block w-full mx-auto shadow attachment__video" %>
+  <% elsif blob.representable? %>
+    <% if blob.content_type.start_with?('image/') %>
+      <% if blob.content_type == "image/svg+xml" %>
+        <%= image_tag blob, data: { zoom_src: cdn_proxy_url(blob) } %>
+      <% elsif blob.content_type == "image/gif" %>
+        <%= image_tag blob, data: { zoom_src: cdn_proxy_url(blob) } %>
+      <% else %>
+        <% resize_to_limit = local_assigns[:in_gallery] ? [ 800, 600 ] : [ 1024, 768 ] %>
+        <% representation = blob.representation(resize_to_limit: resize_to_limit) %>
+        <%= image_tag representation, width: resize_to_limit.first, height: resize_to_limit.second, data: { zoom_src: cdn_proxy_url(blob) } %>
+      <% end %>
+    <% else %>
+      <a href="<%= rails_blob_url(blob) %>" target="_blank" class="flex flex-col items-center justify-center">
+        <%= image_tag blob.preview(resize_to_limit: [300, 300]), class: "block mx-auto shadow" %>
+          <div class="text-xs font-light text-gray-800 dark:text-gray-200"><%= blob.filename.to_s %></div>
+        </span>
+      </a>
+    <% end %>
+  <% else %>
+    <a href="<%= cdn_proxy_url(blob) %>" target="_blank" class="flex flex-col items-center justify-center">
+      <% if defined?(heroicon) %> <%# email does not have right now, just skipping%>
+        <%= heroicon "document", options: { class: "w-6 h-6 mx-auto text-accent" } %>
+      <% end %>
+      <span class="block mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+        <%= blob.filename.to_s %>
+      </span>
+    </a>
+  <% end %>
+  <% if caption = blob.try(:caption) %>
+    <figcaption class="attachment__caption">
+      <%= caption %>
+    </figcaption>
+  <% end %>
+</figure>

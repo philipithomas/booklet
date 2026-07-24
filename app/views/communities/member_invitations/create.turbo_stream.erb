@@ -1,0 +1,10 @@
+<%= turbo_stream.replace "new_invitation" do %>
+  <%= render 'form', member: Member.new %>
+<% end %>
+<% if @invited_members.any? %>
+  <%= turbo_stream.prepend "flash_messages" do %>
+    <%= render :partial => "layouts/flash", locals: {
+      message: (@invited_members.count > 1) ? t('communities.member_invitations.flash.multiple_invited', count: @invited_members.count) : t('communities.member_invitations.flash.invited')
+    } %>
+  <% end %>
+<% end %>

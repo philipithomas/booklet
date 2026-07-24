@@ -1,0 +1,19 @@
+<% if @community.logo.attached? %>
+  <% begin %>
+    <% ratio = @community.logo.metadata[:width].to_f / @community.logo.metadata[:height] %>
+  <% rescue %>
+    <% ratio = 1.0 %>
+  <% end %>
+
+  <% if ratio > 4 %>
+    <%= render partial: 'components/shared/rectangular_image_variants', locals: {image: @community.logo, classes: "h-4 dark:hidden w-auto", alt: @community.name, height: 16} %>
+    <%= render partial: 'components/shared/rectangular_image_variants', locals: {image: @community.logo_for_dark_background.attached? ? @community.logo_for_dark_background : @community.logo, classes: "h-4 hidden dark:block w-auto", alt: @community.name, height: 16} %>
+  <% else %>
+    <%= render partial: 'components/shared/rectangular_image_variants', locals: {image: @community.logo, classes: "h-6 dark:hidden w-auto", alt: @community.name, height: 24} %>
+    <%= render partial: 'components/shared/rectangular_image_variants', locals: {image: @community.logo_for_dark_background.attached? ? @community.logo_for_dark_background : @community.logo, classes: "h-6 hidden dark:block w-auto", alt: @community.name, height: 24} %>
+  <% end %>
+<% else %>
+  <div class="text-2xl font-bold text-gray-900 dark:text-gray-100">
+    <%= @community.name %>
+  </div>
+<% end %>

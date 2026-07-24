@@ -1,0 +1,42 @@
+<% set_meta_tags canonical: posts_url %>
+
+<h1 class="sr-only">
+  Posts
+</h1>
+
+<% if PostPolicy.new(current_member, @community).create? %>
+  <% content_for :action_bar do %>
+    <turbo-frame
+      data-turbo-temporary
+      id="recommended_posts"
+      src="<%= recommended_posts_path %>">
+      <div class="community-container">
+        <div class="animate-pulse space-x-2 w-full flex" aria-busy="true" aria-label="Loading">
+          <div class="h-6 bg-gray-100 dark:bg-gray-900 rounded-full w-32"></div>
+          <div class="h-6 bg-gray-100 dark:bg-gray-900 rounded-full w-64"></div>
+          <div class="h-6 bg-gray-100 dark:bg-gray-900 rounded-full w-36"></div>
+          <div class="h-6 bg-gray-100 dark:bg-gray-900 rounded-full w-48"></div>
+          <div class="h-6 bg-gray-100 dark:bg-gray-900 rounded-full w-64"></div>
+          <div class="h-6 bg-gray-100 dark:bg-gray-900 rounded-full w-32"></div>
+          <div class="h-6 bg-gray-100 dark:bg-gray-900 rounded-full w-64"></div>
+          <div class="h-6 bg-gray-100 dark:bg-gray-900 rounded-full w-36"></div>
+          <div class="h-6 bg-gray-100 dark:bg-gray-900 rounded-full w-48"></div>
+          <div class="h-6 bg-gray-100 dark:bg-gray-900 rounded-full w-64"></div>
+        </div>
+      </div>
+    </turbo-frame>
+  <% end %>
+
+  <% content_for :floating_action_button do %>
+    <a
+      href="<%= new_post_path %>"
+      class="w-full sm:w-auto btn btn-primary bg-white">
+      <%= heroicon "plus-circle", options: { class: "-ml-1 mr-2 h-4 w-5", variant: :mini  } %>
+      <%= t "communities.posts.form.submit" %>
+    </a>
+  <% end %>
+<% end %>
+
+<%= turbo_stream_from @community %>
+
+<%= render "components/post/list", posts: @posts, pinned_post: @community.pinned_post %>

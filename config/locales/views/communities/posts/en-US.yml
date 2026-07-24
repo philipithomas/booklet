@@ -1,0 +1,48 @@
+---
+en-US:
+  communities:
+    posts:
+      dropdown:
+        are_you_sure_you_want_to_pin_this_post: Are you sure you want to pin this to the home page for all members?
+        copy_link: Copy link
+        pin_to_community: Pin to community
+        unpin_from_community: Unpin from community
+      edit:
+        confirm: Are you sure you want to publish this post?
+        publish: Publish
+        save: Save
+        save_and_close: Save and close
+        title: Edit post
+      empty:
+        write_first_post: Write the first post
+        write_welcome_post: Write a welcome post
+      flash:
+        created: Post created
+        destroyed: Post deleted
+        published: Post published
+        saved: Post saved
+      follow_button:
+        follow: Follow
+        following: Following
+      form:
+        submit: Post
+        update: Update post
+        write_your_post_here: Write your post here . . .
+      new:
+        title: New post
+      quarantined_alert:
+        are_you_sure_you_want_to_remove_quarantine: Are you sure you want to remove quarantine?
+        post_quarantined: Post quarantined and hidden from the community
+        remove_quarantine: Remove quarantine
+      share:
+        copy_error_message: There was a problem copying the link.
+        copy_success_message: Link copied.
+        share_error_message: There was a problem while sharing.
+        shareable_label: Share
+      show:
+        are_you_sure_you_want_to_delete_this_post: Are you sure you want to delete this post?
+        delete: Delete
+        edit: Edit
+        posted: Posted
+      switcher:
+        new_draft: New draft

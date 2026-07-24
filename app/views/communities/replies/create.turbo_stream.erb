@@ -1,0 +1,9 @@
+<%= turbo_stream.replace "new-reply" do %>
+  <%= render 'form', reply: Reply.new, post: @post %>
+<% end %>
+<%= turbo_stream.prepend "flash_messages" do %>
+  <%= render :partial => "layouts/flash", locals: { message: t('communities.replies.flash.created') } %>
+<% end %>
+<%= turbo_stream.replace "follow-button" do %>
+  <%= render :partial => "components/post/follow_button", locals: {post: @post, following: true} %>
+<% end %>

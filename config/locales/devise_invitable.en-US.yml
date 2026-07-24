@@ -1,0 +1,23 @@
+---
+en-US:
+  devise:
+    failure:
+      invited: You have a pending invitation, accept it to finish creating your account.
+    invitations:
+      edit:
+        header: Finish your profile
+        submit_button: Sign in
+      invitation_removed: Your invitation was removed.
+      invitation_token_invalid: The invitation link is not valid!
+      no_invitations_remaining: No invitations remaining
+      send_instructions: An invitation email has been sent to %{email}.
+      updated: Your profile was created. You are now signed in.
+      updated_not_active: Your password was set successfully.
+    mailer:
+      invitation_instructions:
+        about: Joining the community will give you access to its newsletter, forum, and more.
+        accept: Accept invite
+        ignore: If you don't want to accept the invitation, please ignore this email.
+        someone_invited_you: 'You have been invited to join %{name}. To get started, accept the invite below:'
+        subject: Invitation to join %{community_name}
+        subject_with_inviter: "%{inviter_name} invited you to join %{community_name}"

@@ -1,0 +1,25 @@
+<div class=" hidden fixed inset-0 bg-black bg-opacity-80 overflow-y-none flex items-center justify-center z-50"
+  data-switch-modal-target="background"
+  data-action="click->switch-modal#closeBackground"
+  data-transition-enter="transition-all ease-in-out duration-300"
+  data-transition-enter-from="bg-opacity-0"
+  data-transition-enter-to="bg-opacity-80"
+  data-transition-leave="transition-all ease-in-out duration-300"
+  data-transition-leave-from="bg-opacity-80"
+  data-transition-leave-to="bg-opacity-0">
+  <div data-switch-modal-target="container" class="max-h-screen w-full max-w-md relative px-6 py-8 overflow-y-auto">
+    <div class="bg-white dark:bg-gray-950 rounded-lg shadow h-auto p-4">
+      <div class="flex justify-end pb-2">
+        <button data-action="click->switch-modal#close">
+          <%= heroicon "x-mark", options: { class: "h-6 w-6 text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 cursor-pointer", action: "click->switch-modal#close" } %>
+        </button>
+      </div>
+      <turbo-frame
+        loading="lazy"
+        id="switch"
+        src="<%= switch_index_path %>">
+        <%= render "components/shared/loading" %>
+      </turbo-frame>
+    </div>
+  </div>
+</div>

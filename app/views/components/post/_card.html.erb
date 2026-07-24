@@ -1,0 +1,48 @@
+<% pinned = defined?(pinned) ? pinned : false %>
+
+<li id="<%= pinned ? 'pinned-post' : dom_id(post) %>" id="<%= dom_id(post) %>" class="border-b border-gray-100 dark:border-gray-900 md:border-0 last:border-0 md:pb-4 transition duration-150 ease-in-out">
+  <div class="community-container">
+    <a href="<%= post_path(post) %>" aria-label="<%= post.title %>" class="md:card py-4 <% if pinned %>border-accent<% end %>">
+      <article class="flex items-center">
+        <div class="flex-1 min-w-0 flex items-center justify-between space-x-4">
+          <div class="flex-1 min-w-0">
+            <div class="font-medium leading-normal text-gray-900 dark:text-gray-050 text-lg sm:text-base hover:text-gray-700 hover:dark:text-gray-200">
+              <% if pinned %>
+              <%= heroicon "bookmark", variant: :mini, options: { class: "text-accent inline h-5 w-5 mr-1" } %>
+              <% end %>
+
+              <%= post.title %>
+            </div>
+            <div class="flex mt-4 justify-between items-center">
+              <div class="flex justify-start sm:items-center text-sm flex-col sm:flex-row flex-shrink-0">
+                <span class="flex items-center">
+                  <span class="">
+                    <% cache ["member", post.member.id, post.member.updated_at] do %>
+                    <%= render :partial => 'components/member/photo', locals: { member: post.member, size: 7 } %>
+                    <% end %>
+                  </span>
+                  <span class="font-normal text-gray-600 dark:text-gray-400 pl-2"><%= post.member.name %></span>
+                </span>
+                <span class="text-xs font-light leading-5 text-gray-400 dark:text-gray-600 pt-1 sm:pt-0 sm:pl-2">
+                  <%= relative_time_tag(post.published_at) %>
+                </span>
+              </div>
+
+              <div class="flex-shrink-0 mt-0 block sm:hidden">
+                <%= render :partial => 'components/post/reply_stacked_avatars', locals: { post: post } %>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex-shrink-0 mt-0 hidden sm:block">
+            <%= render :partial => 'components/post/reply_stacked_avatars', locals: { post: post } %>
+          </div>
+
+        </div>
+        <div class="flex-shrink-0 ml-5">
+          <%= heroicon "chevron-right", options: { class: "w-5 h-5 text-gray-400 dark:text-gray-600" } %>
+        </div>
+      </article>
+    </a>
+  </div>
+</li>

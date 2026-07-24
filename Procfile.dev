@@ -1,0 +1,5 @@
+web: bin/rails s -p 3000
+css: bin/rails tailwindcss:watch
+# stripe: stripe listen --forward-to localtest.me:3000/pay/webhooks/stripe
+yarn: yarn build --watch
+bg: bundle exec rake solid_queue:start

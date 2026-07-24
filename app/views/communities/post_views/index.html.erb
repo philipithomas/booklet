@@ -1,0 +1,6 @@
+<%= turbo_stream_from @post %>
+
+<%= turbo_frame_tag "post_views" do %>
+  <%= render "views", view_count: @view_count, members: @members, post: @post %>
+<% end %>
+

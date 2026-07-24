@@ -1,0 +1,61 @@
+<% title @community.name %>
+
+<%
+fun_facts = {
+  "ID" => @community.id,
+  "Owner" => @community.email,
+  "Host" => @community.host,
+  "Active subscription" => @community.active_subscription?,
+  "Active members" => @community.members.active.count,
+  "Invited members" => @community.members.invited.count,
+  "Visibility" => @community.visibility,
+  "Signups" => @community.signups,
+  "Posts" => @community.posts.count,
+  "Replies" => @community.replies.count,
+  "Created" => @community.created_at,
+}
+
+fun_facts["Domains"] = @community.domains.map { |d| d.inspect }.join(", ") if @community.domains.any?
+
+%>
+
+<div class="community-container mt-8">
+  <div>
+    <div class="px-4 sm:px-0 flex justify-between">
+      <a class="pb-4" href="<%= @community.url %>" target="_blank" rel="noopener noreferrer">
+        <%= render "components/community/logo", community: @community %>
+      </a>
+      <div class="btn-group">
+        <a class="btn btn-secondary btn-small mr-2" href="<%= editor_posts_path(community_id: @community.id) %>">Posts</a>
+        <a class="btn btn-secondary btn-small mr-2" href="<%= editor_replies_path(community_id: @community.id) %>">Replies</a>
+        <a class="btn btn-secondary btn-small" href="<%= editor_members_path(community_id: @community.id) %>">Members</a>
+      </div>
+    </div>
+    <div class="mt-6 border-t border-gray-100 dark:border-gray-900">
+      <dl class="divide-y divide-gray-100 dark:divide-gray-900">
+        <% fun_facts.each do |key, value| %>
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">
+              <%= key %>
+            </dt>
+            <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:col-span-2 sm:mt-0">
+              <%= value %>
+            </dd>
+          </div>
+        <% end %>
+
+        <% if @community&.payment_processor && @community.payment_processor.processor == "stripe" %>
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">
+              Stripe ID
+            </dt>
+            <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:col-span-2 sm:mt-0">
+              <%= link_to @community.payment_processor.processor_id, "https://dashboard.stripe.com/customers/#{@community&.payment_processor&.processor_id}",
+                target: "_blank", rel: "noopener noreferrer", class: :link %>
+            </dd>
+          </div>
+        <% end %>
+      </dl>
+    </div>
+  </div>
+</div>

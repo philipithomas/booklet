@@ -1,0 +1,11 @@
+<p><%= t("devise.mailer.invitation_instructions.someone_invited_you", name: @resource.community.name) %></p>
+
+<% content_for :button_label do %><%= t("devise.mailer.invitation_instructions.accept") %> &rarr;<% end %>
+
+<% content_for :button_link do %><%= accept_invitation_url(@resource, invitation_token: @token, host: @resource.community.host) %><% end %>
+
+<% content_for :after_button_content do %>
+  <p><%= t("devise.mailer.invitation_instructions.about") %></p>
+
+  <p><%= t("devise.mailer.invitation_instructions.ignore") %></p>
+<% end %>

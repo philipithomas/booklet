@@ -1,0 +1,43 @@
+<% content_for :summary do %>
+  Moderation flagged a profile change by <%= @member.name %> and hid the profile.
+<% end %>
+
+<p>
+  <a href="<%= member_url(@member, host: @community.host) %>">
+    <%= @member.name %></a> (<em><%= @member.email %></em>) updated their profile on
+  <a href="<%= posts_url(host: @community.host) %>">
+    <%= @community.name %></a>, and OpenAI Moderation flagged it as disallowed.
+</p>
+<p>
+  Their profile has been hidden, and none of their content is visible to other members while hidden.
+</p>
+<p>
+  Flagged <%= "category".pluralize(@moderation_score.flagged_categories.count) %>: <em><%= @moderation_score.flagged_categories.join(', ') %></em>
+</p>
+<p>
+  <strong>Action required:</strong> Review the profile, and either delete it or unhide it
+</p>
+
+<% if @community.open_ai_member_moderation_enabled %>
+<p>
+  Based on your
+    <a href="<%= settings_moderation_url(host: @community.host) %>">
+      moderation settings</a>, the <strong>member's account has been deactivated</strong>.
+  They cannot log in and are currently not receiving email notifications.
+  <strong>Reactivate the account</strong> on
+  <a href="<%= member_url(@member, host: @community.host) %>">
+  their profile</a>.
+<p>
+<% else %>
+<p>
+  Based on your
+  <a href="<%= settings_moderation_url(host: @community.host) %>">
+    moderation settings</a>, the member's account is still active.
+</p>
+<% end %>
+
+<% content_for :button_label do %>
+  View profile &rarr;
+<% end %>
+
+<% content_for :button_link do %><%= member_url(@member, host: @community.host) %><% end %>

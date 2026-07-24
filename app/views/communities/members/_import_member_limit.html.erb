@@ -1,0 +1,59 @@
+<%# locals: (community:, current_member:) -%>
+
+<div class="hidden w-full" data-new-member-target="directAddLimit" data-controller="modal">
+  <div class="border border-gray-600 dark:border-gray-400 rounded-md px-4 py-2 flex items-center justify-between">
+    <span class="text-gray-700 dark:text-gray-300 text-sm font-semibold tracking-tight flex items-center">
+      <span><%= t(".imported_members") %>:</span>
+      <span class="pl-1 text-gray-800 dark:text-gray-200">
+      <span class="<%= community.can_direct_add_member? ? '' : 'text-accent' %>">
+        <%= number_with_delimiter(community.members_directly_added(current_member)) %>
+      </span> / <%= number_with_delimiter([community.member_direct_add_limit(current_member), community.members_directly_added(current_member)].max) %></span>
+    </span>
+
+    <span>
+      <% if current_member&.person_id %>
+        <%= mail_to "mailto:#{Rails.configuration.support_email}", t('.request_increase') + " →", subject: "Requesting increase in imported member limit for #{community.host}", class: "link text-xs" %>
+      <% else %>
+        <%= link_to t('.increase_limit') + " →", "#", class: "link text-xs", data: { 'action': 'click->modal#open:prevent' } %>
+      <% end %>
+    </span>
+  </div>
+  <div class="text-xs text-gray-500 mt-2 italic">
+    <%= t(".to_prevent_spam_we_limit_imported_members_please_send_invitation_instead") %>
+  </div>
+
+  <!-- Modal -->
+  <div class="hidden fixed inset-0 bg-black bg-opacity-80 overflow-y-none flex items-center justify-center z-50"
+    data-modal-target="background"
+    data-action="click->modal#closeBackground"
+    data-transition-enter="transition-all ease-in-out duration-300"
+    data-transition-enter-from="bg-opacity-0"
+    data-transition-enter-to="bg-opacity-80"
+    data-transition-leave="transition-all ease-in-out duration-300"
+    data-transition-leave-from="bg-opacity-80"
+    data-transition-leave-to="bg-opacity-0">
+    <div data-modal-target="container" class="max-h-screen w-full max-w-lg relative px-6 py-8 overflow-y-auto">
+      <div class="bg-white dark:bg-gray-950 rounded-lg shadow h-auto p-4 md:p-8">
+        <div class="flex justify-end pb-2">
+          <button data-action="click->modal#close">
+            <%= heroicon "x-mark", options: { class: "h-6 w-6 text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 cursor-pointer", action: "click->modal#close" } %>
+          </button>
+        </div>
+        <div class="prose dark:prose-invert">
+          <h2><%= t(".raise_your_import_limit") %></h2>
+          <p><%= t(".verify_your_identity_and_we_will_raise_your_import_limit") %></p>
+        </div>
+        <div class="pt-4">
+          <%= link_to t('.start_stripe_identity_verification'), verifications_path, class: "btn btn-primary", data: { turbo: false } %>
+        </div>
+        <div>
+          <p class="text-xs text-gray-500 pt-4 italic">
+            <%= t(".alternatively_contact_support_for_help") %>
+          </p>
+        </div>
+      </div>
+    </div>
+</div>
+
+</div>
+

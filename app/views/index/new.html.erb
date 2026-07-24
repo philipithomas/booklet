@@ -1,0 +1,16 @@
+<% content_for :heading do %><%= title t("index.sign_in") %><% end %>
+
+<% noindex %>
+
+<%= simple_form_for(Member.new, url: index_path, builder: Bklt::FormBuilder, html: { honeypot: true }) do |f| %>
+  <div class="form-space">
+    <%= f.error_notification %>
+
+    <%= f.input :email,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "email", value: session.delete(:prefill_email) } %>
+
+    <%= f.button :submit_dynamic, label: t(".next"), full_width: true %>
+  </div>
+<% end %>

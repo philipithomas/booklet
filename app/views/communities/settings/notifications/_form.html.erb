@@ -1,0 +1,73 @@
+<%= simple_form_for(member, url: target_url, method: :put, builder: Bklt::FormBuilder, html: { id: 'notifications-form' }) do |f| %>
+  <div class="space-y-5">
+    <%= f.error_notification %>
+
+    <table class="min-w-full">
+      <thead>
+        <tr>
+          <th scope="col" class="pr-2 sm:pr-4 md:pr-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <%= t 'communities.settings.notifications.form.email' %>
+          </th>
+          <% if current_member && current_member.push_subscriptions.any? %>
+            <th scope="col" class="pr-2 sm:pr-4 md:pr-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider ">
+              <%= t 'communities.settings.notifications.form.push' %>
+            </th>
+          <% end %>
+          <th scope="col" class="py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"><span class="sr-only">Description</span></th>
+        </tr>
+      </thead>
+      <tbody class="align-top">
+        <tr>
+          <td class="pr-2 sm:pr-4 md:pr-6 py-4 text-center ">
+            <%= f.check_box :notify_newsletter_email, id: "member_notify_newsletter_email", class: "form-input mx-auto h-4 w-4" %>
+            <label for="member_notify_newsletter_email" class="sr-only"><%= t('communities.settings.notifications.form.notify_newsletter.email_label') %></label>
+          </td>
+          <% if current_member && current_member.push_subscriptions.any? %>
+            <td class="pr-2 sm:pr-4 md:pr-6 py-4 text-center">
+              <%= f.check_box :notify_newsletter_push, id: "member_notify_newsletter_push", class: "form-input mx-auto h-4 w-4" %>
+              <label for="member_notify_newsletter_push" class="sr-only"><%= t('communities.settings.notifications.form.notify_newsletter.push_label') %></label>
+            </td>
+          <% end %>
+          <td class="py-3 text-sm leading-6">
+            <h3 class="form-label"><%= t('communities.settings.notifications.form.notify_newsletter.label') %></h3>
+            <p id="notify-newsletter-description" class="text-gray-600 dark:text-gray-400"><%= t('communities.settings.notifications.form.notify_newsletter.description') %></p>
+          </td>
+        </tr>
+        <tr>
+          <td class="pr-2 sm:pr-4 md:pr-6 py-4 text-center">
+            <%= f.check_box :notify_mentions_email, id: "member_notify_mentions_email", class: "form-input mx-auto h-4 w-4" %>
+            <label for="member_notify_mentions_email" class="sr-only"><%= t('communities.settings.notifications.form.notify_mentions.email_label') %></label>
+          </td>
+          <% if current_member && current_member.push_subscriptions.any? %>
+            <td class="pr-2 sm:pr-4 md:pr-6 py-4 text-center">
+              <%= f.check_box :notify_mentions_push, id: "member_notify_mentions_push", class: "form-input mx-auto h-4 w-4" %>
+              <label for="member_notify_mentions_push" class="sr-only"><%= t('communities.settings.notifications.form.notify_mentions.push_label') %></label>
+            </td>
+          <% end %>
+          <td class="pr-2 sm:pr-4 md:pr-6 py-3 text-sm leading-6">
+            <h3 class="form-label"><%= t('communities.settings.notifications.form.notify_mentions.label') %></h3>
+            <p id="notify-mentions-description" class="text-gray-600 dark:text-gray-400"><%= t('communities.settings.notifications.form.notify_mentions.description') %></p>
+          </td>
+        </tr>
+        <tr>
+          <td class="pr-2 sm:pr-4 md:pr-6 py-4 text-center">
+            <%= f.check_box :notify_new_posts_email, id: "member_notify_new_posts_email", class: "form-input mx-auto h-4 w-4" %>
+            <label for="member_notify_new_posts_email" class="sr-only"><%= t('communities.settings.notifications.form.notify_new_posts.email_label') %></label>
+          </td>
+          <% if current_member && current_member.push_subscriptions.any? %>
+            <td class="pr-2 sm:pr-4 md:pr-6 py-4 text-center">
+              <%= f.check_box :notify_new_posts_push, id: "member_notify_new_posts_push", class: "form-input mx-auto h-4 w-4" %>
+              <label for="member_notify_new_posts_push" class="sr-only"><%= t('communities.settings.notifications.form.notify_new_posts.push_label') %></label>
+            </td>
+          <% end %>
+          <td class="py-3 text-sm leading-6">
+            <h3 class="form-label"><%= t('communities.settings.notifications.form.notify_new_posts.label') %></h3>
+            <p id="notify-new-posts-description" class="text-gray-600 dark:text-gray-400"><%= t('communities.settings.notifications.form.notify_new_posts.description') %></p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <%= f.button :submit_dynamic, label: t('.save'), class: "mt-4" %>
+  </div>
+<% end %>
+

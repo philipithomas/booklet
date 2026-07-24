@@ -1,0 +1,11 @@
+<turbo-frame id="contact">
+  <%= form_with url: member_contact_path(@member), method: :post, local: true, class: "w-full flex items-center justify-center", id: "contact-form" do |form| %>
+    <%= recaptcha_tags callback: 'submitRecaptchaForm', noscript: false %>
+    <script>
+      function submitRecaptchaForm() {
+        document.getElementById('contact-form').requestSubmit();
+      }
+    </script>
+  <% end %>
+</turbo-frame>
+

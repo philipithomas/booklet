@@ -1,0 +1,6 @@
+---
+en-US:
+  components:
+    member:
+      protected_email:
+        contact: Contact

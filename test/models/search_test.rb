@@ -1,0 +1,25 @@
+# == Schema Information
+#
+# Table name: searches
+#
+#  id         :bigint           not null, primary key
+#  query      :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  member_id  :bigint           not null
+#
+# Indexes
+#
+#  index_searches_on_member_id  (member_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (member_id => members.id)
+#
+require "test_helper"
+
+class SearchTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
+end

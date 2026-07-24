@@ -1,0 +1,18 @@
+<%= simple_form_for([post, reply], url: reply.persisted? ? post_reply_path(post, reply) : post_replies_path(post), builder: Bklt::FormBuilder, html: { id: reply.persisted? ? "edit-reply-#{reply.id}" : 'new-reply' }) do |f| %>
+  <div class="space-y-4">
+    <%= f.error_notification %>
+
+    <%= f.input :body,
+                as: :rich_text_area,
+                required: true,
+                label: false,
+                input_html: { class: "trix-editor prose dark:prose-invert", data: { controller: "mentions trix-paste", mentions_target: "field", action: "paste->trix-paste#pasteHandler" } } %>
+    <%= f.button :submit_dynamic, label: t(reply.persisted? ? 'communities.replies.edit.update' : 'communities.replies.new.submit'), full_width: true %>
+    <% if reply.persisted? %>
+      <!-- Cancel link -->
+      <div class="text-center text-sm">
+        <%= link_to t(".cancel"), post_reply_path(post, reply), class: "link" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

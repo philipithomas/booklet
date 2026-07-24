@@ -1,0 +1,25 @@
+<% content_for :heading do %><%= title t("devise.passwordless.title") %><% end %>
+
+<% noindex %>
+
+<%= simple_form_for(:member, url: passwordless_sessions_path, builder: Bklt::FormBuilder) do |f| %>
+  <div class="form-space">
+    <%= f.error_notification %>
+
+    <%= f.input :email,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "email" } %>
+
+    <%= f.hidden_field :community_id, value: @community.id %>
+
+    <%= f.button :submit_dynamic, label: t("devise.passwordless.sessions.new.send_sign_in_link"), full_width: true %>
+  </div>
+<% end %>
+
+<div class="mt-8 text-center prose-sm dark:prose-invert">
+  <p><%= link_to "Back to regular sign-in", new_session_path(Member), class: :link %></p>
+  <% if @community.signups_open? %>
+    <p><%= link_to t("devise.registrations.new.sign_up"), new_member_registration_path, class: :link %></p>
+  <% end %>
+</div>

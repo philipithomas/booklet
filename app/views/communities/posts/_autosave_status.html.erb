@@ -1,0 +1,20 @@
+<div
+  data-controller="autosave-status"
+  data-action="turbo:submit-start@document->autosave-status#saving turbo:submit-end@document->autosave-status#completed"
+  >
+  <div
+    data-autosave-status-target="saved"
+    class="hidden text-sm text-gray-600 dark:text-gray-400"
+    data-transition-enter-active="transition ease-out duration-100"
+    data-transition-enter-from="transform opacity-0 scale-95"
+    data-transition-enter-to="transform opacity-100 scale-100"
+    data-transition-leave-active="transition ease-in duration-500"
+    data-transition-leave-from="transform opacity-100 scale-100"
+    data-transition-leave-to="transform opacity-0 scale-95"
+    >
+    Saved
+  </div>
+  <div data-autosave-status-target="error" class="hidden text-sm font-semibold text-accent-if-contrast ">
+    Error saving!
+  </div>
+</div>

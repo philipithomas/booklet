@@ -1,0 +1,18 @@
+<% content_for :heading do %><%= title t(".create_api_key", community_name: @community.name) %><% end %>
+
+<% noindex %>
+
+<div class="prose dark:prose-invert text-gray-700 dark:text-gray-300">
+  <p>
+    <%= t(".description") %>
+  </p>
+</div>
+
+<%= simple_form_for(@api_key, url: settings_api_keys_path, builder: Bklt::FormBuilder,) do |f| %>
+  <div class="form-space">
+    <%= f.error_notification %>
+
+    <%= f.input :name, label: t(".key_name"), required: true, autofocus: true %>
+    <%= f.button :submit_dynamic, label: t(".create"), full_width: true %>
+  </div>
+<% end %>
